@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "test": "mocha server/**/*.test.js",
     "test-watch": "nodemon --exec 'yarn test'"
   },
@@ -14,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "mongodb": "2.2.5",
     "mongoose": "^5.4.2"
   },
