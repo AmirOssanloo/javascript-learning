@@ -8,6 +8,7 @@
   "repository": "https://github.com/AmirOssanloo/node-course-express-react",
   "keywords": [],
   "scripts": {
+    "test": "",
     "start": "node server/index.js",
     "dev": "nodemon server/index.js"
   }
