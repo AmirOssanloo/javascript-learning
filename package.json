@@ -1,0 +1,14 @@
+{
+  "name": "node-express-react",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Amir Ossanloo",
+  "license": "ISC",
+  "main": "index.js",
+  "repository": "https://github.com/AmirOssanloo/node-course-express-react",
+  "keywords": [],
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  }
+}

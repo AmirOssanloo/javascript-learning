@@ -1,0 +1,17 @@
+{
+  "name": "node-express-react",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Amir Ossanloo",
+  "license": "ISC",
+  "main": "index.js",
+  "repository": "https://github.com/AmirOssanloo/node-course-express-react",
+  "keywords": [],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
+
