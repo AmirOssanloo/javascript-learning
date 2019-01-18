@@ -1,0 +1,14 @@
+.app-outer {
+  background-color: #DDE2C6;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.app-inner {
+  background-color: #E6EED6;
+  width: 400px;
+  text-align: center;
+}
