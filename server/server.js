@@ -22,7 +22,12 @@ io.on('connection', (socket) => {
   });
 
   socket.on('createMessage', (msg) => {
-    console.log('On [createMessage]', {...msg, createdAt: Date.now()});
+    console.log('On [createMessage]', msg);
+    io.emit('newMessage', {
+      from: msg.from,
+      text: msg.text,
+      createdAt: Date.now()
+    });
   });
 
   socket.on('disconnect', () => {
