@@ -1,0 +1,20 @@
+{
+  "name": "node-chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Amir Ossanloo",
+  "license": "ISC",
+  "main": "index.js",
+  "repository": "https://github.com/AmirOssanloo/node-chat-app",
+  "keywords": [],
+  "engines": {
+    "node": "11.6.0"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
