@@ -22,14 +22,22 @@ socket.on('connect', () => {
     if (err) {
       alert(err);
       window.location.href = '/';
-    } else {
-      console.log('No error');
     }
   });
 });
 
 socket.on('disconnect', () => {
   console.log('Disconnected from server');
+});
+
+socket.on('updateUserList', (users) => {
+  let ol = $('<ol></ol>');
+
+  users.forEach(user => {
+    ol.append($('<li></li>').text(user));
+  });
+
+  $('#users').html(ol);
 });
 
 socket.on('newMessage', (msg) => {
