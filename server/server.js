@@ -20,14 +20,8 @@ io.on('connection', (socket) => {
   socket.broadcast.emit('newUserJoined', generateMessage('Admin', 'New user joined'));
 
   socket.on('createMessage', (msg, callback) => {
-    console.log('On [createMessage]', msg);
     io.emit('newMessage', generateMessage(msg.from, msg.text));
     callback('This is from the server');
-    // socket.broadcast.emit('newMessage', {
-    //   from: msg.from,
-    //   text: msg.text,
-    //   createdAt: Date.now()
-    // });
   });
 
   socket.on('createLocationMessage', (coords) => {
