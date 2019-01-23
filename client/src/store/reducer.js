@@ -1,12 +1,10 @@
 const initialState = {
   socket: null,
   connected: false,
-  messages: [
-    {text: 'Whatever!!'},
-    {text: 'Testing..'},
-    {text: 'Wooah'},
-    {text: 'Whatever!!'}
-  ]
+  username: null,
+  room: null,
+  users: [],
+  messages: []
 };
 
 export default (state = initialState, action) => {
@@ -16,6 +14,21 @@ export default (state = initialState, action) => {
 
     case 'SET_SOCKET_STATUS':
       return {...state, connected: action.value};
+
+    case 'SET_USERNAME':
+      return {...state, username: action.value};
+
+    case 'SET_ROOM':
+      return {...state, room: action.value};
+
+    case 'UPDATE_USERLIST':
+      return {...state, users: action.value};
+
+    case 'ADD_MESSAGE':
+      return {
+        ...state,
+        messages: state.messages.concat(action.value)
+      }
 
     default:
       return state;

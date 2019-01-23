@@ -7,20 +7,33 @@ class Chat extends Component {
   constructor(props) {
     super(props);
 
-    this.onSendMessageClick.bind(this);
+    this.state = {
+      message: ''
+    }
+
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onSendMessageClick = this.onSendMessageClick.bind(this);
   }
 
   onSendMessageClick() {
+    let message = this.state.message;
+
     this.props.socket.emit('createMessage', {
-      from: 'User',
-      text: 'What is this...?'
+      from: this.props.user,
+      text: message
     }, () => {
-      console.log('Response');
+      //
     });
   }
 
   onSendLocationClick() {
 
+  }
+
+  onInputChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   render() {
@@ -33,8 +46,16 @@ class Chat extends Component {
           {messages}
         </ul>
         <div id="message-input">
-          <input name="message" type="text" placeholder="Message" autoFocus autoComplete="off"/>
-          <button id="send-message" onClick={() => this.onSendMessageClick()}>Send</button>
+          <input
+            name="message"
+            type="text"
+            placeholder="Message"
+            autoComplete="off"
+            onChange={this.onInputChange}
+            autoFocus
+            />
+
+          <button id="send-message" onClick={this.onSendMessageClick}>Send</button>
           <button id="send-location">Send location</button>
         </div>
       </div>
@@ -49,11 +70,10 @@ const mapStateToProps = state => {
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onIncrement: () => dispatch({type: 'COUNT_INCREMENT'}),
-//     onDecrement: () => dispatch({type: 'COUNT_DECREMENT'})
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddMessage: (msg) => dispatch({type: 'ADD_MESSAGE', value: msg})
+  }
+}
 
-export default connect(mapStateToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);

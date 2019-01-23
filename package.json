@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "author": "Amir Ossanloo",
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
   "repository": "https://github.com/AmirOssanloo/node-chat-app",
   "keywords": [],
