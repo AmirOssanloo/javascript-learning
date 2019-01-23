@@ -1,5 +1,5 @@
 node_modules/
-
+secret/
 ._*
 *.log
 .DS_Store
