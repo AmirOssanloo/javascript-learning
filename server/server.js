@@ -3,7 +3,6 @@ const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
 const {generateMessage} = require('./utils/message');
-const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
 
 const PORT = process.env.PORT || 3000;
@@ -33,11 +32,9 @@ io.on('connection', (socket) => {
     socket.broadcast.to(room).emit('newMessage', generateMessage('Admin', `New ${username} joined`));
   });
 
-  socket.on('createMessage', (msg, callback) => {
+  socket.on('createMessage', obj => {
     let user = users.getUser(socket.id);
-    io.to(user.room).emit('newMessage', generateMessage(user.name, msg.text));
-
-    callback();
+    io.to(user.room).emit('newMessage', generateMessage(user.name, obj.text));
   });
 
   socket.on('disconnect', () => {

@@ -1,0 +1,13 @@
+#join-panel {
+  background-color: #c0c0c0;
+  width: 30%;
+  min-width: 200px;
+  padding: 40px 30px;
+}
+
+.join-input label {
+  display: block;
+  margin-bottom: 5px;
+  color: #444;
+  font-size: 14px;
+}

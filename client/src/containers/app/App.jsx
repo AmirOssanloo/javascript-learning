@@ -11,9 +11,11 @@ class App extends Component {
     super(props);
 
     this.state = {
-      username: '',
-      room: '',
-      message: ''
+      inputs: {
+        username: '',
+        room: '',
+        message: ''
+      }
     }
 
     this.setupSocketConnection();
@@ -32,8 +34,10 @@ class App extends Component {
     socket.on('connect', () => {
       this.props.setSocketStatus(true);
 
-      socket.on('newMessage', msg => {
-        this.props.onAddMessage(msg);
+      socket.on('newMessage', obj => {
+        this.props.onAddMessage(obj);
+
+        console.log(obj)
       });
 
       socket.on('updateUserList', (users) => {
@@ -47,8 +51,8 @@ class App extends Component {
   }
 
   onJoinClick() {
-    let username = this.state.username;
-    let room = this.state.room;
+    let username = this.state.inputs.username;
+    let room = this.state.inputs.room;
 
     if (!isValidString(username) || !isValidString(room))
       return console.log('Username and room must be valid strings');
@@ -59,13 +63,16 @@ class App extends Component {
   }
 
   onInputChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    let value = e.target.value;
+    let name = e.target.name;
+
+    this.setState(prevState => ({
+      inputs: {...prevState.inputs, [name]: value}
+    }));
   }
 
   onSendMessageClick() {
-    let message = this.state.message;
+    let message = this.state.inputs.message;
 
     if (!isValidString(message))
       return console.log('Message must be a valid string');
@@ -73,15 +80,21 @@ class App extends Component {
     this.props.socket.emit('createMessage', {
       from: this.props.user,
       text: message
-    }, () => {
-      //
     });
   }
 
   render() {
-    let username = this.props.username;
-    let room = this.props.room;
-    let messages = this.props.messages;
+    // let username = this.props.username;
+    // let room = this.props.room;
+    // let messages = this.props.messages;
+
+    let username = 'Amir';
+    let room = 'Style';
+    let messages = [
+      {from: 'Girl D', text: 'I found out that Tom now has three citations for drunken driving.', createdAt: Date.now()},
+      {from: 'Boy A', text: 'She has been dead five years.', createdAt: Date.now()},
+      {from: 'Girl C', text: 'I do not have a girlfriend.', createdAt: Date.now()}
+    ];
 
     let view = (!username && !room)
       ? <Join onInputChange={this.onInputChange} onJoinClick={this.onJoinClick}/>
@@ -113,7 +126,7 @@ const mapDispatchToProps = dispatch => {
     setSocketStatus: (status) => dispatch({type: 'SET_SOCKET_STATUS', value: status}),
     setUsername: (username) => dispatch({type: 'SET_USERNAME', value: username}),
     setRoom: (room) => dispatch({type: 'SET_ROOM', value: room}),
-    onAddMessage: (msg) => dispatch({type: 'ADD_MESSAGE', value: msg}),
+    onAddMessage: (obj) => dispatch({type: 'ADD_MESSAGE', value: obj}),
     updateUserList: (users) => dispatch({type: 'UPDATE_USERLIST', value: users})
   }
 }

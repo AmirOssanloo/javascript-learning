@@ -5,9 +5,7 @@ const UserList = (props) => {
     <li key={index}>{user}</li>);
 
   return (
-    <ul>
-      {users}
-    </ul>
+    <ul>{users}</ul>
   );
 }
 

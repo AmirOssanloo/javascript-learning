@@ -7,22 +7,24 @@ const Chat = (props) => {
     <Message key={index} message={message} />);
 
   return (
-    <div id="chat">
+    <div id={styles["chat-panel"]}>
       <ul id="messages">
         {messages}
       </ul>
 
-      <div id="message-input">
-        <input
-          name="message"
-          type="text"
-          placeholder="Message"
-          autoComplete="off"
-          onChange={props.onInputChange}
-          autoFocus
-          />
+      <div className={styles["message-input-container"]}>
+        <div id={styles["message-input"]}>
+          <input
+            name="message"
+            type="text"
+            placeholder="Message"
+            onChange={props.onInputChange}
+            autoComplete="off"
+            autoFocus
+            />
 
-        <button id="send-message" onClick={props.onSendMessageClick}>Send</button>
+          <button id="send-message" onClick={props.onSendMessageClick}>Send</button>
+        </div>
       </div>
     </div>
   );
