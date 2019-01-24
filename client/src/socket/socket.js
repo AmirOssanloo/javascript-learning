@@ -1,21 +1,22 @@
 import io from 'socket.io-client';
 import store from '../store/store';
 
-const socket = io();
+const setupSocket = () => {
+  const socket = io();
+  
+  socket.on('connect', () => {
+    store.dispatch({type: 'SET_SOCKET', value: socket});
 
-socket.on('connect', () => {
-  store.dispatch({type: 'SET_SOCKET', value: socket});
-
-  document.addEventListener('mousemove', (e) => {
-    socket.emit('updateCursor', {
-      x: e.clientX,
-      y: e.clientY
-    })
+    socket.on('updateUserList', users => {
+      store.dispatch({type: 'UPDATE_USERLIST', value: users})
+    });
   });
-});
+  
+  socket.on('disconnect', () => {
+    store.dispatch({type: 'SET_SOCKET', value: null});
+  });
 
-socket.on('disconnect', () => {
-  store.dispatch({type: 'SET_SOCKET', value: null});
-});
+  return socket;
+}
 
-export default {socket};
+export default {setupSocket};

@@ -3,10 +3,10 @@ class Users {
     this.users = [];
   }
 
-  addUser(id, name, room) {
+  addUser(id, username, room) {
     let user = {
-      id, name, room,
-      cursor: {x: null, y: null}
+      id, username, room,
+      x: null, y: null
     };
 
     this.users.push(user);
@@ -23,8 +23,8 @@ class Users {
   }
 
   updateUserCursor(user, pos) {
-    // user.cursor.x = pos.x;
-    // user.cursor.y = pos.y;
+    user.x = pos.x;
+    user.y = pos.y;
   }
 
   getUser(id) {
@@ -32,9 +32,7 @@ class Users {
   }
 
   getUserList(room) {
-    return this.users
-      .filter(user => user.room === room)
-      .map(user => user.name);
+    return this.users.filter(user => user.room === room);
   }
 }
 

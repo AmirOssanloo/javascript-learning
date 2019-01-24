@@ -11,6 +11,15 @@
   right: 0;
 }
 
+#room-title {
+  position: absolute;
+  background-color: #c0c0c0;
+  padding: 20px 25px;
+  top: 0;
+  left: 0;
+  font-weight: bold;
+}
+
 #messages-container {
   position: absolute;
   width: 100%;

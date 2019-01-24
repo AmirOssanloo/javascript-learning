@@ -17,33 +17,29 @@ let users = new Users();
 app.use(express.static(PUBLIC_PATH));
 
 io.on('connection', (socket) => {
-  console.log('Client connected');
-
   socket.on('join', params => {
     let {username, room} = params;
-
-    socket.join(room);
     
+    socket.join(room);
     users.removeUser(socket.id);
-    users.addUser(socket.id, params.username, room);
-
+    users.addUser(socket.id, username, room);
+    
+    console.log(users);
     io.to(room).emit('updateUserList', users.getUserList(room));
-    socket.emit('newMessage', generateMessage('Admin', `Welcome to the chat, ${username}`));
-    socket.broadcast.to(room).emit('newMessage', generateMessage('Admin', `New ${username} joined`));
+    socket.emit('newMessage', generateMessage('Admin', `Welcome to the chat room`));
+    socket.broadcast.to(room).emit('newMessage', generateMessage('Admin', `${username} has joined the room`));
   });
 
   socket.on('createMessage', (obj, callback) => {
     let user = users.getUser(socket.id);
-    io.to(user.room).emit('newMessage', generateMessage(user.name, obj.text));
+    io.to(user.room).emit('newMessage', generateMessage(user.username, obj.text));
 
     callback();
   });
 
   socket.on('updateCursor', obj => {
-    // let user = users.getUser(socket.id);
-    // users.updateUserCursor(user, obj);
-    // console.log(user);
-    // socket.broadcast.to(user.room).emit('updateCursor', {x: 10, y: 10});
+    let user = users.getUser(socket.id);
+    users.updateUserCursor(user, obj);
   });
 
   socket.on('disconnect', () => {
@@ -52,7 +48,7 @@ io.on('connection', (socket) => {
 
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-      io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`));
+      io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.username} has left the room`));
     }
   });
 });

@@ -1,11 +1,12 @@
 import React from 'react';
+import styles from './UserList.css';
 
 const UserList = (props) => {
   let users = props.users.map((user, index) =>
-    <li key={index}>{user}</li>);
+    <li className={styles["user"]}key={index}>{user.username}, {user.room}, {user.x}, {user.y}</li>);
 
   return (
-    <ul>{users}</ul>
+    <ul id={styles["userlist-panel"]}>{users}</ul>
   );
 }
 

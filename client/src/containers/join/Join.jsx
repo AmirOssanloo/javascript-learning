@@ -13,7 +13,6 @@ class Join extends Component {
   }
 
   onJoinClick() {
-    console.log(this.usernameInput.current.value)
     let username = this.usernameInput.current.value;
     let room = this.roomInput.current.value.toLowerCase();
 
