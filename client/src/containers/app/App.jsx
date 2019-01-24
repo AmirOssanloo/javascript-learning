@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Chat from '../chat/Chat';
+import Chat from '../../components/chat/Chat';
 import Join from '../../components/join/Join';
 import UserList from '../../components/userlist/UserList';
 import {isValidString} from '../../utils/string';
@@ -12,34 +12,35 @@ class App extends Component {
 
     this.state = {
       username: '',
-      room: ''
+      room: '',
+      message: ''
     }
+
+    this.setupSocketConnection();
 
     this.onJoinClick = this.onJoinClick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onSendMessageClick = this.onSendMessageClick.bind(this);
   }
 
-  componentDidMount() {
+  setupSocketConnection() {
     let socket = this.props.socket;
 
     // Store socket connection instance in store
     this.props.setSocket(socket);
     
-    // Socket has connected
     socket.on('connect', () => {
       this.props.setSocketStatus(true);
 
       socket.on('newMessage', msg => {
-        this.props.onAddMessage({text: msg.text});
+        this.props.onAddMessage(msg);
       });
 
       socket.on('updateUserList', (users) => {
         this.props.updateUserList(users);
-        console.log(users)
       });
     });
     
-    // Socket has disconnected
     socket.on('disconnect', () => {
       this.props.setSocketStatus(false);
     });
@@ -49,16 +50,11 @@ class App extends Component {
     let username = this.state.username;
     let room = this.state.room;
 
-    // Validate username and join input
-    if (!isValidString(username) || !isValidString(room)) {
+    if (!isValidString(username) || !isValidString(room))
       return console.log('Username and room must be valid strings');
-    }
 
-    // Update store
     this.props.setUsername(username);
     this.props.setRoom(room);
-
-    // Join
     this.props.socket.emit('join', {username, room});
   }
 
@@ -68,13 +64,28 @@ class App extends Component {
     });
   }
 
+  onSendMessageClick() {
+    let message = this.state.message;
+
+    if (!isValidString(message))
+      return console.log('Message must be a valid string');
+
+    this.props.socket.emit('createMessage', {
+      from: this.props.user,
+      text: message
+    }, () => {
+      //
+    });
+  }
+
   render() {
     let username = this.props.username;
     let room = this.props.room;
+    let messages = this.props.messages;
 
     let view = (!username && !room)
       ? <Join onInputChange={this.onInputChange} onJoinClick={this.onJoinClick}/>
-      : <Chat username={username} room={room} /> ;
+      : <Chat onInputChange={this.onInputChange} onSendMessageClick={this.onSendMessageClick} username={username} room={room} messages={messages} /> ;
 
     return (
       <div className={styles['app-outer']}>
@@ -91,7 +102,8 @@ const mapStateToProps = state => {
   return {
     username: state.username,
     room: state.room,
-    users: state.users
+    users: state.users,
+    messages: state.messages
   }
 }
 
