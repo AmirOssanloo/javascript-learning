@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
     case 'ADD_MESSAGE':
       return {
         ...state,
-        messages: state.messages.concat(action.value)
+        messages: [action.value].concat(state.messages)
       }
 
     default:

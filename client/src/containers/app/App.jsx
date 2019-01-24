@@ -22,7 +22,6 @@ class App extends Component {
 
     this.onJoinClick = this.onJoinClick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
-    this.onSendMessageClick = this.onSendMessageClick.bind(this);
   }
 
   setupSocketConnection() {
@@ -36,8 +35,6 @@ class App extends Component {
 
       socket.on('newMessage', obj => {
         this.props.onAddMessage(obj);
-
-        console.log(obj)
       });
 
       socket.on('updateUserList', (users) => {
@@ -71,39 +68,40 @@ class App extends Component {
     }));
   }
 
-  onSendMessageClick() {
-    let message = this.state.inputs.message;
-
-    if (!isValidString(message))
-      return console.log('Message must be a valid string');
-
-    this.props.socket.emit('createMessage', {
-      from: this.props.user,
-      text: message
-    });
-  }
-
   render() {
-    // let username = this.props.username;
-    // let room = this.props.room;
-    // let messages = this.props.messages;
+    let username = this.props.username;
+    let room = this.props.room;
+    let message = this.state.inputs.message;
+    let messages = this.props.messages;
 
-    let username = 'Amir';
-    let room = 'Style';
-    let messages = [
-      {from: 'Girl D', text: 'I found out that Tom now has three citations for drunken driving.', createdAt: Date.now()},
-      {from: 'Boy A', text: 'She has been dead five years.', createdAt: Date.now()},
-      {from: 'Girl C', text: 'I do not have a girlfriend.', createdAt: Date.now()}
-    ];
+    // let username = 'Amir';
+    // let room = 'Style';
+    // let messages = [
+    //   {from: 'Girl D', text: 'I found out that Tom now has three citations for drunken driving.', createdAt: Date.now()},
+    //   {from: 'Boy A', text: 'She has been dead five years.', createdAt: Date.now()},
+    //   {from: 'Girl C', text: 'I do not have a girlfriend.', createdAt: Date.now()},
+    //   {from: 'Girl D', text: 'I found out that Tom now has three citations for drunken driving.', createdAt: Date.now()},
+    //   {from: 'Boy A', text: 'She has been dead five years.', createdAt: Date.now()},
+    //   {from: 'Girl C', text: 'I do not have a girlfriend.', createdAt: Date.now()},
+    //   {from: 'Girl D', text: 'I found out that Tom now has three citations for drunken driving.', createdAt: Date.now()},
+    //   {from: 'Boy A', text: 'She has been dead five years.', createdAt: Date.now()},
+    //   {from: 'Girl C', text: 'I do not have a girlfriend.', createdAt: Date.now()},
+    //   {from: 'Girl D', text: 'I found out that Tom now has three citations for drunken driving.', createdAt: Date.now()},
+    //   {from: 'Boy A', text: 'She has been dead five years.', createdAt: Date.now()},
+    //   {from: 'Girl C', text: 'I do not have a girlfriend.', createdAt: Date.now()},
+    //   {from: 'Girl D', text: 'I found out that Tom now has three citations for drunken driving.', createdAt: Date.now()},
+    //   {from: 'Boy A', text: 'She has been dead five years.', createdAt: Date.now()},
+    //   {from: 'Girl C', text: 'I do not have a girlfriend.', createdAt: Date.now()}
+    // ];
 
     let view = (!username && !room)
       ? <Join onInputChange={this.onInputChange} onJoinClick={this.onJoinClick}/>
-      : <Chat onInputChange={this.onInputChange} onSendMessageClick={this.onSendMessageClick} username={username} room={room} messages={messages} /> ;
+      : <Chat onInputChange={this.onInputChange} message={message} /> ;
 
     return (
       <div className={styles['app-outer']}>
         <div className={styles['app-inner']}>
-          <UserList users={this.props.users} />
+          {/* <UserList users={this.props.users} /> */}
           {view}
         </div>
       </div>
