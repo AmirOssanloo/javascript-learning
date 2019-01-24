@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './store/store';
+import socket from './socket/socket';
 import App from './containers/app/App';
-import io from 'socket.io-client';
 import './index.css';
-
-const socket = io();
 
 ReactDOM.render((
   <Provider store={store}>

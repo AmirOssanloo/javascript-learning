@@ -9,33 +9,36 @@ class Chat extends Component {
   constructor(props) {
     super(props)
 
+    this.messageInput = React.createRef();
     this.messagesContainer = React.createRef();
     this.onSendMessageClick = this.onSendMessageClick.bind(this);
   }
 
+  componentDidMount() {
+    this.props.socket.on('newMessage', obj => {
+      this.props.onAddMessage(obj);
+    });
+  }
+
   componentDidUpdate() {
-    let scrollEl = this.messagesContainer.current;
-    let scrollY = scrollEl.scrollTop;
-    
-    if (scrollY < 200)
-      TweenLite.to(scrollEl, 0.2, {scrollTop: 0, ease: Power2.easeInOut});
+    if (this.messagesContainer.current.scrollTop < 200)
+      TweenLite.to(this.messagesContainer.current, 0.2, {scrollTop: 0, ease: Power2.easeInOut});
   }
 
   onSendMessageClick() {
-    let message = this.props.message;
+    let message = this.messageInput.current.value;
 
     if (!isValidString(message))
       return console.log('Message must be a valid string');
 
-    this.props.socket.emit('createMessage', {
-      from: this.props.user,
+    let payload = {
+      from: this.props.username,
       text: message
-    });
+    }
 
-    let scrollEl = this.messagesContainer.current;
-    let scrollY = scrollEl.scrollTop;
-    
-    TweenLite.to(scrollEl, 0.2, {scrollTop: 0, ease: Power2.easeInOut});
+    this.props.socket.emit('createMessage', payload, () => {
+      TweenLite.to(this.messagesContainer.current, 0.2, {scrollTop: 0, ease: Power2.easeInOut});
+    });
   }
 
   render() {
@@ -47,10 +50,10 @@ class Chat extends Component {
         <div id={styles["message-input-container"]}>
           <div className={styles["message-input"]}>
             <input
+              ref={this.messageInput}
               name="message"
               type="text"
               placeholder="Message"
-              onChange={this.props.onInputChange}
               autoComplete="off"
               autoFocus
               />
@@ -76,4 +79,13 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Chat);
+const mapDispatchToProps = dispatch => {
+  return {
+    setUsername: (username) => dispatch({type: 'SET_USERNAME', value: username}),
+    setRoom: (room) => dispatch({type: 'SET_ROOM', value: room}),
+    onAddMessage: (obj) => dispatch({type: 'ADD_MESSAGE', value: obj}),
+    updateUserList: (users) => dispatch({type: 'UPDATE_USERLIST', value: users})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);

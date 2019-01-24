@@ -4,9 +4,12 @@ class Users {
   }
 
   addUser(id, name, room) {
-    let user = {id, name, room};
+    let user = {
+      id, name, room,
+      cursor: {x: null, y: null}
+    };
+
     this.users.push(user);
-    
     return user;
   }
 
@@ -17,6 +20,11 @@ class Users {
       this.users = this.users.filter(user => user.id !== id);
     
     return user;
+  }
+
+  updateUserCursor(user, pos) {
+    // user.cursor.x = pos.x;
+    // user.cursor.y = pos.y;
   }
 
   getUser(id) {

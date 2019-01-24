@@ -32,9 +32,18 @@ io.on('connection', (socket) => {
     socket.broadcast.to(room).emit('newMessage', generateMessage('Admin', `New ${username} joined`));
   });
 
-  socket.on('createMessage', obj => {
+  socket.on('createMessage', (obj, callback) => {
     let user = users.getUser(socket.id);
     io.to(user.room).emit('newMessage', generateMessage(user.name, obj.text));
+
+    callback();
+  });
+
+  socket.on('updateCursor', obj => {
+    // let user = users.getUser(socket.id);
+    // users.updateUserCursor(user, obj);
+    // console.log(user);
+    // socket.broadcast.to(user.room).emit('updateCursor', {x: 10, y: 10});
   });
 
   socket.on('disconnect', () => {

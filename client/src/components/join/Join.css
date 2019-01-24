@@ -1,8 +1,9 @@
 #join-panel {
   background-color: #c0c0c0;
-  width: 30%;
+  width: 270px;
   min-width: 200px;
-  padding: 40px 30px;
+  margin: 0 auto;
+  padding: 80px 30px 20px 30px;
 }
 
 .join-input label {
