@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
-const {createMessage} = require('./server/message/Message');
+const {createMessage} = require('./server/message/message');
 const Users = require('./server/users/Users');
 
 const port = process.env.PORT || 3000;
