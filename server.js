@@ -6,7 +6,7 @@ const {createMessage} = require('./server/message/Message');
 const Users = require('./server/users/Users');
 
 const port = process.env.PORT || 3000;
-const publicPath = path.join(__dirname, '..', 'public');
+const publicPath = path.join(__dirname, 'public');
 
 const app = express();
 const server = http.createServer(app);
@@ -14,14 +14,6 @@ const io = socketIO(server);
 const users = new Users();
 
 app.use(express.static(publicPath));
-
-// Users.create('swwRkzIf7N8PUm5O', 'KarineMilivoj', 'RoomA');
-// Users.create('ETI8yqeqVq0p5WFN', 'MoritzJudith', 'RoomA');
-// Users.create('lEUcsQzfrumqO2e1', 'HerbertIngulf', 'RoomB');
-// Users.create('zuML8quQIue2Cflp', 'CamiloRolf', 'RoomC');
-// Users.create('pffnyG1ojgVGhH3F', 'HoratiaNinad', 'RoomC');
-// Users.create('72NwVzXEfNYWOGF3', 'RahimCrofton', 'RoomC');
-// Users.create('ZzsNsdun09qA6JXF', 'DrestSimon', 'RoomD');
 
 io.on('connection', socket => {
   socket.on('join', (username, room) => {
