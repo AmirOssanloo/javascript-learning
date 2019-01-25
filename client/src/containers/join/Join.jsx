@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {isValidString} from '../../utils/string';
+import {isValidIdentifier} from '../../utils/string';
 import styles from './join.css';
 
 class Join extends Component {
@@ -16,12 +16,12 @@ class Join extends Component {
     let username = this.usernameInput.current.value;
     let room = this.roomInput.current.value.toLowerCase();
 
-    if (!isValidString(username) || !isValidString(room))
+    if (!isValidIdentifier(username) || !isValidIdentifier(room))
       return console.log('Username and room must be valid strings');
 
     this.props.setUsername(username);
     this.props.setRoom(room);
-    this.props.socket.emit('join', {username, room});
+    this.props.socket.emit('join', username, room);
   }
 
   render() {

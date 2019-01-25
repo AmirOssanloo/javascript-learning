@@ -7,7 +7,7 @@ const Message = (props) => {
 
   return (
     <li className={styles["message"]} >
-      <span className={styles["title"]}>{props.params.from}</span>
+      <span className={styles["title"]}>{props.params.username}</span>
       <span className={styles['time']}>{date.format('hh:mm')}</span>
       <span className={styles["body"]}>{props.params.text}</span>
     </li>

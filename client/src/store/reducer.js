@@ -18,12 +18,6 @@ export default (state = initialState, action) => {
     case 'SET_ROOM':
       return {...state, room: action.value};
 
-    case 'UPDATE_ROOMLIST':
-      return {...state, rooms: action.value};
-
-    case 'UPDATE_USERLIST':
-      return {...state, users: action.value};
-
     case 'ADD_MESSAGE':
       return {
         ...state,

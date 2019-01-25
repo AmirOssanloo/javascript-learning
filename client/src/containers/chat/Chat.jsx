@@ -16,8 +16,8 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    this.props.socket.on('newMessage', obj => {
-      this.props.onAddMessage(obj);
+    this.props.socket.on('addMessage', message => {
+      this.props.onAddMessage(message);
     });
   }
 
@@ -31,7 +31,7 @@ class Chat extends Component {
       return console.log('Message must be a valid string');
 
     let payload = {
-      from: this.props.username,
+      username: this.props.username,
       text: this.messageInput.current.value
     }
 
@@ -88,7 +88,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setUsername: (username) => dispatch({type: 'SET_USERNAME', value: username}),
     setRoom: (room) => dispatch({type: 'SET_ROOM', value: room}),
-    onAddMessage: (obj) => dispatch({type: 'ADD_MESSAGE', value: obj})
+    onAddMessage: (message) => dispatch({type: 'ADD_MESSAGE', value: message})
   }
 }
 

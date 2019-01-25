@@ -6,10 +6,6 @@ const setupSocket = () => {
   
   socket.on('connect', () => {
     store.dispatch({type: 'SET_SOCKET', value: socket});
-
-    socket.on('updateUserList', users => {
-      store.dispatch({type: 'UPDATE_USERLIST', value: users})
-    });
   });
   
   socket.on('disconnect', () => {

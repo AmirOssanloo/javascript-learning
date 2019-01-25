@@ -1,6 +1,10 @@
 const isValidString = str => {
-  let regexp = new RegExp(/^([0-9]|[a-z])+([0-9a-z]+)$/).exec(str)
-  return typeof str === 'string' && str.trim().length > 0 && regexp !== null;
+  return typeof str === 'string' && str.trim().length > 0;
 };
 
-export {isValidString};
+const isValidIdentifier = str => {
+  let regexp = new RegExp(/^([0-9]|[A-Z]|[a-z])+([0-9a-z]+)$/).exec(str)
+  return typeof str === 'string' && str.trim().length > 0 && regexp !== null;
+}
+
+export {isValidIdentifier, isValidString};
