@@ -6,8 +6,8 @@ Users.prototype.create = function(id, name, room) {
   let user = {
     id, name, room,
     cursor: {
-      x: null,
-      y: null
+      x: 0,
+      y: 0
     }
   };
 

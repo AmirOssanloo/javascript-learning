@@ -6,19 +6,25 @@ const {createMessage} = require('./server/message/message');
 const Users = require('./server/users/Users');
 
 const port = process.env.PORT || 3000;
-const publicPath = path.join(__dirname, 'public');
-
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
+const publicPath = path.join(__dirname, 'public');
 const users = new Users();
 
 app.use(express.static(publicPath));
 
 io.on('connection', socket => {
+
   socket.on('join', (username, room) => {
     users.removeById(socket.id);
     users.create(socket.id, username, room);
+
+    if (users.users.length > 0) {
+      setInterval(() => {
+        socket.broadcast.to(room).emit('broadcastUserCursor', users.users);
+      }, 250);
+    }
 
     socket.join(room);
     socket.emit('addMessage', createMessage('Admin', 'Welcome to the chat room'));
@@ -30,6 +36,12 @@ io.on('connection', socket => {
     io.to(user.room).emit('addMessage', createMessage(user.name, message.text));
     
     callback();
+  });
+
+  socket.on('updateUserCursor', cursor => {
+    let user = users.findById(socket.id);
+    user.cursor.x = cursor.x;
+    user.cursor.y = cursor.y;
   });
 
   socket.on('disconnect', () => {
