@@ -13,10 +13,8 @@ class App extends Component {
   render() {
     return (
       <div className={styles['app-outer']}>
-        <div className={styles['app-inner']}>
-          {(this.props.username) ? <Cursors /> : null}
-          {(this.props.username) ? <Chat /> : <Join />}
-        </div>
+        {(this.props.username) ? <Chat /> : <Join />}
+        {(this.props.username) ? <Cursors /> : null}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import styles from './Message.css';
+import styles from './message.css';
 
 const Message = (props) => {
   let date = moment(props.params.createdAt);

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import store from '../../store/store';
 import {TweenLite, Power2} from 'gsap';
 import {isValidString} from '../../utils/string';
-import Message from './message/Message';
+import Message from '../../components/message/Message';
 import styles from './Chat.css';
 
 class Chat extends Component {
@@ -13,6 +12,7 @@ class Chat extends Component {
     this.messageInput = React.createRef();
     this.messagesContainer = React.createRef();
     this.onSendMessageClick = this.onSendMessageClick.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -41,16 +41,21 @@ class Chat extends Component {
     });
   }
 
+  onKeyPress(e) {
+    if (e.key === 'Enter')
+      this.onSendMessageClick(null);
+  }
+
   render() {
     let messages = this.props.messages.map((message, index) =>
       <Message key={index} params={message} />);
 
     return (
-      <div>
+      <React.Fragment>
         <div id={styles["room-title"]}>
           <span>Room: {this.props.room.toUpperCase()}</span>
         </div>
-        <div id={styles["chat-panel"]}>
+        <div id={styles["chat-panel"]} onKeyPress={this.onKeyPress}>
           <div id={styles["message-input-container"]}>
             <div className={styles["message-input"]}>
               <input
@@ -70,7 +75,7 @@ class Chat extends Component {
             {messages}
           </ul>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

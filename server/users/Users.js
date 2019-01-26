@@ -16,8 +16,13 @@ Users.prototype.create = function(id, name, room) {
 }
 
 Users.prototype.removeById = function(id) {
-  this.users = this.users.filter(user => user.id !== id);
-  return this.findById(id);
+  let user = this.users.find(user => user.id === id);
+  console.log(user);
+
+  if (user)
+    this.users = this.users.filter(user => user.id !== id);
+  
+  return user;
 }
 
 Users.prototype.findById = function(id) {

@@ -23,7 +23,7 @@ io.on('connection', socket => {
     if (users.users.length > 0) {
       setInterval(() => {
         socket.broadcast.to(room).emit('broadcastUserCursor', users.users);
-      }, 250);
+      }, (1000 / 60));
     }
 
     socket.join(room);
@@ -45,6 +45,7 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
+    console.log('Client disconnected', socket.id);
     let user = users.removeById(socket.id);
 
     if (user) {

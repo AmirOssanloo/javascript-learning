@@ -1,9 +1,10 @@
 #join-panel {
   background-color: #c0c0c0;
   width: 270px;
+  height: 270px;
   min-width: 200px;
-  margin: 0 auto;
-  padding: 80px 30px 20px 30px;
+  margin: 0 auto 10px auto;
+  padding: 70px 30px 20px 30px;
 }
 
 .join-input label {
@@ -11,4 +12,27 @@
   margin-bottom: 5px;
   color: #444;
   font-size: 14px;
+}
+
+.join-alert {
+  position: absolute;
+  display: none;
+  width: 180px;
+  margin: 0 auto;
+  font-size: 12px;
+  top: 280px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.join-alert span {
+  display: block;
+  background-color: #f8d7da;
+  margin-bottom: 5px;
+  padding: 7px;
+  color: #721c24;
+  text-align: center;
+  border: 1px solid #f5c6cb;
+  list-style: none;
 }
