@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import {TweenLite, Power2} from 'gsap';
 import {isValidString} from '../../utils/string';
 import Message from '../../components/message/Message';
+import withContainer from '../../hoc/withContainer';
 import styles from './Chat.css';
 
 class Chat extends Component {
   constructor(props) {
     super(props)
 
+    this.roomPanelRef = React.createRef();
+    this.chatPanelRef = React.createRef();
     this.messageInput = React.createRef();
     this.messagesContainer = React.createRef();
     this.onSendMessageClick = this.onSendMessageClick.bind(this);
@@ -16,6 +19,12 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    let timelineIn = this.props.timelineIn;
+
+    // Panel in
+    timelineIn.from(this.chatPanelRef.current, 0.9, {x: 480, ease: Power2.easeInOut});
+    timelineIn.from(this.roomPanelRef.current, 0.9, {x: -200, ease: Power2.easeInOut}, '-= 0.9');
+    
     this.props.socket.on('addMessage', message => {
       this.props.onAddMessage(message);
     });
@@ -52,10 +61,10 @@ class Chat extends Component {
 
     return (
       <React.Fragment>
-        <div id={styles["room-title"]}>
+        <div id={styles["room-title"]} ref={this.roomPanelRef}>
           <span>Room: {this.props.room.toUpperCase()}</span>
         </div>
-        <div id={styles["chat-panel"]} onKeyPress={this.onKeyPress}>
+        <div id={styles["chat-panel"]} ref={this.chatPanelRef} onKeyPress={this.onKeyPress}>
           <div id={styles["message-input-container"]}>
             <div className={styles["message-input"]}>
               <input
@@ -97,4 +106,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(withContainer(Chat));

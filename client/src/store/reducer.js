@@ -1,5 +1,6 @@
 const initialState = {
   socket: null,
+  view: 'JOIN',
   username: null,
   room: null,
   users: [],
@@ -11,6 +12,9 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'SET_SOCKET':
       return {...state, socket: action.value};
+
+    case 'SET_VIEW':
+      return {...state, view: action.value};
 
     case 'SET_USERNAME':
       return {...state, username: action.value};

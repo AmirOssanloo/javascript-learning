@@ -13,8 +13,9 @@ class App extends Component {
   render() {
     return (
       <div className={styles['app-outer']}>
-        {(this.props.username) ? <Chat /> : <Join />}
-        {(this.props.username) ? <Cursors /> : null}
+        {(this.props.view === 'JOIN') ? <Join /> : null}
+        {(this.props.view === 'CHAT') ? <Chat /> : null}
+        {(this.props.view === 'CHAT') ? <Cursors /> : null}
       </div>
     );
   }
@@ -23,6 +24,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     socket: state.socket,
+    view: state.view,
     username: state.username,
     users: state.users
   }
