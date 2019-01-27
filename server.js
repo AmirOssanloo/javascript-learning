@@ -40,8 +40,11 @@ io.on('connection', socket => {
 
   socket.on('updateUserCursor', cursor => {
     let user = users.findById(socket.id);
-    user.cursor.x = cursor.x;
-    user.cursor.y = cursor.y;
+
+    if (user) {
+      user.cursor.x = cursor.x;
+      user.cursor.y = cursor.y;
+    }
   });
 
   socket.on('disconnect', () => {

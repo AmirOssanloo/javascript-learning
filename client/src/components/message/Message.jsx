@@ -4,7 +4,7 @@ import styles from './message.css';
 
 const Message = (props) => {
   let date = moment(props.params.createdAt);
-
+  
   return (
     <li className={styles["message"]} >
       <span className={styles["title"]}>{props.params.username}</span>

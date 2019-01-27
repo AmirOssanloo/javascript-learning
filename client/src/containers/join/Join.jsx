@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {TimelineLite, TweenLite, Power2} from 'gsap';
+import {TimelineLite, Power1, Power2} from 'gsap';
 import {isValidString} from '../../utils/string';
 import withContainer from '../../hoc/withContainer';
 import styles from './join.css';
@@ -24,27 +24,16 @@ class Join extends Component {
     // Panel in
     timelineIn.fromTo(this.joinPanelRef.current, 0.45, {y: -300}, {y: 10, ease: Power2.easeOut});
     timelineIn.to(this.joinPanelRef.current, 0.25, {y: 0, ease: Power1.easeInOut});
-    timelineIn.staggerFrom(this.joinPanelRef.current.childNodes, 0.3, {y: 5, opacity: 0, ease: Power1.easeInOut}, 0.1, '-= 0.2');
+    timelineIn.staggerFrom(this.joinPanelRef.current.childNodes, 0.3, {y: 6, opacity: 0, ease: Power1.easeInOut}, 0.1, '-= 0.3');
 
     // Panel out
+    timelineOut.to(this.alertsRef.current, 0.35, {opacity: 0, ease: Power2.easeIn});
     timelineOut.to(this.joinPanelRef.current, 0.45, {y: -300, ease: Power2.easeIn});
-
-    this.props.timelineIn.vars.onStart = () => {
-      console.log("Hello");
-    };
-
-    this.props.timelineIn.vars.onComplete = () => {
-      console.log("Hello");
-    };
-
-    this.props.timelineOut.vars.onStart = () => {
-      console.log("Bye");
-    };
-
-    this.props.timelineOut.vars.onComplete = () => {
+    timelineOut.add(() => {
       this.props.setView('CHAT');
+      console.log(this.props.username);
       this.props.socket.emit('join', this.props.username, this.props.room);
-    };
+    }, '-=0.2')
   }
 
   onJoinClick(e) {
@@ -65,8 +54,8 @@ class Join extends Component {
     tl.set(this.alertsRef.current, {display: 'block'});
     tl.fromTo(this.alertsRef.current, 0.3, {y: -85}, {y: 3, ease: Power2.easeOut});
     tl.to(this.alertsRef.current, 0.2, {y: 0, ease: Power1.easeInOut});
-    tl.to(this.alertsRef.current, 0.35, {delay: 0.75, y: -85, ease: Power2.easeIn});
-    tl.set(this.alertsRef.current, {display: 'none'});
+    tl.to(this.alertsRef.current, 0.35, {delay: 0.75, opacity: 0, ease: Power2.easeIn});
+    tl.set(this.alertsRef.current, {display: 'none', opacity: 1});
   }
 
   onKeyPress(e) {
@@ -98,7 +87,9 @@ class Join extends Component {
 
 const mapStateToProps = state => {
   return {
-    socket: state.socket
+    socket: state.socket,
+    username: state.username,
+    room: state.room
   }
 }
 

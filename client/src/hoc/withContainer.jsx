@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TimelineMax, TweenMax} from 'gsap';
+import {TimelineLite} from 'gsap';
 
 const withContainer = (WrappedComponent) => {
   class HOC extends Component {
@@ -10,9 +10,10 @@ const withContainer = (WrappedComponent) => {
         componentIsMounted: true
       }
 
-      this.timelineIn = new TimelineMax({paused: true});
-      this.timelineOut = new TimelineMax({
+      this.timelineIn = new TimelineLite({paused: true});
+      this.timelineOut = new TimelineLite({
         onComplete: this.componentOutComplete,
+        onCompleteScope: this,
         paused: true
       });
     }
