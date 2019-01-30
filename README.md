@@ -8,6 +8,9 @@ http://immense-cove-92394.herokuapp.com/
 ## Usage
 Open up two or more browsers and enter the same room-name with each. You will be able to chat with other users while seeing their mouse cursor move in real-time. Mobile users will see Desktop users cursors but don't have one of their own.
 
+- The login page have error handling to assure real strings.
+- Chat will scroll back up if a user scrolls down in the chat history and then posts a new message.
+
 ## Purpose
 
 I wanted to build an application that utilizes the most popular tools within front-end engineering. My aspiration is to become a UI Engineer and learning how React/Redux front-end with a Node.js backend works together was the purpose of this project.
