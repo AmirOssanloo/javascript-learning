@@ -1,13 +1,13 @@
 const expect = require('expect');
-const {generateMessage} = require('./message');
+const {createMessage} = require('./message');
 
 describe('Generate Message', () => {
-  it('should generate correct message object', () => {
-    let from = 'Tester';
-    let text = 'My test text';
-    let message = generateMessage(from, text);
+  it('should create message object', () => {
+    let username = 'Terry';
+    let text = 'Morbi ullamcorper tellus erat, sit amet sagittis dolor tincidunt a.';
+    let message = createMessage(username, text);
 
-    expect(message).toMatchObject({from, text});
+    expect(message).toMatchObject(expect.objectContaining({username, text}));
     expect(typeof message.createdAt).toBe('number');
   });
 });

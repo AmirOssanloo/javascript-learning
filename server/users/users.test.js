@@ -1,9 +1,10 @@
 const expect = require('expect');
-const {Users} = require('./users');
+const Users = require('./users');
 
 describe('Users', () => {
   let users;
 
+  // Create seed data
   beforeEach(() => {
     users = new Users();
     users.users = [
@@ -15,44 +16,32 @@ describe('Users', () => {
 
   it('should add new user', () => {
     let user = {
-      id: '4',
-      name: 'Tester',
+      id: '1',
+      name: 'Karry',
       room: 'Test Room B'
     };
 
-    let res = users.addUser(user.id, user.name, user.room);
+    let res = users.create(user.id, user.name, user.room);
     expect(users.users).toEqual(expect.arrayContaining([res]));
-  });
-
-  it('should return names for [Test Room A]', () => {
-    let userList = users.getUserList('Test Room A');
-    
-    expect(userList).toEqual(['Terry', 'Berry']);
-  });
-
-  it('should return names for [Test Room B]', () => {
-    let userList = users.getUserList('Test Room B');
-    
-    expect(userList).toEqual(['Larry']);
   });
 
   it('should find user', () => {
     let id = '1';
-    let user = users.getUser(id);
+    let user = users.findById(id);
 
     expect(user.id).toEqual(id);
   });
 
   it('should not find user', () => {
     let id = 44;
-    let user = users.getUser(id);
+    let user = users.findById(id);
 
     expect(user).not.toBeTruthy();
   });
   
   it('should remove a user', () => {
     let id = '1';
-    let user = users.removeUser(id);
+    let user = users.removeById(id);
     
     expect(user.id).toEqual(id);
     expect(users.users).not.toEqual(expect.arrayContaining([user]));
@@ -60,7 +49,7 @@ describe('Users', () => {
   
   it('should not remove a user', () => {
     let id = '33';
-    let user = users.removeUser(id);
+    let user = users.removeById(id);
     
     expect(user).not.toBeTruthy();
   });
