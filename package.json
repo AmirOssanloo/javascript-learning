@@ -1,0 +1,21 @@
+{
+  "name": "no-wall-jose",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Amir Ossanloo",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "https://github.com/AmirOssanloo/no-wall-jose",
+  "engines": {
+    "node": "11.6.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "uuid": "^3.3.2"
+  }
+}
