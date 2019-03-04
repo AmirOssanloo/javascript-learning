@@ -1,0 +1,21 @@
+#userlist-panel {
+  position: absolute;
+  background-color: #c0c0c0;
+  width: 100%;
+  height: 100%;
+  min-width: 150px;
+  max-width: 200px;
+  overflow: hidden;
+  overscroll-behavior-y: contain;
+  top: 0;
+  left: 0;
+}
+
+.user {
+  display: block;
+  background-color: #c0c0c0;
+  margin: 0;
+  padding: 5px 25px;
+  border-bottom: 1px solid #b0b0b0;
+  list-style: none;
+}

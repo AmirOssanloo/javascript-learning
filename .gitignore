@@ -1,4 +1,8 @@
 node_modules/
+<<<<<<< HEAD
+=======
+secret/
+>>>>>>> nodejs-chat-app/master
 ._*
 *.log
 .DS_Store
