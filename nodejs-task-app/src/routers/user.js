@@ -14,9 +14,9 @@ router.get('/users/:id', async (req, res) => {
     if (!users)
       return res.status(404).send();
 
-    res.status(200).send(users);
+    res.send(users);
   } catch (err) {
-    res.status(400).send(err);
+    res.status(500).send(err);
   }
 });
 
@@ -25,9 +25,9 @@ router.post('/users/login', async (req, res) => {
     const user = await User.findByCredentials(req.body.email, req.body.password);
     const token = await user.generateAuthToken();
 
-    res.status(200).send({user, token});
+    res.send({user, token});
   } catch (err) {
-    res.status(400).send(err);
+    res.status(500).send(err);
   }
 });
 
@@ -64,7 +64,7 @@ router.post('/users', async (req, res) => {
 
     res.status(201).send({user, token});
   } catch (err) {
-    res.status(400).send(err);
+    res.status(500).send(err);
   }
 });
 
@@ -83,7 +83,7 @@ router.patch('/users/me', auth, async (req, res) => {
     await req.user.save();
     res.send(req.user);
   } catch (err) {
-    res.status(400).send(err);
+    res.status(500).send(err);
   }
 });
 
