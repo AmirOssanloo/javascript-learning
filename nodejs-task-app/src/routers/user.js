@@ -1,7 +1,49 @@
 const express = require('express');
+const multer = require('multer');
 const auth = require('../middleware/auth');
 const User = require('../models/user');
+
 const router = new express.Router();
+const upload = multer({
+  limits: {
+    fileSize: 1000000
+  },
+  fileFilter(req, file, callback) {
+    if (!file.originalname.match(/\.(jpe?g$|png$)/))
+      return callback(new Error('Please upload an image'));
+    
+    callback(undefined, true);
+  }
+});
+
+router.get('/users/:id/avatar', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user || !user.avatar)
+      throw new Error('...');
+
+    res.set('Content-Type', 'image/jpg');
+    res.send(user.avatar);
+  } catch (err) {
+    res.status(404).send();
+  }
+});
+
+router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
+  req.user.avatar = req.file.buffer;
+  await req.user.save();
+  
+  res.send();
+}, (err, req, res, next) => {
+  res.status(400).send({error: err.message});
+});
+
+router.delete('/users/me/avatar', auth, async (req, res) => {
+  req.user.avatar = undefined;
+  await req.user.save();
+  res.send();
+});
 
 router.get('/users/me', auth, async (req, res) => {
   res.send(req.user);
