@@ -1,0 +1,17 @@
+{
+  "name": "api-stripe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "env-cmd ./env/dev.env nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "env-cmd": "^8.0.2",
+    "nodemon": "^1.18.10",
+    "stripe": "^6.28.0"
+  }
+}
