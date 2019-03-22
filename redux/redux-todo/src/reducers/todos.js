@@ -20,7 +20,20 @@ export const todo = (state = [], action) => {
   }
 }
 
-export const todos = (state = [], action) => {
+export const getVisibleTodos = (state, filter) => {
+  switch (filter) {
+    case 'all':
+      return state;
+    case 'completed':
+      return state.filter(t => t.completed);
+    case 'active':
+      return state.filter(t => !t.completed);
+    default:
+    throw new Error(`Unknown filter: ${filter}.`);
+  }
+}
+
+const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -33,3 +46,5 @@ export const todos = (state = [], action) => {
     return state;
   }
 }
+
+export default todos;

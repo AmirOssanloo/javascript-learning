@@ -10,3 +10,6 @@ render(
   <Root store={store} />,
   document.getElementById('root')
 );
+
+// TODO:
+// https://egghead.io/lessons/javascript-redux-colocating-selectors-with-reducers

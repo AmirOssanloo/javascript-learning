@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
-import { todos } from './todos';
-import { visibilityFilter } from './visibilityFilter';
+import todos, * as fromTodos from './todos';
 
-export default combineReducers({
-  todos,
-  visibilityFilter
+export const getVisibleTodos = (state, filter) =>
+  fromTodos.getVisibleTodos(state.todos, filter);
+
+const todoApp = combineReducers({
+  todos
 });
+  
+export default todoApp;
