@@ -13,6 +13,8 @@ router.get('/api/kittens', async (req, res) => {
 });
 
 router.post('/api/kittens', async (req, res) => {
+  console.log(req.body)
+
   try {
     const kitten = new Kitten(req.body);
     await kitten.save()

@@ -3,7 +3,6 @@ import kittenEvents from './events';
 
 const fetchKittens = ({ dispatch }) => next => action => {
   if (action.type === kittenEvents.FETCH_KITTENS) {
-
     dispatch(fetchStart({
       method: 'GET',
       url: '/api/kittens',
@@ -15,6 +14,25 @@ const fetchKittens = ({ dispatch }) => next => action => {
   next(action);
 };
 
+const addKitten = ({ dispatch }) => next => action => {
+
+  if (action.type === kittenEvents.ADD_KITTEN) {
+    dispatch(fetchStart({
+      url: '/api/kittens',
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: action.payload,
+      onSuccess: kittenEvents.FETCH_KITTENS,
+      onError: kittenEvents.ADD_KITTEN_ERROR,
+    }));
+  }
+
+  next(action);
+}
+
 export default [
-  fetchKittens
+  fetchKittens,
+  addKitten
 ];

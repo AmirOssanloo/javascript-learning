@@ -11,10 +11,10 @@ const kittenReducer = (state = initialState, action) => {
         ...state,
         kittens: action.payload
       }
-    case kittenEvents.FETCH_KITTENS_ERROR:
+    case kittenEvents.ADD_KITTEN_SUCCESS:
       return {
         ...state,
-        kittens: []
+        kittens: kittens.concat(action.payload)
       }
     default:
       return { ...state }

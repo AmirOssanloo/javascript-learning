@@ -1,11 +1,12 @@
 import apiEvents from './events';
 
-export const fetchStart = ({ method, url, body, onSuccess, onError }) => ({
+export const fetchStart = ({ method, url, headers, body, onSuccess, onError }) => ({
   type: apiEvents.FETCH_START,
   payload: body,
   meta: {
-    method,
     url,
+    method,
+    headers,
     onSuccess,
     onError
   }
