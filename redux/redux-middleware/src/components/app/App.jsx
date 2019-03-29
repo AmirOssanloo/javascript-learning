@@ -14,21 +14,29 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Redux Middleware</h1>
-        <ul></ul>
-
+        <h1>Add a warrior kitten</h1>
+        <input type="text" placeholder="name" />
+        <input type="text" placeholder="role" />
         <div
           className={styles["button"]}
           onClick={this.props.toggleStatus}>
-          {this.props.online ? 'GO ONLINE' : 'GO OFFLINE'}
+          Publish
         </div>
+        <hr />
+        <ol>
+          {this.props.kittens.map(kitten => (
+            <li key={kitten._id}><b>{kitten.name}</b> – {kitten.role}</li>
+          ))}
+        </ol>
+        
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  online: state.app.online
+  online: state.app.online,
+  kittens: state.kitten.kittens
 });
 
 export default connect(mapStateToProps, {
