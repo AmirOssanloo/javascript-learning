@@ -1,0 +1,4 @@
+export default {
+  FETCH_START: 'API_FETCH_START',
+  FETCH_END: 'API_FETCH_END'
+};
