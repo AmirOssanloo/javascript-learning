@@ -13,7 +13,9 @@ class App extends Component {
   }
   
   componentDidMount() {
-    this.props.fetchKittens();
+    this.props.fetchKittens()
+      .then(() => console.log('Got em kittens!'))
+      .catch(() => console.log('Oh noo, pussy got away!'));
   }
 
   onAddKitten() {
@@ -23,13 +25,19 @@ class App extends Component {
     if (name.length <= 0) return console.log('Name is required');
     if (role.length <= 0) return console.log('Role is required');
 
-    this.props.addKitten({name, role});
+    this.props.addKitten({name, role})
+    .then(() => console.log('More kittens to the army!'))
+    .catch(() => console.log('Where did pussy go?'));
   }
 
   render() {
     return (
       <div>
-        <h1>Add a warrior kitten</h1>
+        <h1>
+          {this.props.fetching
+            ? 'Fetching some data'
+            : 'Add a warrior kitten'}
+        </h1>
         <input
           ref={this.nameRef}
           type="text"
@@ -49,14 +57,13 @@ class App extends Component {
             <li key={kitten._id}><b>{kitten.name}</b> – {kitten.role}</li>
           ))}
         </ol>
-        
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  online: state.app.online,
+  fetching: state.api.fetching,
   kittens: state.kitten.kittens
 });
 

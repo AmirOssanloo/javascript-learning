@@ -14,7 +14,7 @@ const kittenReducer = (state = initialState, action) => {
     case kittenEvents.ADD_KITTEN_SUCCESS:
       return {
         ...state,
-        kittens: kittens.concat(action.payload)
+        kittens: state.kittens.concat(action.payload)
       }
     default:
       return { ...state }
