@@ -3,8 +3,6 @@
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
   background-color: #fafafa;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
@@ -38,15 +36,34 @@ ol {
   padding-left: 18px;
 }
 
-li {
+ol li {
   margin-bottom: 2px;
   padding-left: 10px;
   font-weight: 300;
 }
 
+ul {
+  list-style-type: none;
+}
+
+ul li {
+  background-color: #ccfffa;
+  margin-bottom: 4px;
+  padding: 12px;
+  text-align: right;
+  border: 1px solid #fcccfc;
+}
+
+.alerts {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
 .button {
   display: inline-block;
   background-color: #99bbfa;
+  margin-right: 8px;
   padding: 10px 20px;
   color: #ffffaa;
   user-select: none;

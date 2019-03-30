@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { newAlert } from '../../store/alert/actions';
 import { fetchKittens, addKitten } from '../../store/kitten/actions';
 import styles from './App.css';
 
@@ -9,13 +10,34 @@ class App extends Component {
 
     this.nameRef = React.createRef();
     this.roleRef = React.createRef();
+    this.onAddAlert = this.onAddAlert.bind(this);
     this.onAddKitten = this.onAddKitten.bind(this);
   }
   
   componentDidMount() {
     this.props.fetchKittens()
-      .then(() => console.log('Got em kittens!'))
+      .then(() => {
+        this.props.newAlert('Fetch em kittens!');
+      })
       .catch(() => console.log('Oh noo, pussy got away!'));
+  }
+
+  onAddAlert() {
+    const phrases = [
+      'An occurance of sorts',
+      'When something is',
+      'Anything that requires',
+      'Old in age',
+      'To be enraged',
+      'A person',
+      'A type of bazaar',
+      'One who escalates'
+    ];
+
+    const random = Math.floor(Math.random() * phrases.length);
+    const phrase = phrases[random];
+
+    this.props.newAlert(phrase);
   }
 
   onAddKitten() {
@@ -51,12 +73,22 @@ class App extends Component {
           onClick={this.onAddKitten}>
           Publish
         </div>
+        <div
+          className={styles["button"]}
+          onClick={this.onAddAlert}>
+          Alert!
+        </div>
         <hr />
         <ol>
           {this.props.kittens.map(kitten => (
             <li key={kitten._id}><b>{kitten.name}</b> – {kitten.role}</li>
           ))}
         </ol>
+        <ul className={styles["alerts"]}>
+          {this.props.alerts.map(alert => (
+            <li key={alert._id}>{alert.text}</li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -64,10 +96,12 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   fetching: state.api.fetching,
+  alerts: state.alert.alerts,
   kittens: state.kitten.kittens
 });
 
 export default connect(mapStateToProps, {
+  newAlert,  
   fetchKittens,
   addKitten
 })(App);

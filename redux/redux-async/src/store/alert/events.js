@@ -1,0 +1,4 @@
+export default {
+  NEW_ALERT: 'ALERT_NEW_ALERT',
+  REMOVE_ALERT: 'ALERT_REMOVE_ALERT'
+}
