@@ -5,6 +5,8 @@ export const fetchKittens = () => {
   return fetchStart({
     method: 'GET',
     url: '/api/kittens',
+    delayPre: 1500,
+    delayPost: 4000,
     onSuccess: kittenEvents.FETCH_KITTENS_SUCCESS,
     onError: kittenEvents.FETCH_KITTENS_ERROR
   });

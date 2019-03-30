@@ -1,17 +1,15 @@
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './rootReducer';
-import thunkMiddleware from 'redux-thunk';
-// import apiMiddleware from './api/middleware';
-import appMiddleware from './app/middleware';
-// import kittenMiddleware from './kitten/middleware';
+import thunk from 'redux-thunk';
+import logger from './middleware/logger';
+import throttle from './middleware/throttle';
 
 const store = createStore(
   rootReducer,
   applyMiddleware(
-    thunkMiddleware,
-    // ...apiMiddleware,
-    ...appMiddleware,
-    // ...kittenMiddleware
+    thunk,
+    logger,
+    throttle
   )
 );
 

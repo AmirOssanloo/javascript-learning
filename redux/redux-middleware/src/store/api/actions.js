@@ -1,28 +1,35 @@
 import apiEvents from './events';
 
 export const fetchStart = ({
-  method, url, headers, payload, onSuccess, onError
+  url,
+  method,
+  headers,
+  payload,
+  onSuccess,
+  onError,
+  delayPre = 0,
+  delayPost = 0,
 }) => dispatch => {
   const body = JSON.stringify(payload);
-
+  
   return new Promise((resolve, reject) => {
     fetch(url, { method, headers, body })
       .then(res => res.json())
       .then(res => {
-        resolve();
-
+        setTimeout(() => resolve(), delayPre);
         dispatch({ type: apiEvents.FETCH_END });
+
         setTimeout(() => dispatch({
           type: onSuccess, payload: res
-        }), 3000);
+        }), delayPost);
       })
       .catch(err => {
-        reject();
+        setTimeout(() => reject(), delayPost);
         
         dispatch({ type: apiEvents.FETCH_END });
         setTimeout(() => dispatch({
           type: onError, payload: err
-        }), 3000);
+        }), delayPost);
       })
   });
 }
