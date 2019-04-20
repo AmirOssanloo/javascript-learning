@@ -5,7 +5,9 @@ const delay = () => next => action => {
     return next(action);
   }
 
-  setTimeout(() => next(action), time);
+  setTimeout(() => {
+    next(action)
+  }, time);
 };
 
 export default delay;
