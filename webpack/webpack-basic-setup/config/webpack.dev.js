@@ -14,43 +14,43 @@ module.exports = {
   },
   module: {
     rules: [
-    {
-      test: /\.js$/,
-      use: [
-        {loader: "babel-loader"}
-      ],
-      exclude: /node_modules/
-    },
-    {
-      test: /\.css$/,
-      use: [
-        {loader: "style-loader"},
-        {loader: "css-loader"}
-      ]
-    },
-    {
-      test: /\.html$/,
-      use: [
-        {
-          loader: "html-loader",
-          options: {
-            attrs: ["img:src"]
+      {
+        test: /\.js$/,
+        use: [
+          {loader: "babel-loader"}
+        ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {loader: "style-loader"},
+          {loader: "css-loader"}
+        ]
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: {
+              attrs: ["img:src"]
+            }
           }
-        }
-      ]
-    },
-    {
-      test: /\.(jpg|png|gif)$/,
-      use: [
-        {
-          loader: "file-loader",
-          options: {
-            name: "images/[name].[ext]"
+        ]
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[name].[ext]"
+            }
           }
-        }
-      ]
-    }
-  ]
+        ]
+      }
+    ]
   },
   devServer: {
     contentBase: "dist",
