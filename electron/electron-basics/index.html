@@ -19,7 +19,32 @@
   <span>and Electron <script>document.write(process.versions.electron)</script></span>
 
   <script type="text/javascript">
-    
+    var { remote } = require("electron");
+    const fs = require('fs');
+
+    let options = {
+      title: 'Custom title bar',
+      defaultPath: 'D:\\electron-app',
+      buttonLabel: 'Custom button',
+      filters: [],
+      properties: ['openDirectory']
+    };
+
+    remote.dialog
+      .showOpenDialog(options)
+      .then(res => {
+        console.log(res);
+        fs.mkdirSync(
+          `${res.filePaths}/Electron-made`,
+          { recursive: true },
+          err => {
+            console.log(err);
+          }
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
   </script>
 </body>
 </html>
