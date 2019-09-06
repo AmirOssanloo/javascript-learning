@@ -19,7 +19,7 @@
   <span>and Electron <script>document.write(process.versions.electron)</script></span>
 
   <script type="text/javascript">
-    var { remote } = require("electron");
+    var { remote, ipcRenderer } = require("electron");
     const fs = require('fs');
 
     let options = {
@@ -29,6 +29,8 @@
       filters: [],
       properties: ['openDirectory']
     };
+
+    ipcRenderer.send('hello-channel', 'a string', 10);
 
     remote.dialog
       .showOpenDialog(options)

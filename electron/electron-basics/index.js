@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 let win;
 
@@ -21,6 +21,11 @@ const createWin = () => {
 
 app.on('ready', () => {
   createWin();
+
+  ipcMain.on('hello-channel', (event, args) => {
+    console.log('Received a message from Renderer Process');
+    console.log(args);
+  });
 });
 
 app.on('window-all-closed', () => {
