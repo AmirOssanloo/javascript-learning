@@ -8,8 +8,7 @@
 
 // Solution 1
 // function reverse(str) {
-//   let reversed = str;
-//   return reversed
+//   return str
 //     .split('')
 //     .reverse()
 //     .join('');
@@ -28,8 +27,7 @@
 
 // Solution 3
 function reverse(str) {
-  let reversed = str;
-  return reversed.split('').reduce((reversed, char) => char + reversed, '');
+  return str.split('').reduce((reversed, char) => char + reversed, '');
 }
 
 module.exports = reverse;
