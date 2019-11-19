@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
-import withMouse from "../../hoc/withMouse";
-import styles from "./App.css";
+import React, { Component, useState } from 'react';
+import withMouse from '../../hoc/withMouse';
+import styles from './App.css';
 
 class Hello extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Hello extends Component {
 
   render() {
     return (
-      <div style={{ height: "100%" }} onMouseMove={this.handleMouseMove}>
+      <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
         <span>
           State from Hello: {this.state.x}, {this.state.y}
         </span>

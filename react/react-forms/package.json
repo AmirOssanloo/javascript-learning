@@ -1,7 +1,7 @@
 {
-  "name": "react-routing",
+  "name": "react-forms",
   "version": "1.0.0",
-  "description": "Dynamic routing with React",
+  "description": "Forms with React",
   "main": "index.js",
   "keywords": [],
   "author": "Amir Ossanloo",

@@ -1,7 +1,7 @@
 {
-  "name": "react-render-props",
+  "name": "react-styled-components",
   "version": "1.0.0",
-  "description": "Render props with React",
+  "description": "Styled Components with React",
   "main": "index.js",
   "keywords": [],
   "author": "Amir Ossanloo",
@@ -16,6 +16,7 @@
     "@babel/preset-env": "^7.4.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.4.2",
+    "@babel/plugin-transform-runtime": "^7.4.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-async-to-promises": "^1.0.5",
     "css-loader": "^2.1.1",
@@ -28,11 +29,9 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.4.0",
-    "axios": "^0.18.0",
-    "formik": "^1.5.4",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "yup": "^0.27.0"
+    "styled-components": "^4.4.1"
   }
 }

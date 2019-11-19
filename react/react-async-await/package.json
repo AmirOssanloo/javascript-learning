@@ -1,7 +1,7 @@
 {
-  "name": "react-routing",
+  "name": "react-async-await",
   "version": "1.0.0",
-  "description": "Dynamic routing with React",
+  "description": "Async-await with React",
   "main": "index.js",
   "keywords": [],
   "author": "Amir Ossanloo",
