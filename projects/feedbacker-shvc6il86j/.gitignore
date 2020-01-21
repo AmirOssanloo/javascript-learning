@@ -1,0 +1,25 @@
+# Dependency directories
+node_modules/
+
+# Environment variables
+env/
+
+# OS generated files
+._*
+.ds_store
+.DS_Store
+.DS_STORE
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode
+
+# Cache files
+.cache
+
+# Logs
+*.log
+logs
+npm-debug.log*
+lerna-debug.log*
