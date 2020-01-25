@@ -1,12 +1,8 @@
 # Dependency directories
 node_modules/
 
-# Environment variables
-/env/
-
 # Secret
-/secret/
-**/keys/dev.js
+**/keys/
 
 # OS generated files
 ._*
