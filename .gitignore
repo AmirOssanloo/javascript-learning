@@ -2,7 +2,7 @@
 node_modules/
 
 # Secret
-**/keys/
+**/keys/dev.js
 
 # OS generated files
 ._*
