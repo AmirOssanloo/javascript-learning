@@ -2,7 +2,7 @@ const cookieSession = require('cookie-session');
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const { cookieSecret, mongoURI } = require('./env/keys');
+const { cookieSecret, mongoURI } = require('./keys');
 const authRoutes = require('./routes/authRoutes');
 require('./models/User');
 require('./services/passport');
