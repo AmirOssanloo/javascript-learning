@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { AppBar, Toolbar, Link, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,8 +16,29 @@ const useStyles = makeStyles(theme => {
   }
 });
 
-const Header = () => {
+const Header = ({ auth }) => {
   const classes = useStyles();
+
+  const renderContent = () => {
+    switch (auth) {
+      case null:
+        return null;
+
+      case false:
+        return (
+          <Button href="/auth/google" className={classes.link} variant="outlined" color="primary">
+            Login with Google
+          </Button>
+        );
+
+      default:
+        return (
+          <Button href="/api/logout" className={classes.link} variant="outlined" color="primary">
+            Logout
+          </Button>
+        );
+    }
+  };
 
   return (
     <AppBar color="default" elevation={0}>
@@ -27,11 +49,15 @@ const Header = () => {
         <nav>
           <Link className={classes.link} href="/" variant="button" color="inherit">Something</Link>
           <Link className={classes.link} href="/" variant="button" color="inherit">Something</Link>
-          <Button className={classes.link} variant="outlined" color="primary">Login with Google</Button>
+          {renderContent()}
         </nav>
       </Toolbar>
     </AppBar>
   );
 };
 
-export default Header;
+const mapStateToProps = ({ auth }) => ({
+  auth
+});
+
+export default connect(mapStateToProps)(Header);
