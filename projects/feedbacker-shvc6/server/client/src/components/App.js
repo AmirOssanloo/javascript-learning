@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { CssBaseline } from '@material-ui/core';
 
 import Header from './Header';
 
@@ -9,7 +10,8 @@ const Landing = () => <h2>Landing</h2>;
 
 const App = () => {
   return (
-    <div className="container">
+    <React.Fragment>
+      <CssBaseline />
       <BrowserRouter>
         <React.Fragment>
           <Header />
@@ -18,7 +20,7 @@ const App = () => {
           <Route path="/surveys/new" component={SurveyNew} />
         </React.Fragment>
       </BrowserRouter>
-    </div>
+    </React.Fragment>
   );
 };
 
