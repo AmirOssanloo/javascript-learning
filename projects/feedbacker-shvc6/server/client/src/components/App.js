@@ -14,7 +14,7 @@ const App = ({ fetchUser }) => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [fetchUser]);
 
   return (
     <React.Fragment>
