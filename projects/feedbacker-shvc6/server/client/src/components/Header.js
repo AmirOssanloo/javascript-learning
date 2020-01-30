@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Toolbar, Link, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -27,14 +28,32 @@ const Header = ({ auth }) => {
         return (
           <Button href="/auth/google" className={classes.link} variant="outlined" color="primary">
             Login with Google
-          </Button>
+            </Button>
         );
 
       default:
         return (
-          <Button href="/api/logout" className={classes.link} variant="outlined" color="primary">
-            Logout
-          </Button>
+          <React.Fragment>
+            <Link
+              component={RouterLink}
+              to="/"
+              className={classes.link}
+              variant="button"
+              color="inherit">
+              Something
+            </Link>
+            <Link
+              component={RouterLink}
+              href="/"
+              className={classes.link}
+              variant="button"
+              color="inherit">
+              Something
+            </Link>
+            <Button href="/api/logout" className={classes.link} variant="outlined" color="primary">
+              Logout
+            </Button>
+          </React.Fragment>
         );
     }
   };
@@ -43,15 +62,18 @@ const Header = ({ auth }) => {
     <AppBar position="static" color="default" elevation={0}>
       <Toolbar className={classes.toolbar}>
         <Typography variant="h5">
-          <Link href="/" color="inherit">Feedbacker</Link>
+          <Link
+            component={RouterLink}
+            to={auth ? "/surveys" : "/"}
+            color="inherit">
+            Feedbacker
+          </Link>
         </Typography>
         <nav>
-          <Link className={classes.link} href="/" variant="button" color="inherit">Something</Link>
-          <Link className={classes.link} href="/" variant="button" color="inherit">Something</Link>
           {renderContent()}
         </nav>
       </Toolbar>
-    </AppBar>
+    </AppBar >
   );
 };
 
