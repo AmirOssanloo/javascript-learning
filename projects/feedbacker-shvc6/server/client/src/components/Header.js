@@ -40,7 +40,7 @@ const Header = ({ auth }) => {
               className={classes.link}
               variant="button"
               color="inherit">
-              Something
+              Link
             </Link>
             <Link
               component={RouterLink}
@@ -48,7 +48,7 @@ const Header = ({ auth }) => {
               className={classes.link}
               variant="button"
               color="inherit">
-              Something
+              Link
             </Link>
             <Button href="/api/logout" className={classes.link} variant="outlined" color="primary">
               Logout
