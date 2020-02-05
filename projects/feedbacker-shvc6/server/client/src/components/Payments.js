@@ -1,7 +1,10 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import { connect } from 'react-redux';
 import { Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+import * as actions from '../store/actions';
 
 const useStyles = makeStyles(theme => {
   return {
@@ -13,7 +16,7 @@ const useStyles = makeStyles(theme => {
 });
 
 
-const Payments = () => {
+const Payments = ({ handleStripeToken }) => {
   const classes = useStyles();
 
   return (
@@ -21,7 +24,7 @@ const Payments = () => {
       name="Feedbacker"
       description="$5 for 5 emails"
       amount={500}
-      token={token => { console.log(token); }}
+      token={token => handleStripeToken(token)}
       stripeKey={process.env.REACT_APP_STRIPE_KEY}>
       <Link
         to="/"
@@ -34,4 +37,4 @@ const Payments = () => {
   );
 };
 
-export default Payments;
+export default connect(null, actions)(Payments);

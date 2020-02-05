@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const { cookieSecret, mongoURI } = require('./keys');
 const authRoutes = require('./routes/authRoutes');
+const billingRoutes = require('./routes/billingRoutes');
 require('./models/User');
 require('./services/passport');
 
@@ -24,6 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 authRoutes(app);
+billingRoutes(app);
 
 app.listen(PORT, () => {
   console.log(`Running server on port ${PORT}.`);
