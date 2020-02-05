@@ -4,6 +4,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Toolbar, Link, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Payments from './Payments';
+
 const useStyles = makeStyles(theme => {
   return {
     toolbar: {
@@ -28,21 +30,22 @@ const Header = ({ auth }) => {
         return (
           <Button href="/auth/google" className={classes.link} variant="outlined" color="primary">
             Login with Google
-            </Button>
+          </Button>
         );
 
       default:
         return (
           <React.Fragment>
             <Link
-              component={RouterLink}
               to="/"
+              component={RouterLink}
               className={classes.link}
               variant="button"
               color="inherit">
               Link
             </Link>
             <Link
+              to="/"
               component={RouterLink}
               href="/"
               className={classes.link}
@@ -50,6 +53,7 @@ const Header = ({ auth }) => {
               color="inherit">
               Link
             </Link>
+            <Payments />
             <Button href="/api/logout" className={classes.link} variant="outlined" color="primary">
               Logout
             </Button>
