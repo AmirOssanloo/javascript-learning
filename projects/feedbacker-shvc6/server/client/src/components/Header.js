@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Link, Typography, Button } from '@material-ui/core';
+import { AppBar, Badge, Toolbar, Link, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 import Payments from './Payments';
 
@@ -13,6 +14,9 @@ const useStyles = makeStyles(theme => {
       justifyContent: 'space-between',
     },
     link: {
+      margin: theme.spacing(1, 1.5)
+    },
+    badge: {
       margin: theme.spacing(1, 1.5)
     }
   }
@@ -28,7 +32,7 @@ const Header = ({ auth }) => {
 
       case false:
         return (
-          <Button href="/auth/google" className={classes.link} variant="outlined" color="primary">
+          <Button className={classes.link} href="/auth/google" variant="outlined" color="primary">
             Login with Google
           </Button>
         );
@@ -36,25 +40,11 @@ const Header = ({ auth }) => {
       default:
         return (
           <React.Fragment>
-            <Link
-              to="/"
-              component={RouterLink}
-              className={classes.link}
-              variant="button"
-              color="inherit">
-              Link
-            </Link>
-            <Link
-              to="/"
-              component={RouterLink}
-              href="/"
-              className={classes.link}
-              variant="button"
-              color="inherit">
-              Link
-            </Link>
             <Payments />
-            <Button href="/api/logout" className={classes.link} variant="outlined" color="primary">
+            <Badge className={classes.badge} badgeContent={auth.credits} color="primary">
+              <MonetizationOnIcon />
+            </Badge>
+            <Button className={classes.link} href="/api/logout" variant="outlined" color="primary">
               Logout
             </Button>
           </React.Fragment>
