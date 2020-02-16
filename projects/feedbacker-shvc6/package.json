@@ -1,0 +1,21 @@
+{
+  "name": "feedbacker-shvc6",
+  "version": "1.0.0",
+  "author": "Amir Ossanloo <amir@amirossanloo.com>",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "engines": {
+    "node": "10.16.2",
+    "npm": "6.13.4"
+  },
+  "scripts": {
+    "server": "npm run start --prefix server",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "concurrently": "^5.0.2"
+  }
+}
