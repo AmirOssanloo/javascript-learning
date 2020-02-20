@@ -13,10 +13,11 @@
   "scripts": {
     "install-server": "npm install --prefix server",
     "start-server": "npm run start --prefix server",
+    "dev-server": "npm run dev --prefix server",
     "start-client": "npm run start --prefix client",
     "install-client": "npm install --prefix client",
     "build-client": "npm run build --prefix client",
-    "start-dev": "concurrently \"npm run start-server\" \"npm run start-client\"",
+    "start-dev": "concurrently \"npm run dev-server\" \"npm run start-client\"",
     "start": "npm run start-server",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-server && npm run install-client && npm run build-client"
   },
