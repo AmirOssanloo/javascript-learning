@@ -7,6 +7,7 @@ const passport = require('passport');
 const { cookieSecret, mongoURI } = require('./keys');
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
+require('./models/Survey');
 require('./models/User');
 require('./services/passport');
 
@@ -29,6 +30,7 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('../client/build'));
