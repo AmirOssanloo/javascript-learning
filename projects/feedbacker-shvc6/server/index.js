@@ -1,3 +1,7 @@
+require('./models/User');
+require('./models/Survey');
+require('./services/passport');
+
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const express = require('express');
@@ -7,9 +11,7 @@ const passport = require('passport');
 const { cookieSecret, mongoURI } = require('./keys');
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
-require('./models/Survey');
-require('./models/User');
-require('./services/passport');
+const surveyRoutes = require('./routes/surveyRoutes');
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
