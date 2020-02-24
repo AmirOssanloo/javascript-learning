@@ -5,9 +5,9 @@ import { CssBaseline } from '@material-ui/core';
 
 import Header from './Header';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
 import * as actions from '../store/actions';
 
-const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
 
 const App = ({ fetchUser }) => {
