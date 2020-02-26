@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => {
   }
 });
 
-
 const Payments = ({ handleStripeToken }) => {
   const classes = useStyles();
 
