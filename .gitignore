@@ -1,8 +1,12 @@
 # Dependency directories
 node_modules/
 
+# Dotenv files
+.env
+
 # Secret
 **/keys/dev.js
+credentials.json
 
 # OS generated files
 ._*
