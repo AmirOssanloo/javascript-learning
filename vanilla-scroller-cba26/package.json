@@ -6,6 +6,9 @@
   "keywords": [],
   "license": "ISC",
   "main": "./src/index.js",
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "npm run prebuild && parcel build ./src/index.html -d ./public --no-source-maps",

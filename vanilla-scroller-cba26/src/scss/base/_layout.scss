@@ -1,0 +1,23 @@
+#app-root {
+  display: flex;
+  flex-direction: column;
+  background-color: hotpink;
+  width: 40rem;
+  height: 100%;
+  margin: 0 auto;
+}
+
+#header {
+  background-color: indianred;
+  min-height: 6rem;
+}
+
+#main {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+#footer {
+  background-color: indianred;
+  min-height: 5rem;
+}

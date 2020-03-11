@@ -117,21 +117,116 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/server.js":[function(require,module,exports) {
+})({"js/helpers/math.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.random = void 0;
+
+/**
+ * Produces a random number between the `lower` and `upper` bounds.
+ * If no argument is provided a floating-point number between `0` and `1`
+ * is returned. If `integer` is `true`, an integer is returned instead
+ * of a floating-point number.
+ *
+ * @param {number} lower The lower bound.
+ * @param {number} upper The upper bound.
+ * @param {boolean} integer Specify returning an integer.
+ * @returns {number} Returns the random number.
+ */
+const random = (lower, upper, integer) => {
+  lower = lower === undefined ? 0 : lower;
+  upper = upper === undefined ? 1 : upper;
+  let random = integer ? lower + Math.floor(Math.random() * (upper - lower + 1)) : lower + Math.random() * (upper - lower);
+  return random;
+};
+
+exports.random = random;
+},{}],"js/components/post-list/post/Post.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-console.log('Woah');
 
-function sayHi() {
-  console.log('Saying hi');
+var _math = require("../../../helpers/math");
+
+function Post(id) {
+  this.id = id;
+  this.fetchImageAttempts = 0;
+  this.fetchImageMaxAttemps = 3;
+  this.container = document.createElement('div');
+  this.container.className = 'post';
+  this.header = document.createElement('div');
+  this.header.className = 'post__header';
+  this.container.appendChild(this.header);
+  this.main = document.createElement('div');
+  this.main.className = 'post__main';
+  this.container.appendChild(this.main);
+  this.footer = document.createElement('div');
+  this.footer.className = 'post__footer';
+  this.container.appendChild(this.footer);
+  this.createPostImage();
+  return this.container;
 }
 
-var _default = sayHi; // let counter = 0;
-// const fetchNewPosts = async (amount) => {
+;
+
+Post.prototype.createPostImage = async function () {
+  const response = await this.fetchPostImage();
+  console.log(response);
+  const blobURL = window.URL.createObjectURL(response);
+  const img = new Image();
+  img.src = blobURL;
+  this.main.appendChild(img);
+};
+
+Post.prototype.fetchPostImage = function () {
+  const id = this.id;
+  const result = new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.responseType = 'blob';
+    request.open('GET', `https://picsum.photos/id/${id}/400/430`);
+    request.send();
+
+    request.onload = () => {
+      const {
+        status,
+        response,
+        statusText
+      } = request;
+
+      if (status === 200) {
+        resolve(response);
+        console.log('Image success');
+      } else if (status === 404) {
+        console.log('----------------');
+        console.log(this.id);
+        this.id = (0, _math.random)(0, 1000, true);
+        this.createPostImage();
+        console.log(`404 trying another image: ${this.id}`);
+      } else {
+        if (this.fetchImageAttempts < this.fetchImageMaxAttemps) {
+          this.fetchPostImage();
+          this.fetchImageAttempts += 1;
+          console.log('Retrying to fetch image');
+        } else {
+          console.error(`There was a problem with the request: ${statusText}`);
+        }
+      }
+    };
+
+    request.onerror = () => {
+      reject(new Error('There was a network error'));
+    };
+  });
+  return result;
+};
+
+var _default = Post; // const fetchNewPosts = async (amount) => {
 //   const promises = [];
 //   for (var i = 0; i < amount; i++) {
 //     const promise = new Promise((resolve, reject) => {
@@ -156,21 +251,111 @@ var _default = sayHi; // let counter = 0;
 //   const results = await Promise.all(promises);
 //   return results;
 // }
-// const randomRange = (min, max) => {
-//   return Math.floor((Math.random() * max) + min);
-// }
 
+exports.default = _default;
+},{"../../../helpers/math":"js/helpers/math.js"}],"js/components/post-list/PostList.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Post = _interopRequireDefault(require("./post/Post"));
+
+var _math = require("../../helpers/math");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function PostList(element) {
+  this.element = element;
+  this.createManyPosts(3);
+}
+
+;
+
+PostList.prototype.createManyPosts = function (amount) {
+  for (var i = 0; i < amount; i++) {
+    this.createSinglePost();
+  }
+};
+
+PostList.prototype.createSinglePost = function () {
+  const id = (0, _math.random)(0, 1000, true);
+  const post = new _Post.default(id);
+  this.element.appendChild(post);
+};
+
+var _default = PostList;
+exports.default = _default;
+},{"./post/Post":"js/components/post-list/post/Post.js","../../helpers/math":"js/helpers/math.js"}],"js/components/infinite-scroll/InfiniteScroll.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function InfiniteScroll(container, content, callback) {
+  this.container = container;
+  this.content = content;
+  this.callback = callback;
+  this.busy = false;
+  this.container.addEventListener('scroll', this.onScroll.bind(this));
+}
+
+;
+
+InfiniteScroll.prototype.onScroll = function () {
+  const scrollTop = this.container.scrollTop;
+  const offsetHeight = this.container.offsetHeight;
+  const clientHeight = this.content.clientHeight;
+  const shouldTrigger = scrollTop + offsetHeight >= clientHeight;
+
+  if (this.busy) {
+    return;
+  }
+
+  if (shouldTrigger) {
+    this.busy = true;
+    setTimeout(() => {
+      this.callback(this.onComplete.bind(this));
+    }, 1500);
+  }
+};
+
+InfiniteScroll.prototype.onComplete = function () {
+  this.busy = false;
+  this.onScroll();
+};
+
+var _default = InfiniteScroll;
 exports.default = _default;
 },{}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
-var _server = _interopRequireDefault(require("./server"));
+var _PostList = _interopRequireDefault(require("./components/post-list/PostList"));
+
+var _InfiniteScroll = _interopRequireDefault(require("./components/infinite-scroll/InfiniteScroll"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _server.default)();
-console.log('workinggg');
-},{"./server":"js/server.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+function init() {
+  const headerEl = document.querySelector('#header');
+  const mainEl = document.querySelector('#main');
+  const postsEl = document.querySelector('#posts');
+  const footerEl = document.querySelector('#footer');
+  const postList = new _PostList.default(postsEl);
+  const infiniteScroll = new _InfiniteScroll.default(mainEl, postsEl, done => {
+    postList.createManyPosts(3);
+    done();
+  });
+  window.removeEventListener('DOMContentLoaded', init);
+}
+
+;
+window.addEventListener('DOMContentLoaded', init);
+},{"./components/post-list/PostList":"js/components/post-list/PostList.js","./components/infinite-scroll/InfiniteScroll":"js/components/infinite-scroll/InfiniteScroll.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -198,7 +383,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54418" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56925" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

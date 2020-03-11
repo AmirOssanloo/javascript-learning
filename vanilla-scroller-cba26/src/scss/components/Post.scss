@@ -1,0 +1,26 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  background-color: lavenderblush;
+  height: 50rem;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.post__header {
+  background-color: lavender;
+  min-height: 3rem;
+}
+
+.post__main {
+  flex-grow: 1;
+  background-color: gainsboro;
+  max-height: 43rem;
+}
+
+.post__footer {
+  background-color: lavender;
+  min-height: 4rem;
+}
