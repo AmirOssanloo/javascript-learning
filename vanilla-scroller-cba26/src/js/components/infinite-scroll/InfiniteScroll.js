@@ -22,7 +22,7 @@ InfiniteScroll.prototype.onScroll = function() {
 
     setTimeout(() => {
       this.callback(this.onComplete.bind(this));
-    }, 1500);
+    }, 500);
   }
 };
 

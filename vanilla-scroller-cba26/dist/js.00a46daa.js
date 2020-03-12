@@ -155,9 +155,7 @@ exports.default = void 0;
 var _math = require("../../../helpers/math");
 
 function Post(id) {
-  this.id = id;
-  this.fetchImageAttempts = 0;
-  this.fetchImageMaxAttemps = 3;
+  this.id = 200;
   this.container = document.createElement('div');
   this.container.className = 'post';
   this.header = document.createElement('div');
@@ -169,6 +167,8 @@ function Post(id) {
   this.footer = document.createElement('div');
   this.footer.className = 'post__footer';
   this.container.appendChild(this.footer);
+  this.img = new Image();
+  this.main.appendChild(this.img);
   this.createPostImage();
   return this.container;
 }
@@ -176,82 +176,36 @@ function Post(id) {
 ;
 
 Post.prototype.createPostImage = async function () {
-  const response = await this.fetchPostImage();
-  console.log(response);
-  const blobURL = window.URL.createObjectURL(response);
-  const img = new Image();
-  img.src = blobURL;
-  this.main.appendChild(img);
+  const objectURL = await this.fetchPostObjectURL();
+  this.img.src = objectURL;
 };
 
-Post.prototype.fetchPostImage = function () {
+Post.prototype.fetchPostObjectURL = function () {
+  const self = this;
   const id = this.id;
-  const result = new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest();
-    request.responseType = 'blob';
-    request.open('GET', `https://picsum.photos/id/${id}/400/430`);
-    request.send();
+  const result = fetch(`https://picsum.photos/id/${id}/400/430`).then(res => handleErrors(res)).then(res => res.blob()).then(res => window.URL.createObjectURL(res)).catch(err => console.error(err));
 
-    request.onload = () => {
-      const {
-        status,
-        response,
-        statusText
-      } = request;
+  function handleErrors(res) {
+    if (res.status === 404) {
+      fetchNewRandomImage();
+      return Promise.reject(`Resource at ID ${id} could not be found.`);
+    }
 
-      if (status === 200) {
-        resolve(response);
-        console.log('Image success');
-      } else if (status === 404) {
-        console.log('----------------');
-        console.log(this.id);
-        this.id = (0, _math.random)(0, 1000, true);
-        this.createPostImage();
-        console.log(`404 trying another image: ${this.id}`);
-      } else {
-        if (this.fetchImageAttempts < this.fetchImageMaxAttemps) {
-          this.fetchPostImage();
-          this.fetchImageAttempts += 1;
-          console.log('Retrying to fetch image');
-        } else {
-          console.error(`There was a problem with the request: ${statusText}`);
-        }
-      }
-    };
+    return res;
+  }
 
-    request.onerror = () => {
-      reject(new Error('There was a network error'));
-    };
-  });
+  ;
+
+  function fetchNewRandomImage() {
+    self.id = (0, _math.random)(0, 1000, true);
+    self.createPostImage();
+  }
+
+  ;
   return result;
 };
 
-var _default = Post; // const fetchNewPosts = async (amount) => {
-//   const promises = [];
-//   for (var i = 0; i < amount; i++) {
-//     const promise = new Promise((resolve, reject) => {
-//       const id = randomRange(0, 1000);
-//       const request = new XMLHttpRequest();
-//       request.responseType = 'blob';
-//       request.open('GET', `https://picsum.photos/id/${id}/300/400`);
-//       request.send();
-//       request.onload = () => {
-//         if (request.status === 200) {
-//           resolve(request.response);
-//         } else {
-//           console.log(`There was a problem with the request: ${request.statusText}`);
-//         }
-//       };
-//       request.onerror = () => {
-//         reject(new Error('There was a network error.'));
-//       };
-//     });
-//     promises.push(promise);
-//   }
-//   const results = await Promise.all(promises);
-//   return results;
-// }
-
+var _default = Post;
 exports.default = _default;
 },{"../../../helpers/math":"js/helpers/math.js"}],"js/components/post-list/PostList.js":[function(require,module,exports) {
 "use strict";
@@ -320,7 +274,7 @@ InfiniteScroll.prototype.onScroll = function () {
     this.busy = true;
     setTimeout(() => {
       this.callback(this.onComplete.bind(this));
-    }, 1500);
+    }, 500);
   }
 };
 

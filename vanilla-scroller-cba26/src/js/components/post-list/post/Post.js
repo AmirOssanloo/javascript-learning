@@ -1,9 +1,7 @@
 import { random } from '../../../helpers/math';
 
 function Post(id) {
-  this.id = id;
-  this.fetchImageAttempts = 0;
-  this.fetchImageMaxAttemps = 3;
+  this.id = 200;
 
   this.container = document.createElement('div');
   this.container.className = 'post';
@@ -20,90 +18,44 @@ function Post(id) {
   this.footer.className = 'post__footer';
   this.container.appendChild(this.footer);
 
+  this.img = new Image();
+  this.main.appendChild(this.img);
+
   this.createPostImage();
 
   return this.container;
 };
 
 Post.prototype.createPostImage = async function() {
-  const response = await this.fetchPostImage();
-  console.log(response);
+  const objectURL = await this.fetchPostObjectURL();
+  this.img.src = objectURL;
+};
 
-  const blobURL = window.URL.createObjectURL(response);
-  const img = new Image();
-  img.src = blobURL;
-  this.main.appendChild(img);
-}
-
-Post.prototype.fetchPostImage = function () {
+Post.prototype.fetchPostObjectURL = function () {
+  const self = this;
   const id = this.id;
 
-  const result = new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest();
-    request.responseType = 'blob';
-    request.open('GET', `https://picsum.photos/id/${id}/400/430`);
-    request.send();
+  const result = fetch(`https://picsum.photos/id/${id}/400/430`)
+    .then(res => handleErrors(res))
+    .then(res => res.blob())
+    .then(res => window.URL.createObjectURL(res))
+    .catch(err => console.error(err));
 
-    request.onload = () => {
-      const { status, response, statusText } = request;
-
-      if (status === 200) {
-        resolve(response);
-        console.log('Image success');
-      } else if (status === 404) {
-        console.log('----------------');
-        console.log(this.id);
-        this.id = random(0, 1000, true);
-        this.createPostImage();
-        console.log(`404 trying another image: ${this.id}`);
-      } else {
-        if (this.fetchImageAttempts < this.fetchImageMaxAttemps) {
-          this.fetchPostImage();
-          this.fetchImageAttempts += 1;
-          console.log('Retrying to fetch image');
-        } else {
-          console.error(`There was a problem with the request: ${statusText}`);
-        }
-      }
+  function handleErrors(res) {
+    if (res.status === 404) {
+      fetchNewRandomImage();
+      return Promise.reject(`Resource at ID ${id} could not be found.`);
     }
 
-    request.onerror = () => {
-      reject(new Error('There was a network error'));
-    }
-  });
+    return res;
+  };
+
+  function fetchNewRandomImage() {
+    self.id = random(0, 1000, true);
+    self.createPostImage();
+  };
 
   return result;
 };
 
 export default Post;
-
-// const fetchNewPosts = async (amount) => {
-  //   const promises = [];
-  
-  //   for (var i = 0; i < amount; i++) {
-  //     const promise = new Promise((resolve, reject) => {
-  //       const id = randomRange(0, 1000);
-  //       const request = new XMLHttpRequest();
-  //       request.responseType = 'blob';
-  //       request.open('GET', `https://picsum.photos/id/${id}/300/400`);
-  //       request.send();
-  
-  //       request.onload = () => {
-  //         if (request.status === 200) {
-  //           resolve(request.response);
-  //         } else {
-  //           console.log(`There was a problem with the request: ${request.statusText}`);
-  //         }
-  //       };
-  
-  //       request.onerror = () => {
-  //         reject(new Error('There was a network error.'));
-  //       };
-  //     });
-  
-  //     promises.push(promise);
-  //   }
-  
-  //   const results = await Promise.all(promises);
-  //   return results;
-  // }
