@@ -1,5 +1,5 @@
 {
-  "name": "vanilla-scroller-cba26",
+  "name": "toiletpaper-cov19",
   "version": "1.0.0",
   "author": "Amir Ossanloo <amir@amirossanloo.com>",
   "description": "",
@@ -19,6 +19,6 @@
     "sass": "^1.26.2"
   },
   "dependencies": {
-    "pixi.js": "^5.2.1"
+    "three": "^0.114.0"
   }
 }

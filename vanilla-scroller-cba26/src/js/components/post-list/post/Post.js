@@ -1,4 +1,4 @@
-import { random } from '../../../helpers/math';
+import { random } from '../../../utils/math';
 
 function Post(id) {
   this.id = 200;
