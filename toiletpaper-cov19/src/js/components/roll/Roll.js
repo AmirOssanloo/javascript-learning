@@ -10,13 +10,13 @@ function Roll() {
   this.lastMouseY = 0;
   this.rolls = 0;
   
+  this.container = document.querySelector('#hero');
   this.canvas = document.createElement('canvas');
   this.ctx = this.canvas.getContext('2d');
   
-  this.canvas.width = this.sheets.canvas.width;
-  this.canvas.height = window.innerHeight - 110;
+  this.canvas.width = this.sheets.sheetWidth;
+  this.canvas.height = this.container.offsetHeight;
   this.canvas.id = 'roll-canvas';
-  this.canvas.style.position = 'absolute';
   this.canvas.style.cursor = 'grab';
 
   /* Initiate
@@ -71,17 +71,18 @@ Roll.prototype.draw = function() {
     const offsetRepeat = (i * 400);
 
     // Texture
-    this.ctx.drawImage(this.sheets.canvas, 0, -this.offsetY + offsetRepeat, this.canvas.width, this.canvas.height, 0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.globalCompositeOperation = 'destination-in';
+    // this.ctx.drawImage(this.sheets.canvas, 50 * i, offsetRepeat, this.canvas.width, this.canvas.height, 0, 0, this.canvas.width, this.canvas.height);
+    // this.ctx.drawImage(this.sheets.canvas, 0, -this.offsetY + offsetRepeat, this.canvas.width, this.canvas.height, 0, 0, this.canvas.width, this.canvas.height);
+    // this.ctx.globalCompositeOperation = 'destination-in';
     
-    // Mask
-    this.ctx.fillStyle = '#00ffff';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.globalCompositeOperation = 'source-over';
+    // // Mask
+    // this.ctx.fillStyle = '#00ffff';
+    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    // this.ctx.globalCompositeOperation = 'source-over';
 
-    // Gradients
-    const rollGradient = imageCache['roll_gradient'];
-    this.ctx.drawImage(rollGradient, 0, 0);
+    // // Gradients
+    // const rollGradient = imageCache['roll_gradient'];
+    // this.ctx.drawImage(rollGradient, 0, 0);
   }
 };
 
@@ -101,6 +102,8 @@ Roll.prototype.update = function() {
 };
 
 Roll.prototype.onWindowResize = function() {
+  this.canvas.width = this.sheets.sheetWidth;
+  this.canvas.height = this.container.offsetHeight;
   // if (window.innerHeight >= 760) {
   //   this.canvas.height = window.innerHeight - 110;
   // }

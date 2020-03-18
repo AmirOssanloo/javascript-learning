@@ -1,5 +1,4 @@
 import Roll from './components/roll/Roll';
-import Wall from './components/wall/Wall';
 import { preloadImages } from './utils/helpers';
 import sheetTexture from '../static/sheet_texture.png';
 import rollGradient from '../static/roll_gradient.png';
@@ -15,21 +14,19 @@ function init() {
 
 function onReady() {
   const appRoot = document.querySelector('#app-root');
-  const wallContainer = document.querySelector('#wall-container');
-  const wall = new Wall();
-  // const roll = new Roll();
+  const rollContainer = document.querySelector('#roll-container');
+  const roll = new Roll();
 
   /* Initiate
   ============================================ */
-  wallContainer.appendChild(wall.canvas);
-  // appRoot.appendChild(roll.canvas);
+  rollContainer.appendChild(roll.canvas);
   update();
 
   /* Functions
   ============================================ */
   function update() {
     requestAnimationFrame(update.bind(this));
-    // roll.update();
+    roll.update();
   };
 
   /* Event listeners
@@ -40,8 +37,7 @@ function onReady() {
   /* Event handlers
   ============================================ */
   function onWindowResize() {
-    wall.onWindowResize();
-    // roll.onWindowResize();
+    roll.onWindowResize();
   }
 };
 
