@@ -36,7 +36,6 @@ Sheets.prototype.draw = function() {
 Sheets.prototype.onWindowResize = function() {
   this.canvas.width = this.sheetWidth;
   this.canvas.height = this.container.offsetHeight;
-  console.log(this.canvas.height);
   this.draw();
 };
 

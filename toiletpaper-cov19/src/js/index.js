@@ -1,6 +1,7 @@
 import Roll from './components/roll/Roll';
+import Sheets from './components/roll/sheets/Sheets';
 import { preloadImages } from './utils/helpers';
-import sheetTexture from '../static/sheet_texture.png';
+import sheetTexture from '../static/sheet_texture.jpg';
 import rollGradient from '../static/roll_gradient.png';
 
 function init() {

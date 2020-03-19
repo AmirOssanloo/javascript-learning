@@ -5,9 +5,11 @@ function Roll() {
   this.sheets = new Sheets();
   this.dragging = false;
   this.speed = 0;
+  this.originY = 0;
+  this.originAngle = 0;
   this.offsetY = 0;
   this.offsetYMax = this.sheets.sheetHeight;
-  this.lastMouseY = 0;
+  this.lastInputY = 0;
   this.rolls = 0;
   
   this.container = document.querySelector('#hero');
@@ -26,38 +28,51 @@ function Roll() {
 
   /* Event listeners
   ============================================ */
-  this.canvas.addEventListener('mousedown', onMouseDown.bind(this));
-  this.canvas.addEventListener('mouseup', onMouseUp.bind(this));
-  this.canvas.addEventListener('mousemove', onMouseMove.bind(this));
+  this.canvas.addEventListener('mousedown', onInputDown.bind(this));
+  this.canvas.addEventListener('mouseup', onInputUp.bind(this));
+  this.canvas.addEventListener('mousemove', onInputMove.bind(this));
+  this.canvas.addEventListener('touchstart', onInputDown.bind(this));
+  this.canvas.addEventListener('touchend', onInputUp.bind(this));
+  this.canvas.addEventListener('touchmove', onInputMove.bind(this));
 
   /* Event handlers
   ============================================ */
-  function onMouseDown() {
+  function onInputDown(e) {
+    e.preventDefault();
+
     this.dragging = true;
     this.canvas.style.cursor = 'grabbing';
   };
   
-  function onMouseUp() {
+  function onInputUp(e) {
+    e.preventDefault();
+
     this.dragging = false;
     this.canvas.style.cursor = 'grab';
   };
   
-  function onMouseMove(e) {
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-    
-    if (mouseX > 0 && mouseX < this.canvas.width) {
-      console.log('inside')
+  function onInputMove(e) {
+    e.preventDefault();
+
+    let InputX = e.clientX;
+    let InputY = e.clientY;
+
+    if (e.clientX && e.clientY) {
+      InputX = e.clientX;
+      InputY = e.clientY;
+    } else {
+      InputX = e.touches[0].clientX;
+      InputY = e.touches[0].clientY;
     }
 
     if (this.dragging) {;
-      let dy = mouseY - this.lastMouseY;
+      let dy = InputY - this.lastInputY;
     
       if (dy <= 0) dy = 0;
       if (dy >= 8) dy = 8;
       
       this.speed = dy;
-      this.lastMouseY = mouseY;
+      this.lastInputY = InputY;
     }
   };
 
@@ -67,48 +82,48 @@ function Roll() {
 Roll.prototype.draw = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-  for (var i = 0; i < 2; i++) {
-    const offsetRepeat = (i * 400);
+  const offsetRepeat = this.sheets.sheetHeight + 10;
+  const offsetOverlap = 20;
 
-    // Texture
-    // this.ctx.drawImage(this.sheets.canvas, 50 * i, offsetRepeat, this.canvas.width, this.canvas.height, 0, 0, this.canvas.width, this.canvas.height);
-    // this.ctx.drawImage(this.sheets.canvas, 0, -this.offsetY + offsetRepeat, this.canvas.width, this.canvas.height, 0, 0, this.canvas.width, this.canvas.height);
-    // this.ctx.globalCompositeOperation = 'destination-in';
-    
-    // // Mask
-    // this.ctx.fillStyle = '#00ffff';
-    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    // this.ctx.globalCompositeOperation = 'source-over';
+  // Texture
+  // this.ctx.drawImage(this.sheets.canvas, 0, 0, this.canvas.width, this.canvas.height, 0, this.originY + 1, this.canvas.width, this.canvas.height);
+  this.ctx.drawImage(this.sheets.canvas, 0, this.offsetY - offsetRepeat, this.sheets.canvas.width, this.sheets.canvas.height);
+  this.ctx.drawImage(this.sheets.canvas, 0, this.offsetY - offsetOverlap, this.sheets.canvas.width, this.sheets.canvas.height);
+  this.canvas.style.transform = `translate(0, ${this.originY}px)`;
 
-    // // Gradients
-    // const rollGradient = imageCache['roll_gradient'];
-    // this.ctx.drawImage(rollGradient, 0, 0);
-  }
+  // // Gradients
+  const rollGradient = imageCache['roll_gradient'];
+  this.ctx.drawImage(rollGradient, 0, 0);
 };
 
 Roll.prototype.update = function() {
-  this.draw();
+  
+  // Roll sine wave
+  const ampitude = 1.;5
+  this.originY = ampitude + Math.sin(this.originAngle) * ampitude;
 
+  // Roll offset
   if (this.offsetY >= this.offsetYMax) {
     this.offsetY = 0;
     this.rolls += 1;
   }
 
   this.offsetY += this.speed;
+  this.originAngle += (this.speed * 0.05);
 
   if (!this.dragging) {
     this.speed *= 0.94;
   }
+
+  this.draw();
 };
 
 Roll.prototype.onWindowResize = function() {
   this.canvas.width = this.sheets.sheetWidth;
   this.canvas.height = this.container.offsetHeight;
-  // if (window.innerHeight >= 760) {
-  //   this.canvas.height = window.innerHeight - 110;
-  // }
   
-  // this.sheets.onWindowResize();
+  this.sheets.onWindowResize();
+  this.draw();
 };
 
 export default Roll;
