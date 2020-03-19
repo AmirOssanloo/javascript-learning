@@ -10,9 +10,11 @@ module.exports = api => {
         {
           root: ['./src'],
           alias: {
-            '#components': './src/js/components',
-            '#config': './src/js/config',
-            '#utils': './src/js/utils'
+            '#components': './src/components',
+            '#containers': './src/containers',
+            '#config': './src/config',
+            '#state': './src/state',
+            '#utils': './src/utils'
           }
         }
       ]
