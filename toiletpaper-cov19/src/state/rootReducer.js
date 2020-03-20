@@ -1,15 +1,12 @@
 import combineReducers from './utils/combineReducers';
 import { appReducer, appState } from './reducers/app/reducer';
-import { counterReducer, counterState } from './reducers/counter/reducer'
 
 const reducers = {
-  app: appReducer,
-  counter: counterReducer
+  app: appReducer
 };
 
 export const initialState = {
-  app: appState,
-  counter: counterState
+  app: appState
 };
 
 export const rootReducer = combineReducers(reducers, initialState);
