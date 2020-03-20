@@ -9,8 +9,9 @@ const environment = process.env.NODE_ENV || 'development';
 
 let options = {
   output: {
-    filename: '[name].min.js',
-    path: path.resolve(__dirname, 'public')
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'public'),
   },
   module: {
     rules: [
