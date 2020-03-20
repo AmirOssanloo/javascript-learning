@@ -3,8 +3,8 @@ import appReducer from './reducers/appReducer';
 import counterReducer from './reducers/counterReducer';
 
 const rootReducer = combineReducers({
-  appReducer,
-  counterReducer
+  app: appReducer,
+  counter: counterReducer
 });
 
 export default rootReducer;

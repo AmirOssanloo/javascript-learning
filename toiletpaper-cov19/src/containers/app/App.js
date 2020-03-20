@@ -11,8 +11,8 @@ const titles = [
 
 const App = () => {
   const { state, dispatch } = useContext(store);
-  const { title } = state.appReducer;
-  const { counter } = state.counterReducer;
+  const { title } = state.app;
+  const { counter } = state.counter;
 
   return (
     <div>

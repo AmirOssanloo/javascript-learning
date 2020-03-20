@@ -5,10 +5,10 @@ const store = createContext();
 const { Provider } = store;
 
 const initialState = {
-  appReducer: {
+  app: {
     title: 'WELCOME AMERICA'
   },
-  counterReducer: {
+  counter: {
     counter: 0
   }
 };

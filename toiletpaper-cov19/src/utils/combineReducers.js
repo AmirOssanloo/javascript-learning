@@ -10,11 +10,22 @@ const combineReducers = (reducers) => {
       const previousStateForKey = state[key];
       const nextStateForKey = reducer(previousStateForKey, action);
 
+      console.log(key, previousStateForKey);
+
       nextState[key] = nextStateForKey;
     };
 
     return nextState;
   };
+};
+
+const getInitialState = (reducers) => {
+  const reducerKeys = Object.keys(reducers);
+  const initialState = {};
+
+  for (let i = 0; i < reducerKeys.length; i++) {
+    // initialState[key] =
+  }
 };
 
 
