@@ -12,7 +12,7 @@ const titles = [
 const App = () => {
   const { state, dispatch } = useContext(store);
   const { title } = state.app;
-  const { counter } = state.counter;
+  const { counter, numbers } = state.counter;
 
   return (
     <div>
@@ -31,6 +31,10 @@ const App = () => {
       <button onClick={() => {
         dispatch({ type: 'ACTION_DECREMENT_BY', payload: 1 });
       }}>DEINCREMENT BY 1</button>
+
+      <hr />
+
+      <h1>{numbers}</h1>
     </div>
   );
 };

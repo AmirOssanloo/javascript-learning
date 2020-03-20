@@ -1,6 +1,8 @@
-import initialState from './initialState';
+export const appState = {
+  title: 'WELCOME AMERICA'
+};
 
-const appReducer = (state = initialState, action) => {
+export const appReducer = (state = appState, action) => {
   switch (action.type) {
     case 'ACTION_CHANGE_TITLE':
       return { ...state, title: action.payload };
@@ -8,5 +10,3 @@ const appReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default appReducer;

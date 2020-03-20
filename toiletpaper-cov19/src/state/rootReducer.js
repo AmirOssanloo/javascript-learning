@@ -1,10 +1,15 @@
-import combineReducers from '#utils/combineReducers';
-import appReducer from './reducers/appReducer';
-import counterReducer from './reducers/counterReducer';
+import combineReducers from './utils/combineReducers';
+import { appReducer, appState } from './reducers/app/reducer';
+import { counterReducer, counterState } from './reducers/counter/reducer'
 
-const rootReducer = combineReducers({
+const reducers = {
   app: appReducer,
   counter: counterReducer
-});
+};
 
-export default rootReducer;
+export const initialState = {
+  app: appState,
+  counter: counterState
+};
+
+export const rootReducer = combineReducers(reducers, initialState);

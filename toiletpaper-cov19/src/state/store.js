@@ -1,17 +1,8 @@
 import React, { createContext, useReducer } from 'react';
-import rootReducer from './rootReducer';
+import { rootReducer, initialState } from './rootReducer';
 
 const store = createContext();
 const { Provider } = store;
-
-const initialState = {
-  app: {
-    title: 'WELCOME AMERICA'
-  },
-  counter: {
-    counter: 0
-  }
-};
 
 const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
