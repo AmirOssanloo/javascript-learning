@@ -1,4 +1,5 @@
-import React, { Component, useContext } from 'react';
+import React, { Component, Fragment, useContext } from 'react';
+import Hero from '#blocks/hero';
 // import { store } from '#state/store';
 
 class App extends Component {
@@ -8,9 +9,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        DONE
-      </div>
+      <Fragment>
+        <Hero />
+      </Fragment>
     );
   }
 };

@@ -23,6 +23,9 @@ let options = {
       {
         test: /\.(gif|jpg|png|svg)$/,
         loader: 'url-loader',
+        options: {
+          limit: -1
+        },
         exclude: /node_modules/
       }
     ]
