@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { StyledHero } from './styles';
-import Sheet from './roll/sheet/Sheet';
+import Roll from './roll/Roll';
 
 const Hero = () => {
+  const canvasRef = createRef();
 
   useEffect(() => {
-    const sheet = new Sheet();
-
+    const roll = new Roll(canvasRef.current);
   }, []);
 
   return (
@@ -19,6 +19,7 @@ const Hero = () => {
           {/* <img src="./static/roll_holder.png" class="noselect" /> */}
         </div>
       </div>
+      <canvas ref={canvasRef}></canvas>
     </StyledHero>
   );
 };

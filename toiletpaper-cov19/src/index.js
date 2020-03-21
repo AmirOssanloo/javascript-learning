@@ -4,7 +4,8 @@ import Preloader from '#blocks/preloader';
 import ResetStyle from '#styles/reset';
 import GlobalStyle from '#styles/global';
 import { ContextProvider } from '#state/store'
-import { preloadImages } from '#utils/imageCache';
+import { preloadImages, imageCache } from '#utils/imageCache';
+import sheetTexture from '#static/images/sheet_texture.jpg';
 
 const App = React.lazy(() => (
   import(/* webpackChunkName: "app" */ './containers/app')
@@ -22,7 +23,7 @@ const App = React.lazy(() => (
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           return resolve(some);
-        }, 2000);
+        }, 1000);
       })
     })
     .catch(err => console.log(err))

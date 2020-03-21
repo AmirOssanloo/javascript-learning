@@ -2,29 +2,29 @@ import Sheets from './sheets/Sheets';
 import { imageCache } from '../../utils/helpers';
 
 function Roll() {
-  this.sheets = new Sheets();
-  this.dragging = false;
-  this.speed = 0;
-  this.originY = 0;
-  this.originAngle = 0;
-  this.offsetY = 0;
-  this.offsetYMax = this.sheets.sheetHeight;
-  this.lastInputY = 0;
-  this.rolls = 0;
-  
-  this.container = document.querySelector('#hero');
-  this.canvas = document.createElement('canvas');
-  this.ctx = this.canvas.getContext('2d');
-  
-  this.canvas.width = this.sheets.sheetWidth;
-  this.canvas.height = this.container.offsetHeight;
-  this.canvas.id = 'roll-canvas';
-  this.canvas.style.cursor = 'grab';
+  // this.sheets = new Sheets();
+  // this.dragging = false;
+  // this.speed = 0;
+  // this.originY = 0;
+  // this.originAngle = 0;
+  // this.offsetY = 0;
+  // this.offsetYMax = this.sheets.sheetHeight;
+  // this.lastInputY = 0;
+  // this.rolls = 0;
+
+  // this.container = document.querySelector('#hero');
+  // this.canvas = document.createElement('canvas');
+  // this.ctx = this.canvas.getContext('2d');
+
+  // this.canvas.width = this.sheets.sheetWidth;
+  // this.canvas.height = this.container.offsetHeight;
+  // this.canvas.id = 'roll-canvas';
+  // this.canvas.style.cursor = 'grab';
 
   /* Initiate
   ============================================ */
-  this.onWindowResize();
-  this.draw();
+  // this.onWindowResize();
+  // this.draw();
 
   /* Event listeners
   ============================================ */
@@ -43,14 +43,14 @@ function Roll() {
     this.dragging = true;
     this.canvas.style.cursor = 'grabbing';
   };
-  
+
   function onInputUp(e) {
     e.preventDefault();
 
     this.dragging = false;
     this.canvas.style.cursor = 'grab';
   };
-  
+
   function onInputMove(e) {
     e.preventDefault();
 
@@ -65,12 +65,13 @@ function Roll() {
       InputY = e.touches[0].clientY;
     }
 
-    if (this.dragging) {;
+    if (this.dragging) {
+      ;
       let dy = InputY - this.lastInputY;
-    
+
       if (dy <= 0) dy = 0;
       if (dy >= 8) dy = 8;
-      
+
       this.speed = dy;
       this.lastInputY = InputY;
     }
@@ -79,7 +80,7 @@ function Roll() {
   return this;
 };
 
-Roll.prototype.draw = function() {
+Roll.prototype.draw = function () {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
   const offsetRepeat = this.sheets.sheetHeight + 10;
@@ -96,10 +97,10 @@ Roll.prototype.draw = function() {
   this.ctx.drawImage(rollGradient, 0, 0);
 };
 
-Roll.prototype.update = function() {
-  
+Roll.prototype.update = function () {
+
   // Roll sine wave
-  const ampitude = 1.;5
+  const ampitude = 1.; 5
   this.originY = ampitude + Math.sin(this.originAngle) * ampitude;
 
   // Roll offset
@@ -118,12 +119,12 @@ Roll.prototype.update = function() {
   this.draw();
 };
 
-Roll.prototype.onWindowResize = function() {
-  this.canvas.width = this.sheets.sheetWidth;
-  this.canvas.height = this.container.offsetHeight;
-  
-  this.sheets.onWindowResize();
-  this.draw();
-};
+// Roll.prototype.onWindowResize = function () {
+//   this.canvas.width = this.sheets.sheetWidth;
+//   this.canvas.height = this.container.offsetHeight;
+
+//   this.sheets.onWindowResize();
+//   this.draw();
+// };
 
 export default Roll;
