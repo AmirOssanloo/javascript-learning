@@ -4,16 +4,18 @@ import Preloader from '#blocks/preloader';
 import ResetStyle from '#styles/reset';
 import GlobalStyle from '#styles/global';
 import { ContextProvider } from '#state/store'
-import { preloadImages, imageCache } from '#utils/imageCache';
+import { preloadImages } from '#utils/imageCache';
 import sheetTexture from '#static/images/sheet_texture.jpg';
+import rollGradientTexture from '#static/images/roll_gradient.png';
 
 const App = React.lazy(() => (
   import(/* webpackChunkName: "app" */ './containers/app')
-    .then(some => {
+    .then(component => {
       let loading = true;
 
       const images = [
-        { id: 'sheet_texture', src: sheetTexture }
+        { id: 'sheet_texture', src: sheetTexture },
+        { id: 'roll_gradient', src: rollGradientTexture }
       ];
 
       preloadImages(images, () => {
@@ -22,7 +24,7 @@ const App = React.lazy(() => (
 
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          return resolve(some);
+          return resolve(component);
         }, 1000);
       })
     })

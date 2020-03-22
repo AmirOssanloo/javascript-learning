@@ -54,8 +54,8 @@ function Roll() {
   function onInputMove(e) {
     e.preventDefault();
 
-    let InputX = e.clientX;
-    let InputY = e.clientY;
+    let InputX = 0;
+    let InputY = 0;
 
     if (e.clientX && e.clientY) {
       InputX = e.clientX;
@@ -83,14 +83,14 @@ function Roll() {
 Roll.prototype.draw = function () {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-  const offsetRepeat = this.sheets.sheetHeight + 10;
+  const offsetRepeat = this.sheets.sheetHeight;
   const offsetOverlap = 20;
 
   // Texture
   // this.ctx.drawImage(this.sheets.canvas, 0, 0, this.canvas.width, this.canvas.height, 0, this.originY + 1, this.canvas.width, this.canvas.height);
   this.ctx.drawImage(this.sheets.canvas, 0, this.offsetY - offsetRepeat, this.sheets.canvas.width, this.sheets.canvas.height);
   this.ctx.drawImage(this.sheets.canvas, 0, this.offsetY - offsetOverlap, this.sheets.canvas.width, this.sheets.canvas.height);
-  this.canvas.style.transform = `translate(0, ${this.originY}px)`;
+  // this.canvas.style.transform = `translate(0, ${this.originY}px)`;
 
   // // Gradients
   const rollGradient = imageCache['roll_gradient'];
