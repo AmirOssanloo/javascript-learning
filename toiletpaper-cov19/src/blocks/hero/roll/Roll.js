@@ -89,8 +89,8 @@ function Roll(canvas) {
 Roll.prototype.draw = function () {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-  const offsetRepeat = this.sheet.img.height;
-  const offsetOverlap = 0;
+  const offsetOverlap = 10;
+  const offsetRepeat = this.sheet.img.height + offsetOverlap;
 
   // Texture
   this.ctx.drawImage(this.sheet.canvas, 0, this.offsetY - offsetRepeat, this.sheet.canvas.width, this.sheet.canvas.height);

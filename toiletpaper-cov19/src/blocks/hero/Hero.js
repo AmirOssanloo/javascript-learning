@@ -1,6 +1,15 @@
 import React, { createRef, useEffect } from 'react';
-import { StyledHero } from './styles';
 import Roll from './roll/Roll';
+import rollHolderTexture from '#static/images/roll_holder.png';
+
+import {
+  StyledHero,
+  StyledWallContainer,
+  StyledWallVignette,
+  StyledRollCanvas,
+  StyledRollContainer,
+  StyledRollHolder
+} from './styles';
 
 const Hero = () => {
   const canvasRef = createRef();
@@ -10,16 +19,16 @@ const Hero = () => {
   }, []);
 
   return (
-    <StyledHero id="hero">
-      <div id="wall-container">
-        <div id="wall-vignette"></div>
-      </div>
-      <div id="roll-container">
-        <div id="roll-holder">
-          {/* <img src="./static/roll_holder.png" class="noselect" /> */}
-        </div>
-      </div>
-      <canvas ref={canvasRef}></canvas>
+    <StyledHero>
+      <StyledWallContainer>
+        <StyledWallVignette />
+      </StyledWallContainer>
+      <StyledRollContainer>
+        <StyledRollHolder>
+          <img src={rollHolderTexture} class="noselect" />
+        </StyledRollHolder>
+        <StyledRollCanvas ref={canvasRef}></StyledRollCanvas>
+      </StyledRollContainer>
     </StyledHero>
   );
 };

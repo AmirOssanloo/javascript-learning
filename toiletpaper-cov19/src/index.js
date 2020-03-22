@@ -7,6 +7,7 @@ import { ContextProvider } from '#state/store'
 import { preloadImages } from '#utils/imageCache';
 import sheetTexture from '#static/images/sheet_texture.jpg';
 import rollGradientTexture from '#static/images/roll_gradient.png';
+import wallVignetteTexture from '#static/images/wall_vignette.png';
 
 const App = React.lazy(() => (
   import(/* webpackChunkName: "app" */ './containers/app')
@@ -15,7 +16,8 @@ const App = React.lazy(() => (
 
       const images = [
         { id: 'sheet_texture', src: sheetTexture },
-        { id: 'roll_gradient', src: rollGradientTexture }
+        { id: 'roll_gradient', src: rollGradientTexture },
+        { id: 'wall_vignette', src: wallVignetteTexture },
       ];
 
       preloadImages(images, () => {
