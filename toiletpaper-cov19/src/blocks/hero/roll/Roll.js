@@ -74,6 +74,10 @@ function Roll(canvas) {
     this.width = this.sheet.img.width;
     this.height = this.container.offsetHeight;
 
+    if (this.height < 540) {
+      this.height = 540;
+    }
+
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.sheet.canvas.width = this.width;

@@ -7,7 +7,6 @@ import { ContextProvider } from '#state/store'
 import { preloadImages } from '#utils/imageCache';
 import sheetTexture from '#static/images/sheet_texture.jpg';
 import rollGradientTexture from '#static/images/roll_gradient.png';
-import heroVignetteTexture from '#static/images/hero_vignette.png';
 
 const App = React.lazy(() => (
   import(/* webpackChunkName: "app" */ './containers/app')

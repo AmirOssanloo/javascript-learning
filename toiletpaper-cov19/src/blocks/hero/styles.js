@@ -5,8 +5,8 @@ import heroVignetteTexture from '#static/images/hero_vignette.png';
 export const StyledHero = styled.div`
   position: relative;
   width: 100%;
-  height: 86vh;
-  min-height: 50rem;
+  height: calc(100vh - 16.5rem);
+  min-height: 54rem;
   background-image: url(${tilePatternTexture});
   background-repeat: repeat;
   overflow: hidden;
@@ -44,19 +44,11 @@ export const StyledRollContainer = styled.div`
 `;
 
 export const StyledRollHolder = styled.div`
-  padding-top: 17rem;
+  padding-top: 13rem;
 `;
 
 export const StyledRollCanvas = styled.canvas`
   position: absolute;
-  top: 13rem;
+  top: 8rem;
   box-shadow: 0 3rem 2rem 1rem rgba(0, 0, 0, 0.2);
-`;
-
-export const StyledHeroBorder = styled.div`
-  position: absolute;
-  background-color: #ae914b;
-  width: inherit;
-  height: 4px;
-  bottom: 0;
 `;

@@ -4,8 +4,7 @@ const theme = {
     text: '#484642'
   },
   brand: {
-    primary: '#9b7f3b',
-    secondary: '#9b7f3b',
+    primary: '#ae914b;',
     success: '#24a36e',
     warning: '#eb8831',
     error: '#cd4331'
