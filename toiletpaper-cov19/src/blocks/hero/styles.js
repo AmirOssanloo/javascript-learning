@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import wallPatternTexture from '#static/images/wall_pattern.jpg';
-import wallVignetteTexture from '#static/images/wall_vignette.png';
+import tilePatternTexture from '#static/images/tile_pattern.jpg';
+import heroVignetteTexture from '#static/images/hero_vignette.png';
 
 export const StyledHero = styled.div`
+  position: relative;
   width: 100%;
   height: 86vh;
   min-height: 50rem;
-  background-image: url(${wallPatternTexture});
+  background-image: url(${tilePatternTexture});
   background-repeat: repeat;
   overflow: hidden;
 `;
@@ -21,10 +22,11 @@ export const StyledWallContainer = styled.div`
 
 export const StyledWallVignette = styled.div`
   position: relative;
-  background-image: url(${wallVignetteTexture});
+  background-image: url(${heroVignetteTexture});
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  width: 168rem;
+  width: inherit;
+  min-width: 168rem;
   height: inherit;
   min-height: inherit;
   left: 50%;
@@ -49,4 +51,12 @@ export const StyledRollCanvas = styled.canvas`
   position: absolute;
   top: 13rem;
   box-shadow: 0 3rem 2rem 1rem rgba(0, 0, 0, 0.2);
+`;
+
+export const StyledHeroBorder = styled.div`
+  position: absolute;
+  background-color: #ae914b;
+  width: inherit;
+  height: 4px;
+  bottom: 0;
 `;

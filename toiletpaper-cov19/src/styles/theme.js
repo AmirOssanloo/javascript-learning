@@ -1,11 +1,11 @@
 const theme = {
   main: {
     bg: '#f0f0f0',
-    text: '#373737'
+    text: '#484642'
   },
   brand: {
-    primary: '#3789c4',
-    secondary: '#3789c4',
+    primary: '#9b7f3b',
+    secondary: '#9b7f3b',
     success: '#24a36e',
     warning: '#eb8831',
     error: '#cd4331'

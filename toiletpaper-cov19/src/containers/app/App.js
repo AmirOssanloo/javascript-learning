@@ -1,5 +1,6 @@
 import React, { Component, Fragment, useContext } from 'react';
 import Hero from '#blocks/hero';
+import Content from '#blocks/content';
 // import { store } from '#state/store';
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
     return (
       <Fragment>
         <Hero />
+        <Content />
       </Fragment>
     );
   }

@@ -8,7 +8,8 @@ import {
   StyledWallVignette,
   StyledRollCanvas,
   StyledRollContainer,
-  StyledRollHolder
+  StyledRollHolder,
+  StyledHeroBorder
 } from './styles';
 
 const Hero = () => {
@@ -25,10 +26,11 @@ const Hero = () => {
       </StyledWallContainer>
       <StyledRollContainer>
         <StyledRollHolder>
-          <img src={rollHolderTexture} class="noselect" />
+          <img src={rollHolderTexture} />
         </StyledRollHolder>
         <StyledRollCanvas ref={canvasRef}></StyledRollCanvas>
       </StyledRollContainer>
+      <StyledHeroBorder />
     </StyledHero>
   );
 };
