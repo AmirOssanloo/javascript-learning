@@ -1,9 +1,11 @@
 import Sheet from './sheet/Sheet';
 import { imageCache } from '#utils/imageCache';
 
-function Roll(canvas) {
+function Roll(canvas, onIncrementSheet) {
+
   this.sheet = new Sheet();
   this.container = canvas.parentElement;
+  this.onIncrementSheet = onIncrementSheet;
 
   this.width = this.sheet.img.width;
   this.height = this.container.offsetHeight;
@@ -74,8 +76,8 @@ function Roll(canvas) {
     this.width = this.sheet.img.width;
     this.height = this.container.offsetHeight;
 
-    if (this.height < 540) {
-      this.height = 540;
+    if (this.height < 400) {
+      this.height = 400;
     }
 
     this.canvas.width = this.width;
@@ -116,6 +118,7 @@ Roll.prototype.update = function () {
   // Roll offset
   if (this.offsetY >= this.offsetYMax) {
     this.offsetY = 0;
+    this.onIncrementSheet();
   }
 
   this.offsetY += this.speedY;

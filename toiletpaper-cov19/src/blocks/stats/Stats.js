@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import marbleDarkPatternTexture from '#static/images/marble-dark_pattern.jpg';
+import appEvents from '#state/reducers/app/events';
+import { store } from '#state/store';
 
 const StatsContainer = styled.div`
   display: flex;
@@ -9,23 +11,22 @@ const StatsContainer = styled.div`
   background-repeat: repeat;
   width: 100%;
   margin-bottom 5rem;
-  padding: 1.5rem 2rem 0;
-  overflow: hidden;
+  padding: 1.5rem 0;
 `;
+
 
 const StatsTitle = styled.h2`
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  max-width: 50rem;
   margin: 0 auto 1rem auto;
   color: #c3b99c;
   font-size: 1.6rem;
   letter-spacing: 0.2rem;
 
   & span {
-    margin: 0 2rem;
+    padding: 0 2rem;
   }
 `;
 
@@ -60,26 +61,29 @@ const StatsCounterLabel = styled.span`
 `;
 
 const Stats = () => {
+  const { state, dispatch } = useContext(store);
+  const { userSheetsRolled } = state.app;
+
   return (
     <StatsContainer>
       <StatsTitle>
-        <svg width="148" height="9" viewBox="0 0 148 9">
-          <line x1="0" y1="4" x2="140" y2="4" fill="none" stroke="#ae914b" strokeMiterlimit="10" />
-          <rect x="142" y="2" width="5" height="5" transform="translate(38 103) rotate(-45)" fill="none" stroke="#ae914b" strokeMiterlimit="10" />
+        <svg width="68" height="9" viewBox="0 0 68 9">
+          <line x1="0" y1="4" x2="60" y2="4" fill="none" stroke="#ae914b" strokeMiterlimit="10" />
+          <rect x="62" y="2" width="5" height="5" transform="translate(15.42 46.63) rotate(-45)" fill="none" stroke="#ae914b" strokeMiterlimit="10" />
         </svg>
         <span>SHEETS ROLLED</span>
-        <svg width="148" height="9" viewBox="0 0 148 9">
-          <line x1="7" y1="4" x2="147" y2="4" fill="none" stroke="#ae914b" strokeMiterlimit="10" />
-          <rect x="2" y="2" width="5" height="5" transform="translate(-2 4) rotate(-45)" fill="none" stroke="#ae914b" strokeMiterlimit="10" />
+        <svg width="68" height="9" viewBox="0 0 68 9">
+          <line x1="7" y1="4" x2="67" y2="4" fill="none" stroke="#ae914b" strokeMiterlimit="10" />
+          <rect x="2" y="2" width="5" height="5" transform="translate(-2.16 4.21) rotate(-45)" fill="none" stroke="#ae914b" strokeMiterlimit="10" />
         </svg>
       </StatsTitle>
       <StatsCounters>
-        <StatsCounter>
+        {/* <StatsCounter>
           <StatsCounterNumber>4221</StatsCounterNumber>
           <StatsCounterLabel>GLOBALLY</StatsCounterLabel>
-        </StatsCounter>
+        </StatsCounter> */}
         <StatsCounter>
-          <StatsCounterNumber>24</StatsCounterNumber>
+          <StatsCounterNumber>{userSheetsRolled}</StatsCounterNumber>
           <StatsCounterLabel>BY YOU</StatsCounterLabel>
         </StatsCounter>
       </StatsCounters>
