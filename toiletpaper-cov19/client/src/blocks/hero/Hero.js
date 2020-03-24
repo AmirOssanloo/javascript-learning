@@ -73,7 +73,6 @@ const Hero = () => {
 
   return (
     <HeroContainer>
-      {userSheetsRolled}
       <HeroWallContainer>
         <HeroWallVignette />
       </HeroWallContainer>

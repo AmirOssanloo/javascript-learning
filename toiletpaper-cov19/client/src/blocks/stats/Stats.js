@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import marbleDarkPatternTexture from '#static/images/marble-dark_pattern.jpg';
-import appEvents from '#state/reducers/app/events';
 import { store } from '#state/store';
 
 const StatsContainer = styled.div`
@@ -11,7 +10,7 @@ const StatsContainer = styled.div`
   background-repeat: repeat;
   width: 100%;
   margin-bottom 5rem;
-  padding: 1.5rem 0;
+  padding: 1.5rem 0 0;
 `;
 
 
