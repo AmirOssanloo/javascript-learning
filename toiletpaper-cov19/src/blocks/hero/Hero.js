@@ -60,11 +60,10 @@ export const HeroRollCanvas = styled.canvas`
 
 const Hero = () => {
   const { state, dispatch } = useContext(store);
-  const { userSheetsRolled } = state.app;
   const canvasRef = createRef();
 
   const onIncrementSheet = () => {
-    dispatch({ type: appEvents.INCREMENT_SHEETS_ROLLED, payload: 1 });
+    dispatch({ type: appEvents.INCREMENT_USER_SHEETS_ROLLED });
   };
 
   useEffect(() => {

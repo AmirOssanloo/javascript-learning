@@ -1,3 +1,0 @@
-export default {
-  INCREMENT_SHEETS_ROLLED: "INCREMENT_SHEETS_ROLLED"
-};

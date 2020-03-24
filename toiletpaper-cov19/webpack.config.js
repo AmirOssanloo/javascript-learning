@@ -45,11 +45,18 @@ let options = {
 };
 
 if (environment === 'development') {
+  options.devServer = {
+    host: '0.0.0.0',
+    proxy: {
+      '*': 'http://localhost:3000'
+    }
+  };
+
   options.plugins = [
     ...options.plugins,
     new BrowserSyncPlugin({
       host: 'localhost',
-      port: 3000,
+      port: 8000,
       server: { baseDir: ['public'] },
       notify: false
     })

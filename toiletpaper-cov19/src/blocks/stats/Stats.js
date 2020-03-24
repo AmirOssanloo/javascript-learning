@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import marbleDarkPatternTexture from '#static/images/marble-dark_pattern.jpg';
+import appEvents from '#state/reducers/app/events';
 import { store } from '#state/store';
 
 const StatsContainer = styled.div`
@@ -61,7 +62,7 @@ const StatsCounterLabel = styled.span`
 
 const Stats = () => {
   const { state, dispatch } = useContext(store);
-  const { userSheetsRolled } = state.app;
+  const { globalSheetsRolled, userSheetsRolled } = state.app;
 
   return (
     <StatsContainer>
@@ -77,10 +78,10 @@ const Stats = () => {
         </svg>
       </StatsTitle>
       <StatsCounters>
-        {/* <StatsCounter>
-          <StatsCounterNumber>4221</StatsCounterNumber>
+        <StatsCounter>
+          <StatsCounterNumber>{globalSheetsRolled}</StatsCounterNumber>
           <StatsCounterLabel>GLOBALLY</StatsCounterLabel>
-        </StatsCounter> */}
+        </StatsCounter>
         <StatsCounter>
           <StatsCounterNumber>{userSheetsRolled}</StatsCounterNumber>
           <StatsCounterLabel>BY YOU</StatsCounterLabel>

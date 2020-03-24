@@ -1,14 +1,18 @@
 # Dependency directories
 node_modules/
 
-# Build files
+# Build/dist/public folders
+build/
 dist/
 public/
 
 # Dotenv files
+env/
+*.env
 .env
 
-# Secret
+# Secret files and folders
+secret/
 **/keys/dev.js
 credentials.json
 

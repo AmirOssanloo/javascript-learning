@@ -7,8 +7,8 @@ export const appState = {
 
 export const appReducer = (state = appState, action) => {
   switch (action.type) {
-    case appEvents.INCREMENT_SHEETS_ROLLED:
-      let userSheetsRolled = state.userSheetsRolled + action.payload;
+    case appEvents.INCREMENT_USER_SHEETS_ROLLED:
+      const userSheetsRolled = state.userSheetsRolled + 1;
       return { ...state, userSheetsRolled };
     default:
       return state;
