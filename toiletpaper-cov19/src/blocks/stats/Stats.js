@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import marbleDarkPatternTexture from '#static/images/marble-dark_pattern.jpg';
-import appEvents from '#state/reducers/app/events';
-import { store } from '#state/store';
+import { useRootContext } from '#containers/app/AppContext';
 
 const StatsContainer = styled.div`
   display: flex;
@@ -61,8 +60,7 @@ const StatsCounterLabel = styled.span`
 `;
 
 const Stats = () => {
-  const { state, dispatch } = useContext(store);
-  const { globalSheetsRolled, userSheetsRolled } = state.app;
+  const { globalSheetsRolled, userSheetsRolled } = useRootContext();
 
   return (
     <StatsContainer>

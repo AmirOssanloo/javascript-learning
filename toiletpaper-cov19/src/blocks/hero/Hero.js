@@ -4,8 +4,7 @@ import Roll from './roll/Roll';
 import rollHolderTexture from '#static/images/roll_holder.png';
 import tilePatternTexture from '#static/images/tile_pattern.jpg';
 import heroVignetteTexture from '#static/images/hero_vignette.png';
-import appEvents from '#state/reducers/app/events';
-import { store } from '#state/store';
+import { useRootContext } from '#containers/app/AppContext';
 
 export const HeroContainer = styled.div`
   position: relative;
@@ -59,15 +58,11 @@ export const HeroRollCanvas = styled.canvas`
 `;
 
 const Hero = () => {
-  const { state, dispatch } = useContext(store);
+  const { onIncrementUserSheet } = useRootContext();
   const canvasRef = createRef();
 
-  const onIncrementSheet = () => {
-    dispatch({ type: appEvents.INCREMENT_USER_SHEETS_ROLLED });
-  };
-
   useEffect(() => {
-    const roll = new Roll(canvasRef.current, onIncrementSheet);
+    const roll = new Roll(canvasRef.current, onIncrementUserSheet);
   }, []);
 
   return (

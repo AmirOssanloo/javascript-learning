@@ -9,6 +9,8 @@ module.exports = {
           '#components': './src/components',
           '#containers': './src/containers',
           '#config': './src/config',
+          '#database': './src/database',
+          '#hooks': './src/hooks',
           '#state': './src/state',
           '#styles': './src/styles',
           '#utils': './src/utils'

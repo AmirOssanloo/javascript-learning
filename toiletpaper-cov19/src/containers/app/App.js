@@ -1,26 +1,24 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import ReactGA from 'react-ga';
 import Hero from '#blocks/hero';
 import Content from '#blocks/content';
-import appEvents from '#state/reducers/app/events';
+import DB from '#database/db';
 import useFirebaseSnapshot from '#hooks/useFirebaseSnapshot';
-import { store } from '#state/store';
+import { useRootContext } from './AppContext';
 
 const App = () => {
-  const { snapshot, isLoading, hasError } = useFirebaseSnapshot(db, '/');
+  const { setGlobalSheetsRolled } = useRootContext();
+  const { snapshot } = useFirebaseSnapshot(DB, '/');
   const { globalSheetsRolled } = snapshot;
-  const { state, dispatch } = useContext(store);
 
   useEffect(() => {
-    console.log(globalSheetsRolled);
+    setGlobalSheetsRolled(globalSheetsRolled);
+  }, [snapshot]);
+
+  useEffect(() => {
+    ReactGA.initialize('UA-1721500-14');
+    ReactGA.pageview(window.location.pathname);
   }, []);
-
-  if (isLoading) {
-    return 'Still loading';
-  }
-
-  if (hasError) {
-    return 'An error occurred';
-  }
 
   return (
     <Fragment>

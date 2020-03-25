@@ -24,7 +24,9 @@ export default (database, path) => {
       setIsLoading(false);
     };
 
-    fetchSnapshot();
+    if (isLoading) {
+      fetchSnapshot();
+    }
   }, []);
 
   return { snapshot, isLoading, hasError };
