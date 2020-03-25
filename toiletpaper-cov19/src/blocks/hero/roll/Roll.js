@@ -1,5 +1,7 @@
 import Sheet from './sheet/Sheet';
+// import Particles from './particles/Particles';
 import { imageCache } from '#utils/imageCache';
+// import { random } from '#utils/math';
 
 function Roll(canvas, onIncrementSheet) {
 
@@ -13,14 +15,21 @@ function Roll(canvas, onIncrementSheet) {
   this.originY = 0;
   this.offsetY = 0;
   this.offsetYMax = this.sheet.img.height;
+  this.inputX = 0;
+  this.inputY = 0;
+  this.lastInputX = 0;
   this.lastInputY = 0;
   this.originAngle = 0;
-  this.speedY = 0;
+  this.speed = 0;
+  this.speedMax = 24;
+  this.friction = 0.97;
 
   this.canvas = canvas;
   this.ctx = this.canvas.getContext('2d');
   this.canvas.id = 'roll-canvas';
   this.canvas.style.cursor = 'grab';
+
+  // this.particles = new Particles(this.ctx);
 
   /* Initiate
   ============================================ */
@@ -42,8 +51,10 @@ function Roll(canvas, onIncrementSheet) {
   function onInputDown(e) {
     e.preventDefault();
 
+    this.setInputPosition(e);
     this.dragging = true;
     this.canvas.style.cursor = 'grabbing';
+    // this.particles.start();
   };
 
   function onInputUp(e) {
@@ -51,24 +62,14 @@ function Roll(canvas, onIncrementSheet) {
 
     this.dragging = false;
     this.canvas.style.cursor = 'grab';
+    // this.particles.stop();
   };
 
   function onInputMove(e) {
     e.preventDefault();
 
-    let InputY = 0;
-
     if (this.dragging) {
-      if (e.clientY) InputY = e.clientY;
-      else InputY = e.touches[0].clientY;
-
-      let dy = InputY - this.lastInputY;
-
-      if (dy <= 0) dy = 0;
-      if (dy >= 8) dy = 8;
-
-      this.speedY = dy;
-      this.lastInputY = InputY;
+      this.setInputPosition(e);
     }
   };
 
@@ -92,10 +93,20 @@ function Roll(canvas, onIncrementSheet) {
   return this;
 };
 
-Roll.prototype.draw = function () {
+Roll.prototype.setInputPosition = function(e) {
+  if (e.clientY && e.clientY) {
+    this.inputX = e.clientX;
+    this.inputY = e.clientY;
+  } else {
+    this.inputX = e.touches[0].clientX;
+    this.inputY = e.touches[0].clientY;
+  }
+}
+
+Roll.prototype.draw = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-  const offsetOverlap = 10;
+  const offsetOverlap = 40;
   const offsetRepeat = this.sheet.img.height + offsetOverlap;
 
   // Texture
@@ -106,13 +117,14 @@ Roll.prototype.draw = function () {
   // Gradients
   const rollGradient = imageCache['roll_gradient'];
   this.ctx.drawImage(rollGradient, 0, 0);
+
 };
 
-Roll.prototype.update = function () {
+Roll.prototype.update = function() {
   requestAnimationFrame(this.update.bind(this));
 
   // Roll sine wave
-  const ampitude = 1.; 5
+  const ampitude = 1;
   this.originY = ampitude + Math.sin(this.originAngle) * ampitude;
 
   // Roll offset
@@ -121,14 +133,31 @@ Roll.prototype.update = function () {
     this.onIncrementSheet();
   }
 
-  this.offsetY += this.speedY;
-  this.originAngle += (this.speedY * 0.05);
+  this.offsetY += this.speed;
+  this.originAngle += (this.speed * 0.05);
+
+  // Sheet movement
+  if (this.dragging) {
+    let dy = this.inputY - this.lastInputY;
+    this.speed = dy;
+    this.lastInputY = this.inputY;
+  }
+
+  if (this.speed <= 0) this.speed = 0;
+  if (this.speed >= this.speedMax) this.speed = this.speedMax;
 
   if (!this.dragging) {
-    this.speedY *= 0.94;
+    this.speed *= this.friction;
   }
 
   this.draw();
+
+  // Particles
+  // let { x, y } = this.canvas.getBoundingClientRect();
+  // this.particles.emitter.x = (this.inputX - x) + random(-15, 15);
+  // this.particles.emitter.y = (this.inputY - y);
+
+  // this.particles.update();
 };
 
 export default Roll;

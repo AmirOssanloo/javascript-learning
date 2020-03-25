@@ -12,10 +12,8 @@ function Sheet() {
   return this;
 };
 
-Sheet.prototype.draw = function () {
+Sheet.prototype.draw = function() {
   const sheets = Math.ceil(this.canvas.height / this.img.height);
-
-  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
   for (var i = 0; i < sheets; i++) {
     const dx = this.img.width * 0;
