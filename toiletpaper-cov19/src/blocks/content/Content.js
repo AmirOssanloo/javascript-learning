@@ -15,7 +15,7 @@ export const ContentContainer = styled.div`
 `;
 
 export const ContentInner = styled.div`
-  width: 76rem;
+  width: 68rem;
   background-color: #fff;
   padding-bottom: 7rem;
   z-index: 1;
