@@ -6,7 +6,7 @@ const StatsTitleContainer = styled.h2`
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  margin: 0 auto 0.3rem auto;
+  margin: 0 auto;
   color: #c3b99c;
   font-size: 1.6rem;
   letter-spacing: 0.2rem;

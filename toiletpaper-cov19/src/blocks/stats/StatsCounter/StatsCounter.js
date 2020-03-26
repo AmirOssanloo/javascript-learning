@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { createRef, useEffect } from 'react';
 import styled from 'styled-components';
+import StatsParticles from './StatsParticles';
 
 const StatsCounterContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   width: 16rem;
   height: 8.5rem;
   background: rgb(195, 185, 156);
@@ -14,6 +16,21 @@ const StatsCounterContainer = styled.div`
   &:not(last-child) {
     margin-right: 0.4rem;
   }
+`;
+
+const StatsCanvas = styled.canvas`
+  position: absolute;
+  width: inherit;
+  height: inherit;
+`;
+
+const StatsDisplay = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: inherit;
+  height: inherit;
 `;
 
 const StatsCounterNumber = styled.span`
@@ -26,11 +43,33 @@ const StatsCounterLabel = styled.span`
   font-size: 1.2rem;
 `;
 
-const StatsCounter = ({ number, label }) => (
-  <StatsCounterContainer>
-    <StatsCounterNumber>{number}</StatsCounterNumber>
-    <StatsCounterLabel>{label}</StatsCounterLabel>
-  </StatsCounterContainer>
-);
+const StatsCounter = ({ number, label }) => {
+  const canvasRef = createRef();
+  const numberRef = createRef();
+
+  useEffect(() => {
+    StatsParticles.canvas = canvasRef.current;
+    StatsParticles.numberRef = numberRef.current;
+    StatsParticles.number = number;
+  }, []);
+
+  useEffect(() => {
+    StatsParticles.label = label;
+  }, [label]);
+
+  useEffect(() => {
+    StatsParticles.onNumberUpdate(number);
+  }, [number]);
+
+  return (
+    <StatsCounterContainer>
+      <StatsCanvas ref={canvasRef} />
+      <StatsDisplay>
+        <StatsCounterNumber ref={numberRef}>{number}</StatsCounterNumber>
+        <StatsCounterLabel>{label}</StatsCounterLabel>
+      </StatsDisplay>
+    </StatsCounterContainer>
+  );
+};
 
 export default StatsCounter;

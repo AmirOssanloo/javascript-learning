@@ -48,7 +48,7 @@ export const HeroRollContainer = styled.div`
 `;
 
 export const HeroRollHolder = styled.div`
-  padding-top: 10rem;
+  padding-top: 8rem;
 `;
 
 export const HeroRollCanvas = styled.canvas`
