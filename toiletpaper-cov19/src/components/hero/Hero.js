@@ -11,6 +11,7 @@ export const HeroContainer = styled.div`
   width: 100%;
   height: calc(100vh - 16.5rem);
   min-height: 40rem;
+  max-height: 70rem;
   background-image: url(${tilePatternTexture});
   background-repeat: repeat;
   overflow: hidden;

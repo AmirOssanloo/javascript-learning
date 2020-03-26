@@ -13,6 +13,7 @@ function Sheet() {
 };
 
 Sheet.prototype.draw = function() {
+  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   const sheets = Math.ceil(this.canvas.height / this.img.height);
 
   for (var i = 0; i < sheets; i++) {
@@ -22,6 +23,13 @@ Sheet.prototype.draw = function() {
 
     this.ctx.drawImage(this.img, 0, 0, width, height, dx, dy, width, height);
   }
+
+  this.ctx.save();
+  this.ctx.globalAlpha = 0.85;
+  this.ctx.globalCompositeOperation = "luminosity";
+  this.ctx.font = '18px Lato';
+  this.ctx.fillText('They see you rollin', 40, 150);
+  this.ctx.restore();
 };
 
 export default Sheet;

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { render } from 'react-dom';
-import Preloader from '#blocks/preloader';
+import Preloader from '#components/preloader';
 import ResetStyle from '#styles/reset';
 import GlobalStyle from '#styles/global';
 import { ContextProvider } from '#containers/app/AppContext'
@@ -49,5 +49,3 @@ preloadImages(images, () => {
 
   render(app, document.querySelector('#app-root'));
 });
-
-

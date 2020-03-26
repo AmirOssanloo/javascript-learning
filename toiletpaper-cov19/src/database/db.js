@@ -1,6 +1,6 @@
 import 'firebase/database';
 import firebase from 'firebase/app';
-import config from '../secret/env';
+import config from '../../secret/env';
 
 firebase.initializeApp({
   apiKey: config.apiKey,

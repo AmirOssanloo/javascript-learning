@@ -84,7 +84,7 @@ function Roll(canvas, onIncrementSheet) {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.sheet.canvas.width = this.width;
-    this.sheet.canvas.height = this.height;
+    this.sheet.canvas.height = this.sheet.img.height * 3;
 
     this.sheet.draw();
     this.draw();
@@ -107,7 +107,7 @@ Roll.prototype.draw = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
   const offsetOverlap = 40;
-  const offsetRepeat = this.sheet.img.height + offsetOverlap;
+  const offsetRepeat = (this.sheet.img.height * 3) + offsetOverlap;
 
   // Texture
   this.ctx.drawImage(this.sheet.canvas, 0, this.offsetY - offsetRepeat, this.sheet.canvas.width, this.sheet.canvas.height);
@@ -128,7 +128,7 @@ Roll.prototype.update = function() {
   this.originY = ampitude + Math.sin(this.originAngle) * ampitude;
 
   // Roll offset
-  if (this.offsetY >= this.offsetYMax) {
+  if (this.offsetY >= this.offsetYMax * 3) {
     this.offsetY = 0;
     this.onIncrementSheet();
   }

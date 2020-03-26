@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Stats from '#blocks/stats';
+import Stats from '#components/stats';
 import Article from '#components/article';
 import theme from '#styles/theme';
 import marbleLightPatternTexture from '#static/images/marble-light_pattern.jpg';
