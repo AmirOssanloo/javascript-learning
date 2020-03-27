@@ -1,23 +1,22 @@
-import React, { createRef, useEffect, useContext } from 'react';
+import React, { createRef, useEffect } from 'react';
 import styled from 'styled-components';
-import Roll from './roll/Roll';
-import rollHolderTexture from '#static/images/roll_holder.png';
-import tilePatternTexture from '#static/images/tile_pattern.jpg';
-import heroVignetteTexture from '#static/images/hero_vignette.png';
+import Instructions from './instructions';
+import Roll from './roll';
 import { useRootContext } from '#containers/app/AppContext';
+import { imageCache } from '#utils/imageCache';
 
-export const HeroContainer = styled.div`
+export const Container = styled.div`
   position: relative;
   width: 100%;
   height: calc(100vh - 16.5rem);
   min-height: 40rem;
   max-height: 70rem;
-  background-image: url(${tilePatternTexture});
+  background-image: url(${imageCache['tile_pattern'].src});
   background-repeat: repeat;
   overflow: hidden;
 `;
 
-export const HeroWallContainer = styled.div`
+export const WallContainer = styled.div`
   position: absolute;
   width: inherit;
   height: inherit;
@@ -25,9 +24,9 @@ export const HeroWallContainer = styled.div`
   overflow: hidden;
 `;
 
-export const HeroWallVignette = styled.div`
+export const WallVignette = styled.div`
   position: relative;
-  background-image: url(${heroVignetteTexture});
+  background-image: url(${imageCache['hero_vignette'].src});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   width: inherit;
@@ -38,7 +37,7 @@ export const HeroWallVignette = styled.div`
   transform: translate(-50%, 0);
 `;
 
-export const HeroRollContainer = styled.div`
+export const RollContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -48,36 +47,37 @@ export const HeroRollContainer = styled.div`
   transform: translate(-50%, 0);
 `;
 
-export const HeroRollHolder = styled.div`
+export const RollHolder = styled.div`
   padding-top: 8rem;
 `;
 
-export const HeroRollCanvas = styled.canvas`
+export const RollCanvas = styled.canvas`
   position: absolute;
   top: 5rem;
   box-shadow: 0 3rem 2rem 1rem rgba(0, 0, 0, 0.2);
 `;
 
 const Hero = () => {
-  const { onIncrementUserSheet } = useRootContext();
-  const canvasRef = createRef();
+  const { hasInteracted, onSetHasInteracted, onIncrementUserSheet } = useRootContext();
+  const rollCanvasRef = createRef();
 
   useEffect(() => {
-    const roll = new Roll(canvasRef.current, onIncrementUserSheet);
+    const roll = new Roll(rollCanvasRef.current, onIncrementUserSheet, onSetHasInteracted);
   }, []);
 
   return (
-    <HeroContainer>
-      <HeroWallContainer>
-        <HeroWallVignette />
-      </HeroWallContainer>
-      <HeroRollContainer>
-        <HeroRollHolder>
-          <img src={rollHolderTexture} />
-        </HeroRollHolder>
-        <HeroRollCanvas ref={canvasRef}></HeroRollCanvas>
-      </HeroRollContainer>
-    </HeroContainer>
+    <Container>
+      <WallContainer>
+        <WallVignette />
+      </WallContainer>
+      <RollContainer>
+        <RollHolder>
+          <img src={imageCache['roll_holder'].src} />
+        </RollHolder>
+        <RollCanvas ref={rollCanvasRef}></RollCanvas>
+        {hasInteracted ? null : <Instructions />}
+      </RollContainer>
+    </Container>
   );
 };
 

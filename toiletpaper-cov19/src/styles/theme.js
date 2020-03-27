@@ -1,6 +1,6 @@
 const theme = {
   main: {
-    bg: '#f0f0f0',
+    bg: '#1f1f1f',
     text: '#484642'
   },
   brand: {

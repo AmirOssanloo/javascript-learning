@@ -13,6 +13,8 @@ import rollGradientTexture from '#static/images/roll_gradient.png';
 import rollHolderTexture from '#static/images/roll_holder.png';
 import sheetTexture from '#static/images/sheet_texture.jpg';
 import tilePatternTexture from '#static/images/tile_pattern.jpg';
+import instructionIconGrabClosedTexture from '#static/images/instruction-icon_grab-closed.png';
+import instructionIconGrabOpenTexture from '#static/images/instruction-icon_grab-open.png';
 import '#containers/app/AppContext';
 
 
@@ -24,7 +26,9 @@ const images = [
   { id: 'roll_gradient', src: rollGradientTexture },
   { id: 'roll_holder', src: rollHolderTexture },
   { id: 'sheet_texture', src: sheetTexture },
-  { id: 'tile_pattern', src: tilePatternTexture }
+  { id: 'tile_pattern', src: tilePatternTexture },
+  { id: 'instruction-icon_grab-closed', src: instructionIconGrabClosedTexture },
+  { id: 'instruction-icon_grab-open', src: instructionIconGrabOpenTexture }
 ];
 
 preloadImages(images, () => {

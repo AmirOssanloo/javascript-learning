@@ -2,6 +2,7 @@ import { useCallback, useState, useEffect } from 'react';
 import db from '#database/db';
 
 export default (props) => {
+  const [hasInteracted, setHasInteracted] = useState(0);
   const [globalSheetsRolled, setGlobalSheetsRolled] = useState(0);
   const [userSheetsRolled, setUserSheetsRolled] = useState(0);
 
@@ -28,10 +29,16 @@ export default (props) => {
     setUserSheetsRolled(prevState => prevState + 1);
   });
 
+  const onSetHasInteracted = (interacted) => {
+    setHasInteracted(interacted);
+  };
+
   return {
+    hasInteracted,
     globalSheetsRolled,
     userSheetsRolled,
     setGlobalSheetsRolled,
+    onSetHasInteracted,
     onIncrementUserSheet
   };
 };

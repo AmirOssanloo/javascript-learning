@@ -6,8 +6,6 @@ function StatsParticles() {
 };
 
 StatsParticles.prototype.onNumberUpdate = function(number) {
-  console.log(number);
-
   switch (number) {
     case 10:
       return;

@@ -3,11 +3,13 @@ import Sheet from './sheet/Sheet';
 import { imageCache } from '#utils/imageCache';
 // import { random } from '#utils/math';
 
-function Roll(canvas, onIncrementSheet) {
+function Roll(canvas, onIncrementSheet, onSetHasInteracted) {
+  console.log(onSetHasInteracted);
 
   this.sheet = new Sheet();
   this.container = canvas.parentElement;
   this.onIncrementSheet = onIncrementSheet;
+  this.onSetHasInteracted = onSetHasInteracted;
 
   this.width = this.sheet.img.width;
   this.height = this.container.offsetHeight;
@@ -51,6 +53,7 @@ function Roll(canvas, onIncrementSheet) {
   function onInputDown(e) {
     e.preventDefault();
 
+    this.onSetHasInteracted(true);
     this.setInputPosition(e);
     this.dragging = true;
     this.canvas.style.cursor = 'grabbing';
