@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { render } from 'react-dom';
+import App from '#containers/app';
 import Preloader from '#components/preloader';
 import ResetStyle from '#styles/reset';
 import GlobalStyle from '#styles/global';
@@ -17,7 +18,6 @@ import instructionIconGrabClosedTexture from '#static/images/instruction-icon_gr
 import instructionIconGrabOpenTexture from '#static/images/instruction-icon_grab-open.png';
 import '#containers/app/AppContext';
 
-
 const images = [
   { id: 'hero_vignette', src: heroVignetteTexture },
   { id: 'marble-dark_pattern', src: marbleDarkPatternTexture },
@@ -32,23 +32,14 @@ const images = [
 ];
 
 preloadImages(images, () => {
-  const App = React.lazy(() => (
-    import(/* webpackChunkName: "app" */ './containers/app')
-      .then(component => new Promise((resolve, reject) => {
-        setTimeout(() => resolve(component), 1000);
-      })
-      )
-      .catch(err => console.log(err))
-  ));
-
   const app = (
-    <Suspense fallback={<Preloader />}>
+    <React.Fragment>
       <ResetStyle />
       <GlobalStyle />
       <ContextProvider>
         <App />
       </ContextProvider>
-    </Suspense>
+    </React.Fragment>
   );
 
   render(app, document.querySelector('#app-root'));

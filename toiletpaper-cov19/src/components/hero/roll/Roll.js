@@ -1,11 +1,8 @@
 import Sheet from './sheet/Sheet';
-// import Particles from './particles/Particles';
 import { imageCache } from '#utils/imageCache';
-// import { random } from '#utils/math';
+
 
 function Roll(canvas, onIncrementSheet, onSetHasInteracted) {
-  console.log(onSetHasInteracted);
-
   this.sheet = new Sheet();
   this.container = canvas.parentElement;
   this.onIncrementSheet = onIncrementSheet;
@@ -31,8 +28,6 @@ function Roll(canvas, onIncrementSheet, onSetHasInteracted) {
   this.canvas.id = 'roll-canvas';
   this.canvas.style.cursor = 'grab';
 
-  // this.particles = new Particles(this.ctx);
-
   /* Initiate
   ============================================ */
   onWindowResize.bind(this)();
@@ -57,7 +52,6 @@ function Roll(canvas, onIncrementSheet, onSetHasInteracted) {
     this.setInputPosition(e);
     this.dragging = true;
     this.canvas.style.cursor = 'grabbing';
-    // this.particles.start();
   };
 
   function onInputUp(e) {
@@ -65,7 +59,6 @@ function Roll(canvas, onIncrementSheet, onSetHasInteracted) {
 
     this.dragging = false;
     this.canvas.style.cursor = 'grab';
-    // this.particles.stop();
   };
 
   function onInputMove(e) {

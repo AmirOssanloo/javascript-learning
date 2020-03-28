@@ -4,6 +4,9 @@ import Instructions from './instructions';
 import Roll from './roll';
 import { useRootContext } from '#containers/app/AppContext';
 import { imageCache } from '#utils/imageCache';
+import tilePatternTexture from '#static/images/tile_pattern.jpg';
+import heroVignetteTexture from '#static/images/hero_vignette.png';
+import rollHolderTexture from '#static/images/roll_holder.png';
 
 export const Container = styled.div`
   position: relative;
@@ -11,7 +14,7 @@ export const Container = styled.div`
   height: calc(100vh - 16.5rem);
   min-height: 40rem;
   max-height: 70rem;
-  background-image: url(${imageCache['tile_pattern'].src});
+  background-image: url(${tilePatternTexture});
   background-repeat: repeat;
   overflow: hidden;
 `;
@@ -26,7 +29,7 @@ export const WallContainer = styled.div`
 
 export const WallVignette = styled.div`
   position: relative;
-  background-image: url(${imageCache['hero_vignette'].src});
+  background-image: url(${heroVignetteTexture});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   width: inherit;
@@ -72,7 +75,7 @@ const Hero = () => {
       </WallContainer>
       <RollContainer>
         <RollHolder>
-          <img src={imageCache['roll_holder'].src} />
+          <img src={rollHolderTexture} />
         </RollHolder>
         <RollCanvas ref={rollCanvasRef}></RollCanvas>
         {hasInteracted ? null : <Instructions />}

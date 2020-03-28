@@ -34,8 +34,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
-    font-size: 1.8rem;
     margin-bottom: 2rem;
+  }
+
+  i {
+    font-weight: 400;
   }
 `;
 
