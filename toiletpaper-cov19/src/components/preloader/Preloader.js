@@ -4,6 +4,8 @@ import marbleDarkPatternTexture from '#static/images/marble-dark_pattern.jpg';
 
 const PreloaderContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-image: url(${marbleDarkPatternTexture});
   background-repeat: repeat;
   width: 100%;
@@ -13,6 +15,7 @@ const PreloaderContainer = styled.div`
 const Preloader = () => {
   return (
     <PreloaderContainer>
+      <h1>Loading...</h1>
     </PreloaderContainer>
   );
 };

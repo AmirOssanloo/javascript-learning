@@ -4,6 +4,7 @@ module.exports = {
     'import/resolver': {
       'babel-module': {
         alias: {
+          '#src': './src',
           '#static': './static',
           '#blocks': './src/blocks',
           '#components': './src/components',

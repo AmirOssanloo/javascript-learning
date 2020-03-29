@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     height: inherit;
     color: ${theme.main.text};
     font-size: 16px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
     line-height: 1.25;
   }
@@ -28,9 +28,13 @@ const GlobalStyle = createGlobalStyle`
   h1 {
     color: ${theme.brand.primary};
     font-size: 4.8rem;
-    font-style: italic;
-    font-weight: 700;
-    text-align: center;
+    font-weight: 800;
+  }
+
+  h2 {
+    color: ${theme.brand.primary};
+    font-size: 3.4rem;
+    font-weight: 600;
   }
 
   p {

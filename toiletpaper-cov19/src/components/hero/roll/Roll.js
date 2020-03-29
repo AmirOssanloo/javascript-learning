@@ -1,6 +1,5 @@
 import Sheet from './sheet/Sheet';
-import { imageCache } from '#utils/imageCache';
-
+import imageCache from '#src/assets';
 
 function Roll(canvas, onIncrementSheet, onSetHasInteracted) {
   this.sheet = new Sheet();
@@ -111,7 +110,7 @@ Roll.prototype.draw = function() {
   this.canvas.style.transform = `translate(0, ${this.originY}px)`;
 
   // Gradients
-  const rollGradient = imageCache['roll_gradient'];
+  const rollGradient = imageCache.getTag('roll_gradient');
   this.ctx.drawImage(rollGradient, 0, 0);
 
 };

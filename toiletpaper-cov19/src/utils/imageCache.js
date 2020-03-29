@@ -1,19 +1,37 @@
-export const imageCache = {};
+function ImageCache() {
+  const cache = {};
 
-export const preloadImages = (images, callback) => {
-  const imagesClone = [...images];
+  function add(id, obj) {
+    cache[id] = obj;
+  };
 
-  if (imagesClone.length === 0) {
-    return callback();
-  }
+  function merge(id, property, obj) {
+    cache[id] = { ...cache[id], [property]: obj };
+  };
 
-  const obj = imagesClone.shift();
-  const element = document.createElement('img');
-  element.id = obj.id;
-  element.src = obj.src;
+  function getTag(id) {
+    return cache[id].img;
+  };
 
-  element.onload = e => {
-    imageCache[e.target.id] = e.target;
-    return preloadImages(imagesClone, callback);
+  function getSrc(id) {
+    if (cache[id]) {
+      return cache[id].src;
+    }
+
+    throw new Error(`Can not find ${id} in cache.`);
+  };
+
+  function getAll() {
+    return cache;
+  };
+
+  return {
+    add,
+    merge,
+    getTag,
+    getSrc,
+    getAll
   };
 };
+
+export default ImageCache;

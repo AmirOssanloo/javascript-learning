@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ReactGA from 'react-ga';
 import Hero from '#components/hero';
-import Content from '#components/content';
+// import Content from '#components/content';
+import { ContextProvider } from '#containers/app/AppContext'
 
 const App = () => {
   useEffect(() => {
@@ -10,10 +11,10 @@ const App = () => {
   }, []);
 
   return (
-    <Fragment>
+    <ContextProvider>
       <Hero />
-      <Content />
-    </Fragment>
+      {/* <Content /> */}
+    </ContextProvider>
   );
 };
 

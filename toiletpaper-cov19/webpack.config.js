@@ -8,6 +8,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const environment = process.env.NODE_ENV || 'development';
 
 let options = {
+  entry: {
+    assets: './src/assets.js',
+    main: './src/index.js'
+  },
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
@@ -24,7 +28,7 @@ let options = {
         test: /\.(gif|jpg|png|svg)$/,
         loader: 'url-loader',
         options: {
-          limit: -1
+          limit: false
         },
         exclude: /node_modules/
       }
@@ -40,6 +44,9 @@ let options = {
     })
   ],
   optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
@@ -56,6 +63,7 @@ let options = {
 };
 
 if (environment === 'development') {
+  options.devtool = 'source-map';
   options.devServer = {
     host: '0.0.0.0',
     proxy: {

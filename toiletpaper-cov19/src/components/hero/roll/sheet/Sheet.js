@@ -1,7 +1,7 @@
-import { imageCache } from '#utils/imageCache';
+import imageCache from '#src/assets';
 
 function Sheet() {
-  this.img = imageCache['sheet_texture'];
+  this.img = imageCache.getTag('sheet_texture');
   this.canvas = document.createElement('canvas');
   this.ctx = this.canvas.getContext('2d');
 
