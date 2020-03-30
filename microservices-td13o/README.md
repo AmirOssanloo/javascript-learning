@@ -1,3 +1,3 @@
 # Microservices
 
-(Got distracted by COVID-19, project paused)
+(Got distracted by COVID-19, project paused before it started)
