@@ -1,36 +1,72 @@
 import React from 'react';
-import styled from 'styled-components';
-import StatsTitle from './StatsTitle';
+import { Box, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import StatsCounter from './StatsCounter';
-import marbleDarkPatternTexture from '#static/images/marble-dark_pattern.jpg';
+import StatsLeaderboard from './StatsLeaderboard';
 import { useRootContext } from '#containers/app/AppContext';
 
-const StatsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-image: url(${marbleDarkPatternTexture});
-  background-repeat: repeat;
-  width: 100%;
-  margin-bottom 5rem;
-  padding: 1.3rem 0 0;
-`;
+const useStyles = makeStyles(theme => ({
+  root: {
+    position: 'absolute',
+    width: 'inherit',
+    height: 'inherit',
+    minHeight: 'inherit',
+    left: 0,
+    top: 0,
+    pointerEvents: 'none'
+  },
+  gridContainer: {
+    display: 'flex',
+    width: 'inherit',
+    height: 'inherit'
+  },
+  gridItemCounter: {
+    flexGrow: '1',
+  },
+  gridItemCounterInner: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: '22rem',
+  },
+  gridItemSpacing: {
+    width: '58rem'
+  },
+  gridItemLeaderboard: {
+    flexGrow: '1',
+  },
+  gridItemLeaderboardInner: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    marginTop: '22rem',
+  },
 
-const StatsCounters = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+}));
 
 const Stats = () => {
+  const classes = useStyles();
   const { globalSheetsRolled, userSheetsRolled } = useRootContext();
 
   return (
-    <StatsContainer>
-      <StatsTitle title="SHEETS ROLLED" />
-      <StatsCounters>
-        <StatsCounter label="GLOBALLY" number={globalSheetsRolled} />
-        <StatsCounter label="BY YOU" number={userSheetsRolled} />
-      </StatsCounters>
-    </StatsContainer>
+    <Box className={classes.root}>
+      <div className={classes.gridContainer}>
+        <div className={classes.gridItemCounter}>
+          <div className={classes.gridItemCounterInner}>
+            <div>
+              <StatsCounter title="Rolled by the world" counter={globalSheetsRolled} />
+              <StatsCounter title="Rolled by you" counter={userSheetsRolled} />
+            </div>
+          </div>
+        </div>
+        <div className={classes.gridItemSpacing}></div>
+        <div className={classes.gridItemLeaderboard}>
+          <div className={classes.gridItemLeaderboardInner}>
+            <div>
+              <StatsLeaderboard title="Country leaderboard" entries={[{ country: 'Argentina', count: '8273' }, { country: 'Sweden', count: '6372' }]} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Box>
   );
 };
 

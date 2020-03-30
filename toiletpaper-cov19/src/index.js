@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import Preloader from '#components/preloader';
 import ResetStyle from '#styles/reset';
 import GlobalStyle from '#styles/global';
+import { ContextProvider } from '#containers/app/AppContext'
 
 const App = React.lazy(() => (
   import(/* webpackChunkName: "app" */ './containers/app')
@@ -15,7 +16,9 @@ const app = (
   <React.Suspense fallback={<Preloader />}>
     <ResetStyle />
     <GlobalStyle />
-    <App />
+    <ContextProvider>
+      <App />
+    </ContextProvider>
   </React.Suspense>
 );
 

@@ -5,6 +5,7 @@ export default (props) => {
   const [hasInteracted, setHasInteracted] = useState(0);
   const [globalSheetsRolled, setGlobalSheetsRolled] = useState(0);
   const [userSheetsRolled, setUserSheetsRolled] = useState(0);
+  const [userCountry, setUserCountry] = useState('');
 
   useEffect(() => {
     db.ref('/').on('value', snapshot => {
@@ -12,22 +13,38 @@ export default (props) => {
     });
   }, []);
 
-  const onIncrementUserSheet = useCallback(() => {
+  function onIncrementUserSheet() {
     db.ref('/').transaction(snapshot => {
       if (snapshot) {
         return {
           ...snapshot,
           globalSheetsRolled: snapshot.globalSheetsRolled + 1
         };
-      } else {
+      }
+    }, null, true);
+
+    if (userCountry === '') {
+      return null;
+    }
+
+    db.ref('/').transaction(snapshot => {
+      if (snapshot) {
         return {
-          globalSheetsRolled: globalSheetsRolled
+          ...snapshot,
+          countries: {
+            ...snapshot.countries,
+            [userCountry]: snapshot.countries[userCountry] + 1
+          }
         }
       }
     }, null, true);
 
     setUserSheetsRolled(prevState => prevState + 1);
-  });
+  };
+
+  const onSetUserCountry = (country) => {
+    setUserCountry(country);
+  };
 
   const onSetHasInteracted = (interacted) => {
     setHasInteracted(interacted);
@@ -37,8 +54,9 @@ export default (props) => {
     hasInteracted,
     globalSheetsRolled,
     userSheetsRolled,
-    setGlobalSheetsRolled,
+    userCountry,
     onSetHasInteracted,
-    onIncrementUserSheet
+    onIncrementUserSheet,
+    onSetUserCountry
   };
 };

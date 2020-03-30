@@ -14,24 +14,38 @@ const useStyles = makeStyles(theme => ({
   title: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     width: '100%',
+    marginBottom: '0.8rem',
     padding: '0.5rem 0',
     textTransform: 'uppercase'
   },
-  counter: {
-    color: '#fff',
-    fontSize: '7.8rem'
+  entryContainer: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  entryItem: {
+    fontSize: '2.2rem',
+    padding: '0 2rem'
   }
 }));
 
-const StatsCounter = ({ title, counter }) => {
+const StatsLeaderboard = ({ title, entries }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
       <Typography className={classes.title} component="h1" variant="h3">{title}</Typography>
-      <Typography className={classes.counter} component="span" variant="h2">{counter}</Typography>
+      {entries.map(entry => {
+        const { country, count } = entry;
+
+        return (
+          <div key={country} className={classes.entryContainer}>
+            <Typography className={classes.entryItem} component="span" variant="body1">{country}</Typography>
+            <Typography className={classes.entryItem} component="span" variant="body1">{count}</Typography>
+          </div>
+        );
+      })}
     </Box>
   );
 };
 
-export default StatsCounter;
+export default StatsLeaderboard;

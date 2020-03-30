@@ -6,8 +6,6 @@ function RollSheet() {
   this.ctx = this.canvas.getContext('2d');
   this.sheets = 0;
 
-
-
   /* Initiate
   ============================================ */
   this.draw();
@@ -16,7 +14,6 @@ function RollSheet() {
 };
 
 RollSheet.prototype.draw = function() {
-  console.log(this.sheets);
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
   for (var i = 0; i < this.sheets; i++) {

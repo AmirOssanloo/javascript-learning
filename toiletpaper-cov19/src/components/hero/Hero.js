@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Stats from '#components/stats';
 import Wall from './wall';
 import Roll from './roll';
 
@@ -16,8 +17,8 @@ const useStyles = makeStyles(theme => ({
   titleContainer: {
     position: 'relative',
     textAlign: 'center',
-    marginBottom: '5rem',
-    paddingTop: '2.8rem',
+    marginBottom: '5.3rem',
+    paddingTop: '2.7rem',
 
     [theme.breakpoints.down("xs")]: {
       marginBottom: '2rem'
@@ -47,6 +48,7 @@ const Hero = () => {
         <Typography className={classes.subtitle} component="h2" variant="subtitle1">The infinite toilet paper roll for worldwide hoarders</Typography>
       </div>
       <Roll />
+      <Stats />
     </div>
   );
 };

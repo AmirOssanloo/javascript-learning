@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import RollCanvas from './roll-canvas';
 import imageCache from '#src/assets';
 // import Instructions from './instructions';
-// import { useRootContext } from '#containers/app/AppContext';
+import { useRootContext } from '#containers/app/AppContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,11 +32,10 @@ const useStyles = makeStyles(theme => ({
 const Roll = () => {
   const classes = useStyles();
   const rollCanvasRef = createRef();
-  // const { hasInteracted, onSetHasInteracted, onIncrementUserSheet } = useRootContext();
+  const { hasInteracted, onIncrementUserSheet, onSetHasInteracted } = useRootContext();
 
   useEffect(() => {
-    console.log(rollCanvasRef)
-    const roll = new RollCanvas(rollCanvasRef.current, () => { }, () => { });
+    const roll = new RollCanvas(rollCanvasRef.current, onIncrementUserSheet, onSetHasInteracted);
   }, []);
 
   return (

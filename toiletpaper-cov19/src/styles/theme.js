@@ -10,8 +10,16 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: ['Poppins', 'sans-serif'].join(','),
     h1: {
-      fontSize: '8rem',
-      fontWeight: 800
+      fontSize: '7.2rem',
+      fontWeight: 700
+    },
+    h2: {
+      fontSize: '4.2rem',
+      fontWeight: 600
+    },
+    h3: {
+      fontSize: '1.6rem',
+      fontWeight: 600
     },
     subtitle1: {
       fontSize: '2rem',
@@ -38,4 +46,4 @@ const theme = createMuiTheme({
 // }
 
 
-export default responsiveFontSizes(theme);
+export default theme;

@@ -9,7 +9,9 @@ const useStyles = makeStyles(theme => ({
     height: 'inherit',
     minHeight: 'inherit',
     backgroundImage: `url(${imageCache.getSrc('tile_pattern')})`,
-    backgroundRepeat: 'repeat'
+    backgroundRepeat: 'repeat',
+    left: 0,
+    top: 0
   },
   vignette: {
     position: 'absolute',

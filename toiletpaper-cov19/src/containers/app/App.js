@@ -3,10 +3,7 @@ import ReactGA from 'react-ga';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import Hero from '#components/hero';
-// import Content from '#components/content';
-
 import theme from '#styles/theme';
-import { ContextProvider } from '#containers/app/AppContext'
 
 const App = () => {
   useEffect(() => {
@@ -14,34 +11,21 @@ const App = () => {
     ReactGA.pageview(window.location.pathname);
   }, []);
 
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        const { country_name } = data;
+        setUserCountry(country_name);
+      });
+  })
+
   return (
-    <ContextProvider>
-      <ThemeProvider theme={theme}>
-        <Paper elevation={0}>
-          <Hero />
-        </Paper>
-        {/* <Grid container>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="h1">Hello</Typography>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="h1">Hello</Typography>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="h1">Hello</Typography>
-          </Grid>
-        </Grid>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h1">Hello</Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h1">Hello</Typography>
-          </Grid>
-        </Grid> */}
-        {/* <Content /> */}
-      </ThemeProvider>
-    </ContextProvider>
+    <ThemeProvider theme={theme}>
+      <Paper elevation={0}>
+        <Hero />
+      </Paper>
+    </ThemeProvider>
   );
 };
 
