@@ -1,5 +1,5 @@
 import Post from './post/Post';
-import { random } from '../../helpers/math';
+import { random } from '../../utils/math';
 
 function PostList(element) {
   this.element = element;

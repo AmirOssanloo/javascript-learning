@@ -1,7 +1,7 @@
 import { random } from '../../../utils/math';
 
 function Post(id) {
-  this.id = 200;
+  this.id = id;
 
   this.container = document.createElement('div');
   this.container.className = 'post';
