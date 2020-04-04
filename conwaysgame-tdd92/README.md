@@ -1,19 +1,20 @@
 # TDD - Game of Life
 
-* [ ] Install dependencies
-* [ ] Setup Babel
-* [ ] Setup test directory
-* [ ] Add test script
-* [ ] Cell State
- * [ ] Has an ALIVE state
- * [ ] Has a DEAD state
+* [x] Install dependencies
+* [x] Setup Babel
+* [x] Setup test directory
+* [x] Add test script
+* [x] Cell State
+ * [x] Has an ALIVE state
+ * [x] Has a DEAD state
 * [ ] Cell
- * [ ] Should be initialized with a cellState
- * [ ] Should die if it has fewer than 2 live neighbours
-  * [ ] getNextState(numNeighbours)
- * [ ] Should live with 2 or 3 live neighbours
- * [ ] Should die with more than 3 neighbours
- * [ ] Should come alive with exactly 3 neighbours
+ * [x] Should be initialized with a CellState
+ * [x] Should die if it has fewer than 2 live neighbours
+  * [x] getNextState(numNeighbours)
+ * [x] Should live with 2 or 3 live neighbours
+ * [x] Should die with more than 3 neighbours
+ * [x] Should stay dead if it has more than 3 neighbours
+ * [x] Should come alive with exactly 3 neighbours
 * [ ] Game
  * [ ] Should be initialized with a given state
   * [ ] Array of arrays of states
