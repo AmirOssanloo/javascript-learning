@@ -23,13 +23,6 @@ RollSheet.prototype.draw = function() {
 
     this.ctx.drawImage(this.img, 0, 0, width, height, dx, dy, width, height);
   }
-
-  // this.ctx.save();
-  // this.ctx.globalAlpha = 0.85;
-  // this.ctx.globalCompositeOperation = "luminosity";
-  // this.ctx.font = '18px Lato';
-  // this.ctx.fillText('They see you rollin', 40, 150);
-  // this.ctx.restore();
 };
 
 export default RollSheet;

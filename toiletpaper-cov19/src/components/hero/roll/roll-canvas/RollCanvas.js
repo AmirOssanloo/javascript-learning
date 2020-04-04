@@ -1,19 +1,19 @@
 import RollSheet from './roll-sheet';
 import imageCache from '#src/assets';
 
-function RollCanvas(canvas, onIncrementSheet, onSetHasInteracted) {
+function RollCanvas(canvas, onIncrementSheet, setHasInteracted) {
   this.sheet = new RollSheet();
   this.container = canvas.parentElement;
   this.onIncrementSheet = onIncrementSheet;
-  this.onSetHasInteracted = onSetHasInteracted;
+  this.setHasInteracted = setHasInteracted;
 
-  this.width = this.sheet.img.width;
+  this.width = 200;
   this.height = this.container.offsetHeight;
   this.firstRoll = true;
   this.dragging = false;
   this.originY = 0;
-  this.offsetY = this.sheet.img.height * 1.2;
-  this.offsetYMax = this.sheet.img.height;
+  this.offsetY = 256 * 5;
+  this.offsetYMax = 256;
   this.inputX = 0;
   this.inputY = 0;
   this.lastInputX = 0;
@@ -48,7 +48,7 @@ function RollCanvas(canvas, onIncrementSheet, onSetHasInteracted) {
   function onInputDown(e) {
     e.preventDefault();
 
-    this.onSetHasInteracted(true);
+    this.setHasInteracted(true);
     this.setInputPosition(e);
     this.dragging = true;
     this.canvas.style.cursor = 'grabbing';
@@ -91,7 +91,7 @@ function RollCanvas(canvas, onIncrementSheet, onSetHasInteracted) {
 };
 
 RollCanvas.prototype.setInputPosition = function(e) {
-  if (e.clientY && e.clientY) {
+  if (e.clientX && e.clientY) {
     this.inputX = e.clientX;
     this.inputY = e.clientY;
   } else {
@@ -113,6 +113,8 @@ RollCanvas.prototype.draw = function() {
     this.firstRoll = false;
     this.ctx.drawImage(this.sheet.canvas, 0, this.offsetY - offsetOverlap, this.sheet.canvas.width, this.sheet.canvas.height);
   }
+
+  this.canvas.style.transform = `translate(0, ${this.originY}px)`;
 
   // Gradients
   const rollGradient = imageCache.getTag('roll_gradient');

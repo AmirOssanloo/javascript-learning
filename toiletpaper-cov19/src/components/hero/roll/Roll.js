@@ -1,8 +1,10 @@
 import React, { createRef, useEffect } from 'react';
+import isEmpty from 'lodash/isEmpty';
 import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import RollCanvas from './roll-canvas';
+import db from '#database/db';
 import imageCache from '#src/assets';
+import RollCanvas from './roll-canvas';
 // import Instructions from './instructions';
 import { useRootContext } from '#containers/app/AppContext';
 
@@ -32,10 +34,57 @@ const useStyles = makeStyles(theme => ({
 const Roll = () => {
   const classes = useStyles();
   const rollCanvasRef = createRef();
-  const { hasInteracted, onIncrementUserSheet, onSetHasInteracted } = useRootContext();
+  const {
+    hasInteracted,
+    userCountry,
+    userSheetsRolled,
+    setHasInteracted,
+    setUserSheetsRolled,
+  } = useRootContext();
 
   useEffect(() => {
-    const roll = new RollCanvas(rollCanvasRef.current, onIncrementUserSheet, onSetHasInteracted);
+    onIncrementGlobalSheet();
+    onIncrementCountrySheet(userCountry);
+  }, [userSheetsRolled]);
+
+  const onIncrementSheet = () => {
+    onIncrementUserSheet();
+  };
+
+  const onIncrementUserSheet = () => {
+    setUserSheetsRolled(prevState => prevState + 1);
+  };
+
+  const onIncrementGlobalSheet = () => {
+    db.ref('/').transaction(snapshot => {
+      if (snapshot) {
+        return {
+          ...snapshot,
+          globalSheetsRolled: snapshot.globalSheetsRolled + 1
+        };
+      }
+    }, null, true);
+  };
+
+  const onIncrementCountrySheet = country => {
+    if (isEmpty(country)) return;
+
+    db.ref('/countrySheetsRolled/').transaction(snapshot => {
+      if (snapshot) {
+        const { id, name } = country;
+        let count = 0;
+
+        if (snapshot[id]) {
+          count = snapshot[id].count;
+        }
+
+        return { ...snapshot, [id]: { name, count: count + 1 } };
+      }
+    }, null, true);
+  };
+
+  useEffect(() => {
+    const roll = new RollCanvas(rollCanvasRef.current, onIncrementSheet, setHasInteracted);
   }, []);
 
   return (

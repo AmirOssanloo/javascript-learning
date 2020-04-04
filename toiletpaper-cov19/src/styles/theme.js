@@ -1,6 +1,15 @@
 import { createMuiTheme, createBreakpoints, responsiveFontSizes } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 680,
+      md: 1060,
+      lg: 1280,
+      xl: 1920
+    }
+  },
   palette: {
     text: {
       primary: '#efede7',

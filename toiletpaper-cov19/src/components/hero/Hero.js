@@ -1,7 +1,7 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, withWidth } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Stats from '#components/stats';
+import { StatsSm, StatsLg } from '#components/stats';
 import Wall from './wall';
 import Roll from './roll';
 
@@ -37,8 +37,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Hero = () => {
+const Hero = ({ width }) => {
   const classes = useStyles();
+  const isSizeSm = (width === 'xs' || width === 'sm');
 
   return (
     <div className={classes.root}>
@@ -48,9 +49,9 @@ const Hero = () => {
         <Typography className={classes.subtitle} component="h2" variant="subtitle1">The infinite toilet paper roll for worldwide hoarders</Typography>
       </div>
       <Roll />
-      <Stats />
+      {isSizeSm ? <StatsSm /> : <StatsLg />}
     </div>
   );
 };
 
-export default Hero;
+export default withWidth()(Hero);

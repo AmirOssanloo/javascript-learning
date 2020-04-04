@@ -15,7 +15,6 @@ const PreloaderContainer = styled.div`
 const Preloader = () => {
   return (
     <PreloaderContainer>
-      <h1>Loading...</h1>
     </PreloaderContainer>
   );
 };

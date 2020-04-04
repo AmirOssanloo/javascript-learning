@@ -7,14 +7,14 @@ import theme from '#styles/theme';
 import { useRootContext } from '#containers/app/AppContext';
 
 const App = () => {
-  const { onSetUserCountry } = useRootContext();
+  const { setUserCountry } = useRootContext();
 
   useEffect(() => {
     fetch('https://ipapi.co/json/')
       .then(res => res.json())
       .then(data => {
-        const { country_name } = data;
-        onSetUserCountry(country_name);
+        const { country, country_name } = data;
+        setUserCountry({ id: country, name: country_name });
       });
   }, []);
 

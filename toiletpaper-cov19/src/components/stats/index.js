@@ -1,2 +1,3 @@
-import Stats from './Stats';
-export default Stats;
+import StatsSm from './StatsSm';
+import StatsLg from './StatsLg';
+export { StatsSm, StatsLg };

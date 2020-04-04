@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import StatsCounter from './StatsCounter';
 import StatsLeaderboard from './StatsLeaderboard';
@@ -18,7 +18,11 @@ const useStyles = makeStyles(theme => ({
   gridContainer: {
     display: 'flex',
     width: 'inherit',
-    height: 'inherit'
+    height: 'inherit',
+    padding: '0 3rem'
+  },
+  gridItemSpacing: {
+    width: '55rem'
   },
   gridItemCounter: {
     flexGrow: '1',
@@ -28,9 +32,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end',
     marginTop: '22rem',
   },
-  gridItemSpacing: {
-    width: '58rem'
-  },
   gridItemLeaderboard: {
     flexGrow: '1',
   },
@@ -38,13 +39,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'flex-start',
     marginTop: '22rem',
-  },
-
+  }
 }));
 
-const Stats = () => {
+const StatsLg = () => {
   const classes = useStyles();
-  const { globalSheetsRolled, userSheetsRolled } = useRootContext();
+  const { userSheetsRolled, globalSheetsRolled, countrySheetsRolled } = useRootContext();
 
   return (
     <Box className={classes.root}>
@@ -61,7 +61,7 @@ const Stats = () => {
         <div className={classes.gridItemLeaderboard}>
           <div className={classes.gridItemLeaderboardInner}>
             <div>
-              <StatsLeaderboard title="Country leaderboard" entries={[{ country: 'Argentina', count: '8273' }, { country: 'Sweden', count: '6372' }]} />
+              <StatsLeaderboard title="Country leaderboard" entries={countrySheetsRolled} />
             </div>
           </div>
         </div>
@@ -70,4 +70,4 @@ const Stats = () => {
   );
 };
 
-export default Stats;
+export default StatsLg;

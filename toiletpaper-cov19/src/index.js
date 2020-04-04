@@ -8,7 +8,7 @@ import { ContextProvider } from '#containers/app/AppContext'
 const App = React.lazy(() => (
   import(/* webpackChunkName: "app" */ './containers/app')
     .then(component => new Promise((resolve, reject) => {
-      setTimeout(() => resolve(component), 500);
+      setTimeout(() => resolve(component), 1000);
     }))
 ));
 
