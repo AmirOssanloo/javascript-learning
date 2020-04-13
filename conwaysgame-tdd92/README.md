@@ -4,11 +4,11 @@ Test Driven Development to write a simple Conway's Game of Life. Using Mocha and
 
 ## Tests
 
-### Cell State
+#### Cell State
  * [x] Has an ALIVE state
  * [x] Has a DEAD state
 
-### Cell
+#### Cell
  * [x] Should be initialized with a CellState
  * [x] Should throw error if not initialized with a CellState
  * [x] Should die if it has fewer than 2 live neighbours
@@ -17,7 +17,7 @@ Test Driven Development to write a simple Conway's Game of Life. Using Mocha and
  * [x] Should stay dead with more than 3 neighbours
  * [x] Should come alive with exactly 3 neighbours
 
-### Game
+#### Game
  * [x] Should be initialized with a given state
  * [x] Should retrieve a cell at a given row and column
  * [x] Should get the number of alive neighbours for a given cell
