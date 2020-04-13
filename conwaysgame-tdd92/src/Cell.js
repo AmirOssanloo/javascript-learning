@@ -1,8 +1,12 @@
 import CellState from './CellState';
 
 function Cell(state) {
+  console.log('State:', state, CellState.ALIVE);
+  if (state !== CellState.ALIVE || state !== CellState.DEAD) {
+    throw new Error('Invalid cell state');
+  }
+
   this.state = state;
-  this.neighbours = 0;
 };
 
 Cell.prototype.getNextState = function(neighbours) {

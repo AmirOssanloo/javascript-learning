@@ -4,11 +4,19 @@ import CellState from '../src/CellState';
 
 describe('Cell', () => {
   it('Should be initialized with a CellState', () => {
+    console.log('--------------')
+    console.log(CellState.ALIVE)
     const cellAlive = new Cell(CellState.ALIVE);
     expect(cellAlive.state).to.equal(CellState.ALIVE);
 
     const cellDead = new Cell(CellState.DEAD);
     expect(cellDead.state).to.equal(CellState.DEAD);
+  });
+
+  it('Should throw error if not initialized with a CellState', () => {
+    expect(() => {
+      new Cell(undefined)
+    }).to.throw();
   });
 
   it('Should die if it has fewer than 2 live neighbours', () => {
