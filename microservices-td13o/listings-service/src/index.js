@@ -1,2 +1,4 @@
-import path from 'path';
-console.log('Working from Listings Service');
+import "@babel/polyfill";
+
+import "#root/db/connection";
+import "#root/server/startServer";
