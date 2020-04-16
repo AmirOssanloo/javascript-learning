@@ -1,5 +1,5 @@
 module.exports.development = {
   dialect: "mysql",
-  seederStorage: "sequalize",
+  seederStorage: "sequelize",
   url: process.env.DB_URI
 };
