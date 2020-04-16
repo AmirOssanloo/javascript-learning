@@ -1,5 +1,5 @@
-import Cell from "./Cell";
-import CellState from "./CellState";
+import Cell from "./Cell/Cell";
+import CellState from "./Cell/CellState";
 
 function Game(state) {
   this.rows = state.length;
@@ -11,6 +11,10 @@ function Game(state) {
 
 Game.prototype.getCellAt = function(row, col) {
   return this.state[row][col];
+};
+
+Game.prototype.setCellAt = function(state, row, col) {
+  this.state[row][col] = state;
 };
 
 Game.prototype.getNextState = function() {

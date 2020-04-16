@@ -2,10 +2,11 @@
   "name": "conwaysgame-tdd92",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "mocha --require @babel/register",
-    "test-watch": "nodemon --exec 'npm run test'"
+    "test-watch": "nodemon --exec 'npm run test'",
+    "dev": "parcel ./src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,13 @@
     "@babel/register": "^7.9.0",
     "chai": "^4.2.0",
     "mocha": "^7.1.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1",
+    "styled-components": "^5.1.0"
   }
 }

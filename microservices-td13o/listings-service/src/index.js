@@ -1,3 +1,2 @@
 import path from 'path';
-
-console.log('Working now');
+console.log('Working from Listings Service');

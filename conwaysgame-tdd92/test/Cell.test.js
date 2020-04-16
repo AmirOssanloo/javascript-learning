@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Cell from '../src/Cell';
-import CellState from '../src/CellState';
+import Cell from '../src/Game/Cell/Cell';
+import CellState from '../src/Game/Cell/CellState';
 
 describe('Cell', () => {
   it('Should be initialized with a CellState', () => {

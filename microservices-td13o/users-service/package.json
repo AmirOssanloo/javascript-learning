@@ -1,18 +1,19 @@
 {
-  "name": "users-service",
+  "name": "listings-service",
   "version": "1.0.0",
-  "main": "index.js",
+  "author": "",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "main": "./src/index.js",
   "scripts": {
-    "watch": "babel-watch -L src/index.js"
+    "watch": "babel-watch -L ./src/index.js"
   },
-  "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "babel-plugin-module-resolver": "^4.0.0",
     "babel-watch": "^7.0.0"
-  },
-  "dependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/polyfill": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "babel-plugin-module-resolver": "^4.0.0"
   }
 }

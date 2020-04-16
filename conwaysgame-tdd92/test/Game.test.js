@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import Cell from '../src/Cell';
-import CellState from '../src/CellState';
-import Game from '../src/Game';
+import Cell from '../src/Game/Cell/Cell';
+import CellState from '../src/Game/Cell/CellState';
+import Game from '../src/Game/Game';
 
 const { ALIVE, DEAD } = CellState;
 const aliveState = [[ALIVE, ALIVE, ALIVE], [ALIVE, ALIVE, ALIVE],[ALIVE, ALIVE, ALIVE]];

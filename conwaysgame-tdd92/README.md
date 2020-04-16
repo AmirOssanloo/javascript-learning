@@ -2,6 +2,12 @@
 
 Test Driven Development to write a simple Conway's Game of Life. Using Mocha and Chai for testing and React to display the state.
 
+## Todo
+ * [] Setup React view
+ * [] Ability to switch state
+ * [] Ability to start / stop
+ * [] Ability to toggle state on click (when game is stopped)
+
 ## Tests
 
 #### Cell State
