@@ -13,15 +13,6 @@ module.exports.up = (queryInterface, DataTypes) => {
       },
       type: DataTypes.UUID
     },
-    email: {
-      allowNull: false,
-      unique: true,
-      type: DataTypes.STRING
-    },
-    passwordHash: {
-      allowNull: false,
-      type: DataTypes.CHAR(64)
-    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE

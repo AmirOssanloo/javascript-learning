@@ -10,6 +10,7 @@ import typeDefs from '#root/graphql/typeDefs';
 const PORT = accessEnv("PORT", 7000);
 const app = express();
 const apolloServer = new ApolloServer({
+  context: context => context,
   formatError: formatGraphQLErrors,
   resolvers, typeDefs
 });
