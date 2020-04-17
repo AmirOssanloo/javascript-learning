@@ -1,14 +1,18 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
+import cors from './cors';
+import formatGraphQLErrors from './formatGraphQLErrors';
 import accessEnv from '#root/helpers/accessEnv';
 import resolvers from '#root/graphql/resolvers';
 import typeDefs from '#root/graphql/typeDefs';
-import cors from './cors';
 
 const PORT = accessEnv("PORT", 7000);
-const apolloServer = new ApolloServer({ resolvers, typeDefs });
 const app = express();
+const apolloServer = new ApolloServer({
+  formatError: formatGraphQLErrors,
+  resolvers, typeDefs
+});
 
 app.use(cookieParser());
 app.use(cors);
