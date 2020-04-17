@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Login from '#root/components/login';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  width: 80rem;
+  width: 40rem;
   margin: 0 auto;
 `;
 
@@ -30,7 +31,7 @@ const Root = () => {
     <Wrapper>
       <Container>
         <Content>Working</Content>
-        <Sidebar>Sidebar</Sidebar>
+        <Sidebar><Login /></Sidebar>
       </Container>
     </Wrapper>
   );
