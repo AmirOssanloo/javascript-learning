@@ -8,8 +8,6 @@ import graphqlClient from '#root/api/graphqlClient';
 import Root from '#root/components/root/';
 import * as theme from './theme';
 
-
-
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
     width: 100%;
