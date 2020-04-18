@@ -1,7 +1,7 @@
 /* Events
 ================================== */
-const CLEAR = 'session/CLEAR';
-const SET = 'session/SET';
+const CLEAR = 'user/CLEAR';
+const SET = 'user/SET';
 
 /* Default state
 ================================== */
@@ -9,10 +9,10 @@ const DEFAULT_STATE = null;
 
 /* Reducer
 ================================== */
-const sessionReducer = (state = DEFAULT_STATE, action = {}) => {
+const userReducer = (state = DEFAULT_STATE, action = {}) => {
   switch (action.type) {
     case SET:
-      return action.session;
+      return action.user;
     case CLEAR:
       return null;
     default:
@@ -20,14 +20,14 @@ const sessionReducer = (state = DEFAULT_STATE, action = {}) => {
   }
 };
 
-export default sessionReducer;
+export default userReducer;
 
 /* Action creators
 ================================== */
-export const setSession = session => {
-  return { type: SET, session };
+export const setUser = user => {
+  return { type: SET, user };
 };
 
-export const clearSession = () => {
+export const clearUser = () => {
   return { type: CLEAR };
 };
