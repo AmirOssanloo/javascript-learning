@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { useDispatch } from 'react-redux';
 import AccountDetails from '#root/components/Root/AccountDetails';
+import Listings from '#root/components/Root/Listings';
 import graphqlClient from '#root/api/graphqlClient';
 import { setSession } from '#root/store/ducks/session';
 
@@ -63,8 +64,12 @@ const Root = () => {
   return (
     <Wrapper>
       <Container>
-        <Content>Hello</Content>
-        <Sidebar><AccountDetails /></Sidebar>
+        <Content>
+          <Listings />
+        </Content>
+        <Sidebar>
+          <AccountDetails />
+        </Sidebar>
       </Container>
     </Wrapper>
   );

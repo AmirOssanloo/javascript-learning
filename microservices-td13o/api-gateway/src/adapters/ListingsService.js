@@ -7,4 +7,12 @@ export default class ListingsService {
     const body = await got.get(`${LISTINGS_SERVICE_URI}/listings`).json();
     return body;
   };
+
+  static async createListing({ title, description }) {
+    const body = await got.post(`${LISTINGS_SERVICE_URI}/listings`, {
+      json: { title, description }
+    }).json();
+
+    return body;
+  };
 };

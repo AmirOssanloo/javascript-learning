@@ -10,8 +10,8 @@ const typeDefs = gql`
   }
 
   type User {
-    email: String!
     id: ID!
+    email: String!
   }
 
   type UserSession {
@@ -22,6 +22,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    createListing(title: String!, description: String!): Listing!
     createUser(email: String!, password: String!): User!
     createUserSession(email: String!, password: String!): UserSession!
     deleteUserSession(sessionId: ID!): Boolean!
