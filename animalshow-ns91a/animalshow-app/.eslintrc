@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "babel-module": {
+        "alias": {
+          "#src": "./src",
+          "#components": "./src/components",
+          "#shared": "./src/components/shared",
+          "#containers": "./src/containers",
+          "#styles": "./src/styles",
+          "#store": "./src/store"
+        }
+      }
+    }
+  },
+  "env": {
+    "browser": true
+  }
+}

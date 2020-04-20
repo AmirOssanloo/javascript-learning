@@ -1,0 +1,31 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "#src": "./src",
+          "#components": "./src/components",
+          "#shared": "./src/components/shared",
+          "#containers": "./src/containers",
+          "#styles": "./src/styles",
+          "#store": "./src/store"
+        }
+      }
+    ]
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 chrome versions"
+          ],
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ]
+}
