@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form'
-import Button from '#shared/Button';
+import Button from '#shared/CoreUI/Button';
 import TextField from '#shared/TextField';
 import FormGroup from '#shared/FormGroup';
 import FormControl from '#shared/FormControl';
@@ -63,9 +63,7 @@ const AnimalQuery = ({ onChangeToAnimalDisplay: pushChangeToAnimalDisplay }) => 
               inputRef={register} />
           </FormGroup>
         </FormControl>
-        <Button type="submit" variant="contained" color="primary">
-          Get Images
-        </Button>
+        <Button type="submit">Hello</Button>
       </form>
     </div>
   );

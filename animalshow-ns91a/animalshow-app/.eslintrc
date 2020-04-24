@@ -9,11 +9,16 @@
         "alias": {
           "#src": "./src",
           "#components": "./src/components",
+          "#hooks": "./src/utils/hooks",
           "#shared": "./src/components/shared",
           "#containers": "./src/containers",
           "#styles": "./src/styles",
           "#store": "./src/store"
-        }
+        },
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
       }
     }
   },

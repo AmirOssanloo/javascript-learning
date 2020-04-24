@@ -1,11 +1,13 @@
 {
   "plugins": [
+    "@babel/plugin-transform-runtime",
     [
       "module-resolver",
       {
         "alias": {
           "#src": "./src",
           "#components": "./src/components",
+          "#hooks": "./src/utils/hooks",
           "#shared": "./src/components/shared",
           "#containers": "./src/containers",
           "#styles": "./src/styles",
@@ -15,17 +17,7 @@
     ]
   ],
   "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "browsers": [
-            "last 2 chrome versions"
-          ],
-          "node": "current"
-        }
-      }
-    ],
+    "@babel/preset-env",
     "@babel/preset-react"
   ]
 }
