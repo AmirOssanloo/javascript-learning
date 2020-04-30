@@ -1,9 +1,10 @@
 // Colors
-export const background = "#cfacfa";
-export const surface = "#f1f1f1";
+export const background = '#edc7b7';
+export const surface = '#eee2dc';
+export const text = '#888';
 
-export const titleSecondary = "#fbccbf";
-export const textSecondary = "#fdfeedf";
+export const primary = '#ac3b61';
+export const secondary = '#123c69';
 
-export const titlePrimary = "#fff417";
-export const textPrimary = "#ff0000";
+export const dark = '#808080';
+export const bright = '#f1f1f1';

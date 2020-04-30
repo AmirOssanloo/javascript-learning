@@ -2,8 +2,13 @@
 
 exports[`Root should match with snapshot 1`] = `
 <styled.div>
-  <AnimalQuery
-    onChangeToAnimalDisplay={[Function]}
-  />
+  <styled.div>
+    <styled.h1>
+      Animal Query
+    </styled.h1>
+    <AnimalQuery
+      onChangeToAnimalDisplay={[Function]}
+    />
+  </styled.div>
 </styled.div>
 `;

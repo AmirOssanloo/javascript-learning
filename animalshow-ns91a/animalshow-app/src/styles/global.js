@@ -6,17 +6,20 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
   body {
-    background-color: #fbfbfb;
+    background-color: ${({ theme }) => theme.background};
     width: inherit;
     height: inherit;
     margin: 0;
     padding: 0;
-    color: #1a1a1a;
+    color: ${({ theme }) => theme.text};
     font-family: 'Lato', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    margin-bottom: 2rem;
   }
 
   #app {

@@ -20,9 +20,7 @@ InfiniteScroll.prototype.onScroll = function() {
   if (shouldTrigger) {
     this.busy = true;
 
-    setTimeout(() => {
       this.callback(this.onComplete.bind(this));
-    }, 500);
   }
 };
 
