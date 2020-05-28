@@ -1,4 +1,3 @@
-
 import UsersService from '#root/adapters/UsersService';
 
 const UserSession = {
